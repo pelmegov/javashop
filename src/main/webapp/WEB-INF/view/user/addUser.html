@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/webjars/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="fragments/header ::header"></div>
+
+<div class="container">
+    <p class="bg-error info-message" th:if="${error != null}" th:text="${error}"></p>
+
+    <form name="AddUserForm" action="" method="post">
+        <table>
+            <tr>
+                <td>LOGIN:</td>
+                <td><input type="text" name="login"/></td>
+            </tr>
+            <tr>
+                <td>PASSWORD:</td>
+                <td><input type="text" name="password"/></td>
+            </tr>
+            <tr>
+                <td>NAME:</td>
+                <td><input type="text" name="name"/></td>
+            </tr>
+
+            <tr>
+                <td colspan='2'>
+                    <input name="submit" type="submit" value="ADD"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+
+<!--Template footer-->
+<div th:include="fragments/footer ::footer"></div>
+
+</body>
+</html>

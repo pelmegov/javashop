@@ -1,0 +1,30 @@
+<!--Template Thymeleaf-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>header</title>
+</head>
+<body>
+
+<!--HEADER-->
+<div th:fragment="header">
+
+    <nav class="header navbar navbar-dark bg-inverse">
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="/">JavaShop</a>
+
+        <!-- Links -->
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/user/">USERS CRUD</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+<!--/HEADER-->
+
+</body>
+</html>

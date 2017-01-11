@@ -1,0 +1,21 @@
+/*css style*/
+p.info-message {
+    padding: 15px;
+    color: #fff !important;
+}
+p.bg-error {
+    background: #ff0000;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+footer {
+    height: 60px;
+    line-height: 60px;
+}
+
+.navbar {
+    border-radius: 0;
+}

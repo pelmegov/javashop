@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/webjars/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="fragments/header ::header"></div>
+
+<div class="container">
+
+    <h1>Hello. This is index PAGE!</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, doloremque, earum iure laboriosam nulla
+        perferendis praesentium repellendus repudiandae tempore ullam ut voluptatum. Dolor fugiat neque praesentium
+        suscipit totam ut vel!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, doloremque, earum iure laboriosam nulla
+        perferendis praesentium repellendus repudiandae tempore ullam ut voluptatum. Dolor fugiat neque praesentium
+        suscipit totam ut vel!</p>
+
+    <hr>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, doloremque, earum iure laboriosam nulla
+        perferendis praesentium repellendus repudiandae tempore ullam ut voluptatum. Dolor fugiat neque praesentium
+        suscipit totam ut vel!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, doloremque, earum iure laboriosam nulla
+        perferendis praesentium repellendus repudiandae tempore ullam ut voluptatum. Dolor fugiat neque praesentium
+        suscipit totam ut vel!</p>
+
+</div>
+
+<!--Template footer-->
+<div th:include="fragments/footer ::footer"></div>
+
+</body>
+</html>
