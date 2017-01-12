@@ -12,52 +12,47 @@ import java.util.List;
 @Repository
 public class UserDAOImpl extends AbstractDao implements UserDAO {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDAOImpl.class);
 
     public UserDAOImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
     @Override
-    public boolean addUser(User user) {
+    public void addUser(User user) {
         getSession().save(user);
-        return true;
-//        logger.info("User successfully added. User details: " + user.getId() + user.getLogin() + user.getName());
+        LOGGER.info("User successfully added: {}.", user);
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public void updateUser(User user) {
         getSession().update(user);
-        return true;
-//        logger.info("User successfully update. User details: " + user.getId() + user.getLogin() + user.getName());
+        LOGGER.info("User successfully update: {}.", user);
     }
 
     @Override
-    public boolean removeUser(Long id) {
-        User user = (User) getSession().load(User.class, id);
+    public void deleteUserById(Long id) {
+        User user = getSession().load(User.class, id);
 
         if (user != null) {
+            LOGGER.info("User successfully removed: {}.", user);
             getSession().delete(user);
         }
-        return true;
-//        logger.info("User successfully removed. User details: " + user);
     }
 
     @Override
     public User getUserById(Long id) {
         User user = (User) getSession().createQuery("FROM User WHERE id = :id").setParameter("id", id).uniqueResult();
-//        logger.info("User successfully loaded. User details: " + user);
+        LOGGER.info("User successfully loaded: {}.", user);
         return user;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<User> listUsers() {
-        List<User> userList = (List<User>) getSession().createQuery("from User").list();
+    public List<User> allUsers() {
+        List<User> userList = (List<User>) getSession().createQuery("FROM User ORDER BY id").list();
+        LOGGER.info("User list: {}.", userList);
 
-//        for (User user : userList) {
-//            logger.warn("User list: " + user);
-//        }
         return userList;
     }
 }

@@ -15,12 +15,12 @@ public class User {
 
     @NotNull
     @Size(min = 3, max = 32)
-    @Column(name = "login")
+    @Column(name = "login", nullable = false)
     private String login;
 
     @NotNull
     @Size(min = 6, max = 32)
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     public Long getId() {

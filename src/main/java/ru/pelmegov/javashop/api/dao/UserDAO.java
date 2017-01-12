@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface UserDAO {
 
-    public boolean addUser(User user);
+    public void addUser(User user);
 
-    public boolean updateUser(User user);
+    public void updateUser(User user);
 
-    public boolean removeUser(Long id);
+    public void deleteUserById(Long id);
 
     public User getUserById(Long id);
 
-    public List<User> listUsers();
+    public List<User> allUsers();
 
 }

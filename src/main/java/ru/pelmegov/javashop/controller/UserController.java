@@ -3,6 +3,7 @@ package ru.pelmegov.javashop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,58 +28,68 @@ public class UserController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("user/index");
-        modelAndView.addObject("users", userService.listUsers());
+        modelAndView.addObject("users", userService.allUsers());
         return modelAndView;
     }
 
     @RequestMapping(value = {"/addUser"}, method = RequestMethod.GET)
-    public ModelAndView addUser() {
+    public ModelAndView addUser(User user) {
         ModelAndView modelAndView = new ModelAndView("user/addUser");
-        return modelAndView;
+        return getUserModelAndView(modelAndView, user);
     }
 
     @RequestMapping(value = {"/addUser"}, method = RequestMethod.POST)
-    public String addUser(@Valid final User user,
-                          final BindingResult result,
-                          RedirectAttributes redirectAttrs) {
+    public ModelAndView addUser(@Valid @ModelAttribute final User user,
+                                final BindingResult result,
+                                ModelAndView modelAndView,
+                                RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
-            redirectAttrs.addFlashAttribute("error", "Error! Invalid field.");
-            return "redirect:/user/addUser";
+            return getUserModelAndView(modelAndView, user);
         }
         userService.addUser(user);
-        redirectAttrs.addFlashAttribute("success", "Add user. Name.");
+        redirectAttrs.addFlashAttribute("success", "User added: " + user);
 
-        return "redirect:/user/";
+        return new ModelAndView("redirect:/user/index");
     }
 
-    @RequestMapping(value = {"/updateUser/{id}"}, method = RequestMethod.GET)
-    public ModelAndView updateUser(@PathVariable("id") Long id) {
+    @RequestMapping(value = {"/updateUser/{id}", "/updateUser"}, method = RequestMethod.GET)
+    public ModelAndView updateUser(User user, RedirectAttributes redirectAttrs) {
         ModelAndView modelAndView = new ModelAndView("user/updateUser");
-        User user = userService.getUserById(id);
+
+        if (user.getId() == null) {
+            redirectAttrs.addFlashAttribute("error", "Not the selected user");
+            return new ModelAndView("redirect:/user/index");
+        }
+
+        user = userService.getUserById(user.getId());
+        modelAndView.addObject("user", user);
+        return getUserModelAndView(modelAndView, user);
+    }
+
+    @RequestMapping(value = {"/updateUser"}, method = RequestMethod.POST)
+    public ModelAndView updateUser(@Valid @ModelAttribute final User user,
+                                   final BindingResult result,
+                                   final ModelAndView modelAndView,
+                                   RedirectAttributes redirectAttrs) {
+        if (result.hasErrors()) {
+            return getUserModelAndView(modelAndView, user);
+        }
+        userService.updateUser(user);
+        redirectAttrs.addFlashAttribute("success", "User updated: " + user);
+
+        return new ModelAndView("redirect:/user/index");
+    }
+
+    private ModelAndView getUserModelAndView(ModelAndView modelAndView, User user) {
         modelAndView.addObject("user", user);
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/updateUser"}, method = RequestMethod.POST)
-    public String updateUser(@Valid final User user,
-                             final BindingResult result,
-                             RedirectAttributes redirectAttrs) {
-        if (result.hasErrors()) {
-            redirectAttrs.addFlashAttribute("error", "Error! Invalid fields.");
-            return "redirect:/user/updateUser/" + user.getId();
-        }
-        userService.updateUser(user);
-        redirectAttrs.addFlashAttribute("success", "Update name.");
+    @RequestMapping(value = {"/deleteUser/{id}"}, method = RequestMethod.GET)
+    public String deleteUser(@PathVariable("id") Long id, RedirectAttributes redirectAttrs) {
+        userService.deleteUserById(id);
+        redirectAttrs.addFlashAttribute("success", "Delete user with id: " + id);
 
         return "redirect:/user/";
     }
-
-    @RequestMapping(value = {"/delUser/{id}"}, method = RequestMethod.GET)
-    public String delUser(@PathVariable("id") Long id, RedirectAttributes redirectAttrs) {
-        userService.removeUser(id);
-        redirectAttrs.addFlashAttribute("success", "Delete user with id = " + id);
-
-        return "redirect:/user/";
-    }
-
 }

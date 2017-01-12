@@ -15,34 +15,37 @@
 
 <div class="container">
 
-    <p class="bg-error info-message" th:if="${error != null}" th:text="${error}"></p>
+    <div class="row">
+        <div class="col-md-6">
 
-    <form name="UpdateUserForm" action="/user/updateUser" method="post">
-        <table>
-            <tr>
-                <td>ID:</td>
-                <td><input th:value="${user.id}" type="text" name="id"/></td>
-            </tr>
-            <tr>
-                <td>LOGIN:</td>
-                <td><input th:value="${user.login}" type="text" name="login"/></td>
-            </tr>
-            <tr>
-                <td>PASSWORD:</td>
-                <td><input th:value="${user.password}" type="text" name="password"/></td>
-            </tr>
-            <tr>
-                <td>NAME:</td>
-                <td><input th:value="${user.name}" type="text" name="name"/></td>
-            </tr>
+            <form action="#" th:action="@{/user/updateUser}" th:object="${user}" method="post">
 
-            <tr>
-                <td colspan='2'>
-                    <input name="submit" type="submit" value="Update"/>
-                </td>
-            </tr>
-        </table>
-    </form>
+                <div class="form-group row">
+                    <label class="form-control-label" for="ID">ID::</label>
+                    <input th:value="${user.id}" class="form-control" id="ID" type="text" name="id"/>
+                </div>
+
+                <div class="form-group row">
+                    <label class="form-control-label" for="LOGIN">LOGIN:</label>
+                    <input th:field="*{login}" class="form-control" id="LOGIN" type="text" name="login"/>
+                    <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+                         class="form-control-feedback">Login Error. Try another?
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="form-control-label" for="PASSWORD">PASSWORD:</label>
+                    <input th:field="*{password}" class="form-control" id="PASSWORD" type="text" name="password"/>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                         class="form-control-feedback">Password Error. Try another?
+                    </div>
+                </div>
+
+                <input class="btn btn-primary" name="submit" type="submit" value="Update"/>
+
+            </form>
+        </div>
+    </div>
 </div>
 
 <!--Template footer-->

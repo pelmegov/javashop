@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All users</title>
     <!-- Bootstrap Core CSS -->
     <link th:href="@{/webjars/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css}" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 
     <a class="btn btn-success" href="addUser">Add User</a>
 
-    <table class="table">
+    <table class="table" th:unless="${#lists.isEmpty(users)}">
         <thead>
         <tr>
             <th>Id</th>
@@ -38,7 +38,7 @@
             <td th:text="${user.password}">Password</td>
 
             <td><a th:href="@{updateUser/{id}(id=${user.id})}">Update User</a></td>
-            <td><a th:href="@{delUser/{id}(id=${user.id})}">Delete User</a></td>
+            <td><a th:href="@{deleteUser/{id}(id=${user.id})}">Delete User</a></td>
         </tr>
         </tbody>
     </table>

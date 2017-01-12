@@ -21,23 +21,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public boolean addUser(User user) {
+    public void addUser(User user) {
         this.userDao.addUser(user);
-        return true;
     }
 
     @Override
     @Transactional
-    public boolean updateUser(User user) {
+    public void updateUser(User user) {
         this.userDao.updateUser(user);
-        return true;
     }
 
     @Override
     @Transactional
-    public boolean removeUser(Long id) {
-        this.userDao.removeUser(id);
-        return true;
+    public void deleteUserById(Long id) {
+        this.userDao.deleteUserById(id);
     }
 
     @Override
@@ -48,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<User> listUsers() {
-        return this.userDao.listUsers();
+    public List<User> allUsers() {
+        return this.userDao.allUsers();
     }
 }
