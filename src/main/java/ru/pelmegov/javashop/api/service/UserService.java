@@ -2,7 +2,7 @@ package ru.pelmegov.javashop.api.service;
 
 import ru.pelmegov.javashop.model.User;
 
-import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -14,6 +14,6 @@ public interface UserService {
 
     public User getUserById(Long id);
 
-    public List<User> allUsers();
+    public Set<User> allUsers();
 
 }

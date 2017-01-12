@@ -7,10 +7,12 @@ import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.UserDAO;
 import ru.pelmegov.javashop.model.User;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
-public class UserDAOImpl extends AbstractDao implements UserDAO {
+public class UserDAOImpl extends AbstractDAO implements UserDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDAOImpl.class);
 
@@ -49,10 +51,10 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<User> allUsers() {
-        List<User> userList = (List<User>) getSession().createQuery("FROM User ORDER BY id").list();
-        LOGGER.info("User list: {}.", userList);
+    public Set<User> allUsers() {
+        List<User> users = getSession().createQuery("FROM User ORDER BY id").list();
+        LOGGER.info("User list: {}.", users);
 
-        return userList;
+        return new HashSet<User>(users);
     }
 }

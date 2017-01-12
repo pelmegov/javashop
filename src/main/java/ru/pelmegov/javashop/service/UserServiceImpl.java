@@ -7,7 +7,7 @@ import ru.pelmegov.javashop.api.dao.UserDAO;
 import ru.pelmegov.javashop.api.service.UserService;
 import ru.pelmegov.javashop.model.User;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<User> allUsers() {
+    public Set<User> allUsers() {
         return this.userDao.allUsers();
     }
 }

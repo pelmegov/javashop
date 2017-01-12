@@ -9,20 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
+import ru.pelmegov.javashop.model.Role;
 import ru.pelmegov.javashop.model.User;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
@@ -46,6 +51,9 @@ public class UserController {
         if (result.hasErrors()) {
             return getUserModelAndView(modelAndView, user);
         }
+
+        Role user_role = roleService.getRoleByName("ROLE_USER");
+        user.setRole(user_role);
         userService.addUser(user);
         redirectAttrs.addFlashAttribute("success", "User added: " + user);
 
