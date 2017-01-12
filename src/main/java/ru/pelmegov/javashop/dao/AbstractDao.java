@@ -4,12 +4,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractDao {
+public abstract class AbstractDAO {
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public AbstractDao(SessionFactory sessionFactory) {
+    public AbstractDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
