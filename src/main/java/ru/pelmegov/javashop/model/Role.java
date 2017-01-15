@@ -7,15 +7,15 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "role", schema = "public")
+@Table(name = "role")
 public class Role implements GrantedAuthority {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 20, nullable = false)
+    @Column(name = "name", length = 20)
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")

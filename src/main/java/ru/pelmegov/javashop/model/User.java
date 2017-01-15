@@ -4,34 +4,30 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "user")
 public class User implements UserDetails {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Size(min = 3, max = 32)
-    @Column(name = "login", nullable = false)
+    @Column(name = "login")
     private String login;
 
-    @NotNull
     @Size(min = 6, max = 32)
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
-    @JoinTable(name = "user_role", schema = "public",
-            joinColumns = {@JoinColumn(name = "user_id")},
+    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
@@ -107,6 +103,12 @@ public class User implements UserDetails {
     }
 
     public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    public User(Long id, String login, String password) {
+        this.id = id;
         this.login = login;
         this.password = password;
     }
