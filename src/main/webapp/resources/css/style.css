@@ -19,3 +19,9 @@ footer {
 .navbar {
     border-radius: 0;
 }
+.navbar a {
+    color: white;
+}
+.navbar a:hover {
+    color: #dddddd;
+}

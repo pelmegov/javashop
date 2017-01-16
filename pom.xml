@@ -30,7 +30,7 @@
         <hibernate.validator>5.3.4.Final</hibernate.validator>
         <jdbc.postgresql>9.3-1100-jdbc41</jdbc.postgresql>
         <thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
-        <bootstrap>4.0.0-alpha.5</bootstrap>
+        <bootstrap>4.0.0-alpha.6</bootstrap>
         <slf4j>1.7.22</slf4j>
     </properties>
 
@@ -106,6 +106,13 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
             <version>${org.springsecurity}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+            <version>3.0.1.RELEASE</version>
         </dependency>
 
         <!-- Javax Servlet -->

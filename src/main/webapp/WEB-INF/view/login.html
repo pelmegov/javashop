@@ -3,7 +3,7 @@
 <head>
     <title>Login page</title>
     <!-- Bootstrap Core CSS -->
-    <link th:href="@{/webjars/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
     <link th:href="@{/resources/css/style.css}" rel="stylesheet"/>
 </head>
@@ -13,7 +13,7 @@
 <div th:include="fragments/header :: header"></div>
 
 <div class="container">
-    <div class="rov">
+    <div class="row">
         <div class="col-md-4 offset-md-4">
             <h1>Login page</h1>
             <p th:if="${error}" class="alert alert-danger" role="alert">Wrong user or password</p>

@@ -1,7 +1,7 @@
 <!--Template Thymeleaf-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>header</title>
 </head>
@@ -10,17 +10,32 @@
 <!--HEADER-->
 <div th:fragment="header">
 
-    <nav class="header navbar navbar-dark bg-inverse">
-
-        <!-- Brand -->
+    <nav class="header navbar navbar-toggleable-md bg-inverse navbar-dark bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <a class="navbar-brand" href="/">JavaShop</a>
 
-        <!-- Links -->
-        <ul class="nav navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/user/">USERS CRUD</a>
-            </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                    <a class="nav-link" href="/user/">USERS CRUD</a>
+                </li>
+            </ul>
+            <div class="my-2 my-lg-0">
+                <ul class="navbar-nav">
+                    <li th:switch="${#authentication} ? ${#authorization.expression('isAuthenticated()')} : ${false}"
+                        class="nav-item pull-sm-0">
+                <span th:case="${false}">
+                <a class="nav-link" href="/login">Login</a>
+                </span>
+                        <span th:case="${true}">
+                <a class="nav-link" href="/login?logout">Logout</a>
+                </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
 </div>
