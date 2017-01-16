@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login page</title>
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/webjars/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="rov">
+        <div class="col-md-4 offset-md-4">
+            <h1>Login page</h1>
+            <p th:if="${error}" class="alert alert-danger" role="alert">Wrong user or password</p>
+            <form th:action="@{/login}" method="post">
+                <label for="login">Login</label>:
+                <input class="form-control" type="text" id="login" name="login" autofocus="autofocus"/> <br/>
+                <label for="password">Password</label>:
+                <input class="form-control" type="password" id="password" name="password"/> <br/>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log in"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Template footer-->
+<div th:include="fragments/footer :: footer"></div>
+
+</body>
+</html>

@@ -26,6 +26,9 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "active")
+    private Boolean active;
+
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
@@ -58,7 +61,11 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return active;
+    }
+
+    public void setEnabled(Boolean active) {
+        this.active = active;
     }
 
     public Long getId() {
@@ -105,18 +112,24 @@ public class User implements UserDetails {
     public User(String login, String password) {
         this.login = login;
         this.password = password;
+
+        this.active = true;
     }
 
     public User(Long id, String login, String password) {
         this.id = id;
         this.login = login;
         this.password = password;
+
+        this.active = true;
     }
 
     public User(String login, String password, Set<Role> roles) {
         this.login = login;
         this.password = password;
         this.roles = roles;
+
+        this.active = true;
     }
 
     public User(Long id, String login, String password, Set<Role> roles) {
@@ -124,6 +137,8 @@ public class User implements UserDetails {
         this.login = login;
         this.password = password;
         this.roles = roles;
+
+        this.active = true;
     }
 
     @Override
