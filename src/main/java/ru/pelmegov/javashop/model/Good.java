@@ -2,9 +2,7 @@ package ru.pelmegov.javashop.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Blob;
 import java.util.Arrays;
-import java.util.Set;
 
 @Entity
 @Table(name = "good", schema = "public")
@@ -12,7 +10,7 @@ public class Good {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "title")
@@ -24,14 +22,14 @@ public class Good {
     @Basic(fetch = FetchType.LAZY)
     @Lob
     @Column(name = "icon")
-    private byte[] icon;
+    private Byte[] icon;
 
     @NotNull
     @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
 
     @Column(name = "price")
-    private long price;
+    private Float price;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", nullable = false)
@@ -40,22 +38,22 @@ public class Good {
     public Good() {
     }
 
-    public Good(String title, int quantity) {
+    public Good(String title, Integer quantity) {
         this.title = title;
         this.quantity = quantity;
     }
 
-    public Good(String title, int quantity, Category category) {
+    public Good(String title, Integer quantity, Category category) {
         this.title = title;
         this.quantity = quantity;
         this.category = category;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,28 +73,36 @@ public class Good {
         this.description = description;
     }
 
-    public byte[] getIcon() {
+    public Byte[] getIcon() {
         return icon;
     }
 
-    public void setIcon(byte[] icon) {
+    public void setIcon(Byte[] icon) {
         this.icon = icon;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public long getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -106,25 +112,27 @@ public class Good {
 
         Good good = (Good) o;
 
-        if (getId() != good.getId()) return false;
-        if (getQuantity() != good.getQuantity()) return false;
-        if (getPrice() != good.getPrice()) return false;
+        if (!getId().equals(good.getId())) return false;
         if (!getTitle().equals(good.getTitle())) return false;
-        if (!getDescription().equals(good.getDescription())) return false;
+        if (getDescription() != null ? !getDescription().equals(good.getDescription()) : good.getDescription() != null)
+            return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
         if (!Arrays.equals(getIcon(), good.getIcon())) return false;
-        return category.equals(good.category);
+        if (!getQuantity().equals(good.getQuantity())) return false;
+        if (getPrice() != null ? !getPrice().equals(good.getPrice()) : good.getPrice() != null) return false;
+        return getCategory().equals(good.getCategory());
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = getId().hashCode();
         result = 31 * result + getTitle().hashCode();
-        result = 31 * result + getDescription().hashCode();
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + Arrays.hashCode(getIcon());
-        result = 31 * result + getQuantity();
-        result = 31 * result + (int) (getPrice() ^ (getPrice() >>> 32));
-        result = 31 * result + category.hashCode();
+        result = 31 * result + getQuantity().hashCode();
+        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
+        result = 31 * result + getCategory().hashCode();
         return result;
     }
 

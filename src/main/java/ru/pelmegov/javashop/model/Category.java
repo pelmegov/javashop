@@ -11,7 +11,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "title")
     @NotNull
@@ -35,11 +35,11 @@ public class Category {
         this.goods = goods;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -74,20 +74,20 @@ public class Category {
 
         Category category = (Category) o;
 
-        if (getId() != category.getId()) return false;
+        if (!getId().equals(category.getId())) return false;
         if (!getTitle().equals(category.getTitle())) return false;
         if (getDescription() != null ? !getDescription().equals(category.getDescription()) : category.getDescription() != null)
             return false;
-        return getGoods() != null ? getGoods().equals(category.getGoods()) : category.getGoods() == null;
+        return getGoods().equals(category.getGoods());
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = getId().hashCode();
         result = 31 * result + getTitle().hashCode();
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + (getGoods() != null ? getGoods().hashCode() : 0);
+        result = 31 * result + getGoods().hashCode();
         return result;
     }
 
@@ -95,6 +95,9 @@ public class Category {
     public String toString() {
         return "Category{" +
                 "id=" + id +
-                ", title='" + title + '\'' + '}';
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", goods=" + goods +
+                '}';
     }
 }
