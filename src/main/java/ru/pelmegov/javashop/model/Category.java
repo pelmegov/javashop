@@ -2,7 +2,7 @@ package ru.pelmegov.javashop.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,7 +21,7 @@ public class Category {
     private String description;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
-    private List<Good> goods;
+    private Set<Good> goods = new HashSet<Good>();
 
     public Category() {
     }
@@ -30,7 +30,7 @@ public class Category {
         this.title = title;
     }
 
-    public Category(String title, List<Good> goods) {
+    public Category(String title, Set<Good> goods) {
         this.title = title;
         this.goods = goods;
     }
@@ -59,11 +59,11 @@ public class Category {
         this.description = description;
     }
 
-    public List<Good> getGoods() {
+    public Set<Good> getGoods() {
         return goods;
     }
 
-    public void setGoods(List<Good> goods) {
+    public void setGoods(Set<Good> goods) {
         this.goods = goods;
     }
 
