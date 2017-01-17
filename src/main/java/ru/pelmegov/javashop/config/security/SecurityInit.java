@@ -1,4 +1,4 @@
-package ru.pelmegov.javashop.config;
+package ru.pelmegov.javashop.config.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

@@ -37,6 +37,15 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="form-control-label" for="ROLES">ROLES:</label>
+                    <select class="form-control" id="ROLES" name="roles" multiple="multiple" >
+                        <option th:each="role : ${allRoles}"
+                                th:value="${{role}}"
+                                th:text="${role.name}">Role name</option>
+                    </select>
+                </div>
+
                 <input class="btn btn-primary" name="submit" type="submit" value="ADD"/>
             </form>
         </div>

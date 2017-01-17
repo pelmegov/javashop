@@ -28,6 +28,11 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
+    public Role(String name, List<User> users) {
+        this.name = name;
+        this.users = users;
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,11 +57,6 @@ public class Role implements GrantedAuthority {
         this.users = users;
     }
 
-    @Override
-    public String toString() {
-        return "Role with id " + id + " and name " + name;
-    }
-
     public String getAuthority() {
         return name;
     }
@@ -64,16 +64,28 @@ public class Role implements GrantedAuthority {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Role)) return false;
+
         Role role = (Role) o;
-        return name.equals(role.name);
+
+        if (getId() != null ? !getId().equals(role.getId()) : role.getId() != null) return false;
+        if (getName() != null ? !getName().equals(role.getName()) : role.getName() != null) return false;
+        return getUsers() != null ? getUsers().equals(role.getUsers()) : role.getUsers() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + (users != null ? users.hashCode() : 0);
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getUsers() != null ? getUsers().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

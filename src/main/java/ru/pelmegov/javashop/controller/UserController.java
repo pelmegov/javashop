@@ -38,12 +38,12 @@ public class UserController {
     @RequestMapping(value = {"/addUser"}, method = RequestMethod.GET)
     public ModelAndView addUser(User user) {
         ModelAndView modelAndView = new ModelAndView("user/addUser");
-        modelAndView.addObject("roles", roleService.allRoles());
+        modelAndView.addObject("allRoles", roleService.allRoles());
         return getUserModelAndView(modelAndView, user);
     }
 
     @RequestMapping(value = {"/addUser"}, method = RequestMethod.POST)
-    public ModelAndView addUser(@Valid @ModelAttribute final User user,
+    public ModelAndView addUser(@Valid @ModelAttribute User user,
                                 final BindingResult result,
                                 ModelAndView modelAndView,
                                 RedirectAttributes redirectAttrs) {
@@ -51,8 +51,6 @@ public class UserController {
             return getUserModelAndView(modelAndView, user);
         }
 
-        Role user_role = roleService.getRoleByName("ROLE_USER");
-        user.setRole(user_role);
         userService.addUser(user);
         redirectAttrs.addFlashAttribute("success", "User added: " + user);
 
@@ -70,14 +68,13 @@ public class UserController {
 
         user = userService.getUserById(user.getId());
 
-        modelAndView.addObject("roles", roleService.allRoles());
+        modelAndView.addObject("allRoles", roleService.allRoles());
         modelAndView.addObject("user", user);
         return getUserModelAndView(modelAndView, user);
     }
 
     @RequestMapping(value = {"/updateUser"}, method = RequestMethod.POST)
     public ModelAndView updateUser(@Valid @ModelAttribute User user,
-                                   @RequestParam(value = "roles", required = false) Long[] roles,
                                    final BindingResult result,
                                    final ModelAndView modelAndView,
                                    RedirectAttributes redirectAttrs) {
@@ -85,12 +82,6 @@ public class UserController {
             return getUserModelAndView(modelAndView, user);
         }
 
-        Set<Role> setRoles = new HashSet<Role>();
-        if (roles != null)
-            for (Long role : roles) {
-                setRoles.add(roleService.getRoleById(role));
-            }
-        user.setRoles(setRoles);
         userService.updateUser(user);
         redirectAttrs.addFlashAttribute("success", "User updated: " + user);
 

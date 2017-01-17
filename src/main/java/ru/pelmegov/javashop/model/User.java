@@ -152,6 +152,7 @@ public class User implements UserDetails {
         if (getLogin() != null ? !getLogin().equals(user.getLogin()) : user.getLogin() != null) return false;
         if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
             return false;
+        if (active != null ? !active.equals(user.active) : user.active != null) return false;
         return getRoles() != null ? getRoles().equals(user.getRoles()) : user.getRoles() == null;
     }
 
@@ -160,6 +161,7 @@ public class User implements UserDetails {
         int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + (getLogin() != null ? getLogin().hashCode() : 0);
         result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + (active != null ? active.hashCode() : 0);
         result = 31 * result + (getRoles() != null ? getRoles().hashCode() : 0);
         return result;
     }
