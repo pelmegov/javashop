@@ -21,6 +21,10 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
             registry.addResourceHandler("/webjars/bootstrap/**")
                     .addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/4.0.0-alpha.6/");
         }
+        if (!registry.hasMappingForPattern("/webjars/jquery/**")) {
+            registry.addResourceHandler("/webjars/jquery/**")
+                    .addResourceLocations("classpath:/META-INF/resources/webjars/jquery/1.11.1/");
+        }
         if (!registry.hasMappingForPattern("/resources/**")) {
             registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         }
