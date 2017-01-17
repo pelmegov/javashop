@@ -26,6 +26,7 @@
             <th>Id</th>
             <th>Login</th>
             <th>Password</th>
+            <th>Roles</th>
 
             <th>Update User</th>
             <th>Delete User</th>
@@ -36,6 +37,9 @@
             <td th:text="${user.id}">Id</td>
             <td th:text="${user.login}">Login</td>
             <td th:text="${user.password}">Password</td>
+            <td>
+                <div th:each="role : ${user.roles}" th:text="${role.name}">Roles</div>
+            </td>
 
             <td><a th:href="@{updateUser/{id}(id=${user.id})}">Update User</a></td>
             <td><a th:href="@{deleteUser/{id}(id=${user.id})}">Delete User</a></td>

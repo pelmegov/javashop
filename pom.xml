@@ -26,7 +26,7 @@
         <java-version>1.8</java-version>
         <org.springframework-version>4.3.5.RELEASE</org.springframework-version>
         <org.springsecurity>4.2.1.RELEASE</org.springsecurity>
-        <hibernate.version>5.2.5.Final</hibernate.version>
+        <hibernate.version>4.3.5.Final</hibernate.version>
         <hibernate.validator>5.3.4.Final</hibernate.validator>
         <jdbc.postgresql>9.3-1100-jdbc41</jdbc.postgresql>
         <thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>

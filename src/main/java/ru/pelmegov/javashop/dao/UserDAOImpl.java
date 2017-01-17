@@ -34,7 +34,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
 
     @Override
     public void deleteUserById(Long id) {
-        User user = getSession().load(User.class, id);
+        User user = (User) getSession().load(User.class, id);
 
         if (user != null) {
             LOGGER.info("User successfully removed: {}.", user);
@@ -52,7 +52,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     @Override
     @SuppressWarnings("unchecked")
     public Set<User> allUsers() {
-        List<User> users = getSession().createQuery("FROM User ORDER BY id").list();
+        List<User> users = getSession().createQuery("FROM User ORDER BY id ASC").list();
         LOGGER.info("User list: {}.", users);
 
         return new HashSet<User>(users);
