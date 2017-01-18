@@ -19,7 +19,7 @@ public class Good {
     private String description;
 
     @Column(name = "small_image_link")
-    private String small_image_link;
+    private String smallImageLink;
 
     @NotNull
     @Column(name = "quantity")
@@ -46,17 +46,17 @@ public class Good {
         this.category = category;
     }
 
-    public Good(String title, String description, String small_image_link, Category category) {
+    public Good(String title, String description, String smallImageLink, Category category) {
         this.title = title;
         this.description = description;
-        this.small_image_link = small_image_link;
+        this.smallImageLink = smallImageLink;
         this.category = category;
     }
 
-    public Good(String title, String description, String small_image_link, Integer quantity, Float price, Category category) {
+    public Good(String title, String description, String smallImageLink, Integer quantity, Float price, Category category) {
         this.title = title;
         this.description = description;
-        this.small_image_link = small_image_link;
+        this.smallImageLink = smallImageLink;
         this.quantity = quantity;
         this.price = price;
         this.category = category;
@@ -86,12 +86,12 @@ public class Good {
         this.description = description;
     }
 
-    public String getSmall_image_link() {
-        return small_image_link;
+    public String getSmallImageLink() {
+        return smallImageLink;
     }
 
-    public void setSmall_image_link(String small_image_link) {
-        this.small_image_link = small_image_link;
+    public void setSmallImageLink(String smallImageLink) {
+        this.smallImageLink = smallImageLink;
     }
 
     public Integer getQuantity() {
@@ -128,7 +128,7 @@ public class Good {
         if (id != null ? !id.equals(good.id) : good.id != null) return false;
         if (title != null ? !title.equals(good.title) : good.title != null) return false;
         if (description != null ? !description.equals(good.description) : good.description != null) return false;
-        if (small_image_link != null ? !small_image_link.equals(good.small_image_link) : good.small_image_link != null)
+        if (smallImageLink != null ? !smallImageLink.equals(good.smallImageLink) : good.smallImageLink != null)
             return false;
         if (quantity != null ? !quantity.equals(good.quantity) : good.quantity != null) return false;
         if (price != null ? !price.equals(good.price) : good.price != null) return false;
@@ -140,7 +140,7 @@ public class Good {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (small_image_link != null ? small_image_link.hashCode() : 0);
+        result = 31 * result + (smallImageLink != null ? smallImageLink.hashCode() : 0);
         result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
