@@ -3,17 +3,17 @@ package ru.pelmegov.javashop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
-import ru.pelmegov.javashop.model.Role;
 import ru.pelmegov.javashop.model.User;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -38,7 +38,6 @@ public class UserController {
     @RequestMapping(value = {"/addUser"}, method = RequestMethod.GET)
     public ModelAndView addUser(User user) {
         ModelAndView modelAndView = new ModelAndView("user/addUser");
-        modelAndView.addObject("allRoles", roleService.allRoles());
         return getUserModelAndView(modelAndView, user);
     }
 
@@ -48,6 +47,11 @@ public class UserController {
                                 ModelAndView modelAndView,
                                 RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
+            return getUserModelAndView(modelAndView, user);
+        }
+
+        // ToDO Реализовать. Попытка добавить пользователя с существующим логином
+        if (userService.getUserByLogin(user.getLogin()) != null) {
             return getUserModelAndView(modelAndView, user);
         }
 
@@ -68,7 +72,6 @@ public class UserController {
 
         user = userService.getUserById(user.getId());
 
-        modelAndView.addObject("allRoles", roleService.allRoles());
         modelAndView.addObject("user", user);
         return getUserModelAndView(modelAndView, user);
     }
@@ -88,17 +91,19 @@ public class UserController {
         return new ModelAndView("redirect:/user/index");
     }
 
-    private ModelAndView getUserModelAndView(ModelAndView modelAndView, User user) {
-        modelAndView.addObject("currentRoles", user.getRoles());
-        modelAndView.addObject("user", user);
-        return modelAndView;
-    }
-
     @RequestMapping(value = {"/deleteUser/{id}"}, method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") Long id, RedirectAttributes redirectAttrs) {
+        User user = userService.getUserById(id);
         userService.deleteUserById(id);
-        redirectAttrs.addFlashAttribute("success", "Delete user with id: " + id);
+        redirectAttrs.addFlashAttribute("success", "Delete user {}: " + user);
 
         return "redirect:/user/";
+    }
+
+    private ModelAndView getUserModelAndView(ModelAndView modelAndView, User user) {
+        modelAndView.addObject("currentRoles", user.getRoles());
+        modelAndView.addObject("allRoles", roleService.allRoles());
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 }

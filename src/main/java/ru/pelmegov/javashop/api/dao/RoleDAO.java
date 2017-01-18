@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface RoleDAO {
 
-    public Role getRoleByName(String roleName);
+    public Role getRoleByName(String name);
 
     public Role getRoleById(Long id);
 

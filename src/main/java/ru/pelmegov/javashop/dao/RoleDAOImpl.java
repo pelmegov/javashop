@@ -1,6 +1,7 @@
 package ru.pelmegov.javashop.dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.RoleDAO;
 import ru.pelmegov.javashop.model.Role;
@@ -17,16 +18,17 @@ public class RoleDAOImpl extends AbstractDAO implements RoleDAO {
     }
 
     @Override
-    public Role getRoleByName(String roleName) {
-        return (Role) getSession().createQuery("FROM Role WHERE name = :name").setParameter("name", roleName).uniqueResult();
+    public Role getRoleByName(String name) {
+        return (Role) getSession().createCriteria(Role.class).add(Restrictions.eq("name", name)).uniqueResult();
     }
 
     @Override
     public Role getRoleById(Long id) {
-        return (Role) getSession().createQuery("FROM Role WHERE id = :id").setParameter("id", id).uniqueResult();
+        return (Role) getSession().createCriteria(Role.class).add(Restrictions.eq("id", id)).uniqueResult();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Set<Role> allRoles() {
         List<Role> roles = getSession().createQuery("FROM Role").list();
         return new HashSet<Role>(roles);

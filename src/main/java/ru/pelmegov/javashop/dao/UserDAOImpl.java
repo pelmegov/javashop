@@ -1,6 +1,8 @@
 package ru.pelmegov.javashop.dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -44,7 +46,14 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
 
     @Override
     public User getUserById(Long id) {
-        User user = (User) getSession().createQuery("FROM User WHERE id = :id").setParameter("id", id).uniqueResult();
+        User user = (User) getSession().createCriteria(User.class).add(Restrictions.eq("id", id)).uniqueResult();
+        LOGGER.info("User successfully loaded: {}.", user);
+        return user;
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+        User user = (User) getSession().createCriteria(User.class).add(Restrictions.eq("login", login)).uniqueResult();
         LOGGER.info("User successfully loaded: {}.", user);
         return user;
     }
@@ -52,7 +61,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     @Override
     @SuppressWarnings("unchecked")
     public Set<User> allUsers() {
-        List<User> users = getSession().createQuery("FROM User ORDER BY id ASC").list();
+        List<User> users = getSession().createCriteria(User.class).addOrder(Order.asc("id")).list();
         LOGGER.info("User list: {}.", users);
 
         return new HashSet<User>(users);

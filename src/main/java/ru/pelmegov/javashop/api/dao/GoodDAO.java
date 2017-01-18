@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface GoodDAO {
 
-    public Good getGoodByName(String goodName);
+    public Good getGoodByName(String name);
 
     public Good getGoodById(Long id);
 

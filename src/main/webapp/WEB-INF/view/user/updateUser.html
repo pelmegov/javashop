@@ -18,6 +18,8 @@
     <div class="row">
         <div class="col-md-6">
 
+            <p class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}"></p>
+
             <form action="#" th:action="@{/user/updateUser}" th:object="${user}" method="post">
 
                 <div class="form-group row">
@@ -41,12 +43,32 @@
                     </div>
                 </div>
 
+                <fieldset class="row">
+                    <legend class="col-form-legend">ACTIVE</legend>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="active"
+                                   value="1" th:checked="${user.active == true}">Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="active"
+                                   value="0" th:checked="${user.active == false}">No
+                        </label>
+                    </div>
+                    <div th:if="${#fields.hasErrors('active')}" th:errors="*{active}"
+                         class="form-control-feedback">Active Error. Try another?
+                    </div>
+                </fieldset>
+
                 <div class="form-group row">
                     <label class="form-control-label" for="ROLES">ROLES:</label>
-                    <select th:field="*{roles}" class="form-control" id="ROLES" name="roles" multiple="multiple" >
+                    <select th:field="*{roles}" class="form-control" id="ROLES" name="roles" multiple="multiple">
                         <option th:each="role : ${allRoles}"
                                 th:value="${{role}}"
-                                th:text="${role.name}">Role name</option>
+                                th:text="${role.name}">Role name
+                        </option>
                     </select>
                 </div>
 

@@ -14,6 +14,8 @@ public interface UserService {
 
     public User getUserById(Long id);
 
+    public User getUserByLogin(String login);
+
     public Set<User> allUsers();
 
 }

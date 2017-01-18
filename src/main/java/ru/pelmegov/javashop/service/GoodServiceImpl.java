@@ -21,8 +21,8 @@ public class GoodServiceImpl implements GoodService {
 
     @Override
     @Transactional
-    public Good getGoodByName(String goodName) {
-        return goodDao.getGoodByName(goodName);
+    public Good getGoodByName(String name) {
+        return goodDao.getGoodByName(name);
     }
 
     @Override
