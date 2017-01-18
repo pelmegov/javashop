@@ -17,7 +17,9 @@ INSERT INTO "category" (title) VALUES ('компьютерная техника'
 INSERT INTO "category" (title) VALUES ('бытовая техника');
 
 --insert good data
-INSERT INTO "good" (title, quantity, category_id) VALUES ('Ноутбук HP', 1, 1);
-INSERT INTO "good" (title, quantity, category_id) VALUES ('Ноутбук ASUS', 1, 1);
-INSERT INTO "good" (title, quantity, category_id) VALUES ('Ноутбук DELL', 1, 1);
+INSERT INTO "good" (title, small_image_link, description, quantity, category_id) VALUES ('Ноутбук HP', '/static/img/i.jpeg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 1);
+INSERT INTO "good" (title, small_image_link, description, quantity, category_id) VALUES ('Ноутбук ASUS', '/static/img/LG-15UD530KX5DK_250x250.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 1);
+INSERT INTO "good" (title, small_image_link, description, quantity, category_id) VALUES ('Ноутбук DELL', '/static/img/LG-15ZD950LX10K_250x150.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 1);
+INSERT INTO "good" (title, small_image_link, description, quantity, category_id) VALUES ('Ноутбук PB', '/static/img/Medion-S2217_250x150.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 1);
+INSERT INTO "good" (title, small_image_link, description, quantity, category_id) VALUES ('Ноутбук Star Wars', '/static/img/Star-WarsTM-Special-Edition_center-facing-250x150.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 1);
 

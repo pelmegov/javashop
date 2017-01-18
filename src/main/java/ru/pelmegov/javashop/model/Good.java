@@ -2,10 +2,9 @@ package ru.pelmegov.javashop.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
 
 @Entity
-@Table(name = "good", schema = "public")
+@Table(name = "good")
 public class Good {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +18,8 @@ public class Good {
     @Column(name = "description")
     private String description;
 
-    @Basic(fetch = FetchType.LAZY)
-    @Lob
-    @Column(name = "icon")
-    private Byte[] icon;
+    @Column(name = "small_image_link")
+    private String small_image_link;
 
     @NotNull
     @Column(name = "quantity")
@@ -31,8 +28,8 @@ public class Good {
     @Column(name = "price")
     private Float price;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     public Good() {
@@ -46,6 +43,22 @@ public class Good {
     public Good(String title, Integer quantity, Category category) {
         this.title = title;
         this.quantity = quantity;
+        this.category = category;
+    }
+
+    public Good(String title, String description, String small_image_link, Category category) {
+        this.title = title;
+        this.description = description;
+        this.small_image_link = small_image_link;
+        this.category = category;
+    }
+
+    public Good(String title, String description, String small_image_link, Integer quantity, Float price, Category category) {
+        this.title = title;
+        this.description = description;
+        this.small_image_link = small_image_link;
+        this.quantity = quantity;
+        this.price = price;
         this.category = category;
     }
 
@@ -73,12 +86,12 @@ public class Good {
         this.description = description;
     }
 
-    public Byte[] getIcon() {
-        return icon;
+    public String getSmall_image_link() {
+        return small_image_link;
     }
 
-    public void setIcon(Byte[] icon) {
-        this.icon = icon;
+    public void setSmall_image_link(String small_image_link) {
+        this.small_image_link = small_image_link;
     }
 
     public Integer getQuantity() {
@@ -108,31 +121,29 @@ public class Good {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Good)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Good good = (Good) o;
 
-        if (!getId().equals(good.getId())) return false;
-        if (!getTitle().equals(good.getTitle())) return false;
-        if (getDescription() != null ? !getDescription().equals(good.getDescription()) : good.getDescription() != null)
+        if (id != null ? !id.equals(good.id) : good.id != null) return false;
+        if (title != null ? !title.equals(good.title) : good.title != null) return false;
+        if (description != null ? !description.equals(good.description) : good.description != null) return false;
+        if (small_image_link != null ? !small_image_link.equals(good.small_image_link) : good.small_image_link != null)
             return false;
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        if (!Arrays.equals(getIcon(), good.getIcon())) return false;
-        if (!getQuantity().equals(good.getQuantity())) return false;
-        if (getPrice() != null ? !getPrice().equals(good.getPrice()) : good.getPrice() != null) return false;
-        return getCategory().equals(good.getCategory());
-
+        if (quantity != null ? !quantity.equals(good.quantity) : good.quantity != null) return false;
+        if (price != null ? !price.equals(good.price) : good.price != null) return false;
+        return category != null ? category.equals(good.category) : good.category == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getTitle().hashCode();
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(getIcon());
-        result = 31 * result + getQuantity().hashCode();
-        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
-        result = 31 * result + getCategory().hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (small_image_link != null ? small_image_link.hashCode() : 0);
+        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
         return result;
     }
 
@@ -142,10 +153,6 @@ public class Good {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", icon=" + Arrays.toString(icon) +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", category=" + category +
                 '}';
     }
 }

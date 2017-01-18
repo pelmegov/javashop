@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "category", schema = "public")
+@Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Category {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Good> goods = new HashSet<Good>();
 
     public Category() {
@@ -70,24 +70,20 @@ public class Category {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Category category = (Category) o;
 
-        if (!getId().equals(category.getId())) return false;
-        if (!getTitle().equals(category.getTitle())) return false;
-        if (getDescription() != null ? !getDescription().equals(category.getDescription()) : category.getDescription() != null)
-            return false;
-        return getGoods().equals(category.getGoods());
-
+        if (id != null ? !id.equals(category.id) : category.id != null) return false;
+        if (title != null ? !title.equals(category.title) : category.title != null) return false;
+        return description != null ? description.equals(category.description) : category.description == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getTitle().hashCode();
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + getGoods().hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
 
@@ -97,7 +93,7 @@ public class Category {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", goods=" + goods +
                 '}';
     }
+
 }
