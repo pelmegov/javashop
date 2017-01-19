@@ -34,7 +34,7 @@ public class Good {
     private Integer quantity;
 
     @Column(name = "price")
-    private Float price;
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")

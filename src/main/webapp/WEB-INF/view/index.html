@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>JavaShop</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <!-- Bootstrap Core CSS -->
     <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -59,11 +59,18 @@
     <div class="row" style="margin-top: 20px">
         <div class="col-sm-3" th:each="good : ${newGoods}">
             <div class="card">
-                <img class="card-img-top" th:src="${good.smallImageLink}" alt="Card smallImageLink cap">
+                <img class="card-img-top" th:src="${good.smallImageLink}"
+                     alt="Card smallImageLink cap">
                 <div class="card-block">
                     <h4 class="card-title" th:text="${good.title}"></h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="text-align: right">
+                            <span style="color: darkslateblue; font-weight: bold" th:text="${good.price}">PRICE</span>&nbsp;
+                            RUB
+                        </li>
+                    </ul>
                     <p class="card-text" th:text="${good.description}"></p>
-                    <a href="#" class="btn btn-success">Buy</a>
+                    <a href="#" class="btn btn-success">Buy now!</a>
                 </div>
             </div>
         </div>
@@ -73,85 +80,39 @@
     <hr>
     <h2>CATALOG</h2>
     <div class="row" style="margin-top: 20px">
-        <div class="col-sm-3">
+        <div class="col-sm-3" th:each="good : ${firstRowCatalogGoods}">
             <div class="card">
-                <img class="card-img-top" src="http://placehold.it/250x150" alt="Card smallImageLink cap">
+                <img class="card-img-top" th:src="${good.smallImageLink}"
+                     alt="Card smallImageLink cap">
                 <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/250x150" alt="Card smallImageLink cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/250x150" alt="Card smallImageLink cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/250x150" alt="Card smallImageLink cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
+                    <h4 class="card-title" th:text="${good.title}"></h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="text-align: right">
+                            <span style="color: darkslateblue; font-weight: bold" th:text="${good.price}">PRICE</span>&nbsp;
+                            RUB
+                        </li>
+                    </ul>
+                    <p class="card-text" th:text="${good.description}"></p>
+                    <a href="#" class="btn btn-primary">Buy now!</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="row" style="margin-top: 10px">
-        <div class="col-sm-3">
+        <div class="col-sm-3" th:each="good : ${secondRowCatalogGoods}">
             <div class="card">
-                <img class="card-img-top" src="http://placehold.it/250x150" alt="Card smallImageLink cap">
+                <img class="card-img-top" th:src="${good.smallImageLink}"
+                     alt="Card smallImageLink cap">
                 <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/250x150" alt="Card smallImageLink cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/250x150" alt="Card smallImageLink cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/250x150" alt="Card smallImageLink cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
+                    <h4 class="card-title" th:text="${good.title}"></h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="text-align: right">
+                            <span style="color: darkslateblue; font-weight: bold" th:text="${good.price}">PRICE</span>&nbsp;
+                            RUB
+                        </li>
+                    </ul>
+                    <p class="card-text" th:text="${good.description}"></p>
+                    <a href="#" class="btn btn-primary">Buy now!</a>
                 </div>
             </div>
         </div>

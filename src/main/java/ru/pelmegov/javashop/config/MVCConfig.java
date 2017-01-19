@@ -28,9 +28,6 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         if (!registry.hasMappingForPattern("/resources/**")) {
             registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         }
-        if (!registry.hasMappingForPattern("/static/img/**")) {
-            registry.addResourceHandler("/static/img/**").addResourceLocations("/static/img/");
-        }
     }
 
     @Override
