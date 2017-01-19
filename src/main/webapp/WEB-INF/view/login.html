@@ -18,18 +18,28 @@
             <h1>Login page</h1>
             <p th:if="${error}" class="alert alert-danger" role="alert">Wrong user or password</p>
             <form th:action="@{/login}" method="post">
+
                 <label for="login">Login</label>:
                 <input class="form-control" type="text" id="login" name="login" autofocus="autofocus"/> <br/>
+
                 <label for="password">Password</label>:
                 <input class="form-control" type="password" id="password" name="password"/> <br/>
+
                 <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log in"/>
+
             </form>
         </div>
     </div>
+
+    <div class="row" style="margin-top: 20px">
+        <div class="col-md-4 offset-md-4">
+            <p class="alert alert-success"><a href="/registration">Create account.</a></p>
+        </div>
+    </div>
+
+    <!--Template footer-->
+    <div th:include="fragments/footer :: footer"></div>
+
 </div>
-
-<!--Template footer-->
-<div th:include="fragments/footer :: footer"></div>
-
 </body>
 </html>

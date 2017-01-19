@@ -26,6 +26,7 @@
             <th>Id</th>
             <th>Login</th>
             <th>Password</th>
+            <th>Active</th>
             <th>Roles</th>
 
             <th>Update User</th>
@@ -37,6 +38,7 @@
             <td th:text="${user.id}">Id</td>
             <td th:text="${user.login}">Login</td>
             <td th:text="${user.password}">Password</td>
+            <td th:text="${user.active}">Active</td>
             <td>
                 <div th:each="role : ${user.roles}" th:text="${role.name}">Roles</div>
             </td>
