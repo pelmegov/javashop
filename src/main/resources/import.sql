@@ -13,8 +13,8 @@ INSERT INTO "user_role" (user_id, role_id) VALUES (1, 1);
 INSERT INTO "user_role" (user_id, role_id) VALUES (2, 2);
 
 --insert category data
-INSERT INTO "category" (title) VALUES ('компьютерная техника');
-INSERT INTO "category" (title) VALUES ('бытовая техника');
+INSERT INTO "category" (title, description) VALUES ('компьютерная техника', 'Cards assume no specific width to start, so they’ll be 100% wide unless otherwise stated. You can change this as needed with custom CSS, grid classes, grid Sass mixins, or utilities.');
+INSERT INTO "category" (title, description) VALUES ('бытовая техника', 'Use our handful of available sizing utilities to quickly set a card’s width.');
 
 --insert good data
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Ноутбук HP', '/resources/img/i.jpeg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 20500, 1);

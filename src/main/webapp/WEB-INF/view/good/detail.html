@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JavaShop</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"/>
+
+    <!-- Jquery -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="fragments/header ::header"></div>
+
+<div class="container">
+
+    <div class="card">
+        <div class="card-header">
+            Detail Page
+        </div>
+        <div class="card-block">
+            <img class="card-img-top" th:src="${good.smallImageLink}" alt="Card smallImageLink cap">
+            <h4 class="card-title" th:text="${good.title}"></h4>
+            <p class="card-text" style="font-size: 1.2em" th:text="${good.description}">Description</p>
+
+            <p class="card-text">
+                <b>Category:</b>
+                <span th:text="${good.category.title}">Category title</span></p>
+            <p class="card-text">
+                <b>Category Description:</b>
+                <span th:text="${good.category.description}">Category description</span></p>
+
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <b>Price:&nbsp;</b>
+                    <span style="color: darkslateblue; font-weight: bold" th:text="${good.price}">PRICE</span>&nbsp;
+                    RUB
+                </li>
+            </ul>
+
+            <a href="#" style="margin-top: 20px;" class="btn btn-primary">BUY NOW!</a>
+        </div>
+    </div>
+
+</div>
+
+<!--Template footer-->
+<div th:include="fragments/footer ::footer"></div>
+
+</body>
+</html>
