@@ -60,8 +60,11 @@
         <div class="col-sm-3" th:each="good : ${newGoods}">
             <div class="card">
 
-                <a th:href="@{/good/detail/{id}(id=${good.id})}"><img class="card-img-top" th:src="${good.smallImageLink}"
-                                                                      alt="Card smallImageLink cap"></a>
+                <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                    <div class="card-img-top card-image-fixheight">
+                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap" />
+                    </div>
+                </a>
                 <div class="card-block">
                     <a th:href="@{/good/detail/{id}(id=${good.id})}"><h4 class="card-title" th:text="${good.title}"></h4></a>
                     <ul class="list-group list-group-flush">
@@ -83,8 +86,11 @@
     <div class="row" style="margin-top: 20px">
         <div class="col-sm-3" th:each="good : ${firstRowCatalogGoods}">
             <div class="card">
-                <a th:href="@{/good/detail/{id}(id=${good.id})}"><img class="card-img-top" th:src="${good.smallImageLink}"
-                                                                      alt="Card smallImageLink cap"></a>
+                <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                    <div class="card-img-top card-image-fixheight">
+                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap" />
+                    </div>
+                </a>
                 <div class="card-block">
                     <a th:href="@{/good/detail/{id}(id=${good.id})}"><h4 class="card-title" th:text="${good.title}"></h4></a>
                     <ul class="list-group list-group-flush">
@@ -102,8 +108,11 @@
     <div class="row" style="margin-top: 10px">
         <div class="col-sm-3" th:each="good : ${secondRowCatalogGoods}">
             <div class="card">
-                <a th:href="@{/good/detail/{id}(id=${good.id})}"><img class="card-img-top" th:src="${good.smallImageLink}"
-                                                                      alt="Card smallImageLink cap"></a>
+                <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                    <div class="card-img-top card-image-fixheight">
+                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap" />
+                    </div>
+                </a>
                 <div class="card-block">
                     <a th:href="@{/good/detail/{id}(id=${good.id})}"><h4 class="card-title" th:text="${good.title}"></h4></a>
                     <ul class="list-group list-group-flush">

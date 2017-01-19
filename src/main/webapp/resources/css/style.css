@@ -30,3 +30,7 @@ footer {
 .navbar a:hover {
     color: #dddddd;
 }
+
+.card-image-fixheight {
+    max-height: 150px !important;
+}
