@@ -95,7 +95,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Long id, RedirectAttributes redirectAttrs) {
         User user = userService.getUserById(id);
         userService.deleteUserById(id);
-        redirectAttrs.addFlashAttribute("success", "Delete user {}: " + user);
+        redirectAttrs.addFlashAttribute("success", "Delete user: " + user);
 
         return "redirect:/user/";
     }

@@ -30,7 +30,7 @@ public class RoleDAOImpl extends AbstractDAO implements RoleDAO {
     @Override
     @SuppressWarnings("unchecked")
     public Set<Role> allRoles() {
-        List<Role> roles = getSession().createQuery("FROM Role").list();
+        List<Role> roles = getSession().createCriteria(Role.class).list();
         return new HashSet<Role>(roles);
     }
 }
