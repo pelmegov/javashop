@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
@@ -20,8 +21,12 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/admin/user")
 public class UserController {
+
+    private String indexView = "/admin/user/index";
+    private String updateUserView = "/admin/user/updateUser";
+    private String addUserView = "/admin/user/addUser";
 
     private final UserService userService;
     private final RoleService roleService;
@@ -34,8 +39,7 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("user/index");
-
+        ModelAndView modelAndView = new ModelAndView(indexView);
         List<User> allUsers = new ArrayList<User>(userService.allUsers());
         // ToDo придумать как и где сортировать по другому по возрастанию ID юзеров
         Collections.sort(allUsers, new Comparator<User>() {
@@ -45,14 +49,13 @@ public class UserController {
                 return (i1 < i2 ? -1 : (i1.equals(i2) ? 0 : 1));
             }
         });
-
         modelAndView.addObject("users", allUsers);
         return modelAndView;
     }
 
     @RequestMapping(value = {"/addUser"}, method = RequestMethod.GET)
     public ModelAndView addUser(User user) {
-        ModelAndView modelAndView = new ModelAndView("user/addUser");
+        ModelAndView modelAndView = new ModelAndView(addUserView);
         return getUserModelAndView(modelAndView, user);
     }
 
@@ -64,29 +67,23 @@ public class UserController {
         if (result.hasErrors()) {
             return getUserModelAndView(modelAndView, user);
         }
-
         // ToDO Реализовать. Попытка добавить пользователя с существующим логином
         if (userService.getUserByLogin(user.getLogin()) != null) {
             return getUserModelAndView(modelAndView, user);
         }
-
         userService.addUser(user);
         redirectAttrs.addFlashAttribute("success", "User added: " + user);
-
-        return new ModelAndView("redirect:/user/index");
+        return new ModelAndView("redirect:" + indexView);
     }
 
     @RequestMapping(value = {"/updateUser/{id}", "/updateUser"}, method = RequestMethod.GET)
     public ModelAndView updateUser(User user, RedirectAttributes redirectAttrs) {
-        ModelAndView modelAndView = new ModelAndView("user/updateUser");
-
+        ModelAndView modelAndView = new ModelAndView(updateUserView);
         if (user.getId() == null) {
             redirectAttrs.addFlashAttribute("error", "Not the selected user");
-            return new ModelAndView("redirect:/user/index");
+            return new ModelAndView("redirect:" + indexView);
         }
-
         user = userService.getUserById(user.getId());
-
         modelAndView.addObject("user", user);
         return getUserModelAndView(modelAndView, user);
     }
@@ -99,11 +96,9 @@ public class UserController {
         if (result.hasErrors()) {
             return getUserModelAndView(modelAndView, user);
         }
-
         userService.updateUser(user);
         redirectAttrs.addFlashAttribute("success", "User updated: " + user);
-
-        return new ModelAndView("redirect:/user/index");
+        return new ModelAndView("redirect:" + indexView);
     }
 
     @RequestMapping(value = {"/deleteUser/{id}"}, method = RequestMethod.GET)
@@ -111,8 +106,7 @@ public class UserController {
         User user = userService.getUserById(id);
         userService.deleteUserById(id);
         redirectAttrs.addFlashAttribute("success", "Delete user: " + user);
-
-        return "redirect:/user/";
+        return "redirect:" + indexView;
     }
 
     private ModelAndView getUserModelAndView(ModelAndView modelAndView, User user) {

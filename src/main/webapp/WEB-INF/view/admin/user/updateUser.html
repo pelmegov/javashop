@@ -11,7 +11,7 @@
 <body>
 
 <!--Template Header-->
-<div th:include="fragments/header ::header"></div>
+<div th:include="/fragments/header :: header"></div>
 
 <div class="container">
 
@@ -20,7 +20,7 @@
 
             <p class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}"></p>
 
-            <form action="#" th:action="@{/user/updateUser}" th:object="${user}" method="post">
+            <form action="#" th:action="@{/admin/user/updateUser}" th:object="${user}" method="post">
 
                 <div class="form-group row">
                     <label class="form-control-label" for="ID">ID::</label>
@@ -80,7 +80,7 @@
 </div>
 
 <!--Template footer-->
-<div th:include="fragments/footer ::footer"></div>
+<div th:include="/fragments/footer :: footer"></div>
 
 </body>
 </html>

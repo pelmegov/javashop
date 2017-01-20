@@ -24,6 +24,10 @@ import java.util.Set;
 @Controller
 public class SecurityController {
 
+    private String loginView = "/login";
+    private String registrationView = "/registration";
+    private String error403View = "/403";
+
     private final UserService userService;
     private final RoleService roleService;
 
@@ -36,21 +40,19 @@ public class SecurityController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout) {
-        ModelAndView model = new ModelAndView("login");
+        ModelAndView model = new ModelAndView(loginView);
         if (error != null) {
             model.addObject("error", "Invalid Login Or Password!");
         }
-
         return model;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration(User user, @RequestParam(value = "error", required = false) String error) {
-        ModelAndView model = new ModelAndView("registration");
+        ModelAndView model = new ModelAndView(registrationView);
         if (error != null) {
             model.addObject("error", "Invalid Login Or Password!");
         }
-
         return model;
     }
 
@@ -58,42 +60,32 @@ public class SecurityController {
     public ModelAndView registration(@Valid @ModelAttribute User user,
                                      final BindingResult result,
                                      final ModelAndView modelAndView) {
-
         if (result.hasErrors()) {
             modelAndView.addObject("error", "Invalid Login Or Password!");
             return modelAndView;
         }
-
         // ToDO Реализовать. Попытка добавить пользователя с существующим логином
         if (userService.getUserByLogin(user.getLogin()) != null) {
             modelAndView.addObject("error", "User with this login exists!");
             return modelAndView;
         }
-
         Set<Role> role = new HashSet<Role>();
         role.add(roleService.getRoleByName("ROLE_USER"));
-
         user.setRoles(role);
         user.setActive(true);
-
         userService.addUser(user);
-
-        return new ModelAndView("login");
+        return new ModelAndView(loginView);
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accessDenied() {
-
-        ModelAndView model = new ModelAndView("403");
-
+        ModelAndView model = new ModelAndView(error403View);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
             model.addObject("username", userDetail.getUsername());
         }
-
         return model;
-
     }
 
 }

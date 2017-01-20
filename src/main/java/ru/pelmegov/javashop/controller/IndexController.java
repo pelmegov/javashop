@@ -14,12 +14,14 @@ import java.util.List;
 @Controller
 public class IndexController {
 
+    private String indexView = "/index";
+
     @Autowired
     private GoodService goodService;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView indexPage() {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView(indexView);
         modelAndView.addObject("newGoods", goodService.getLastAddedGoods(4));
 
         List<Good> catalogProducts = new ArrayList<Good>(goodService.allGoods()).subList(0, 9);

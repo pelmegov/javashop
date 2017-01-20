@@ -11,12 +11,14 @@ import ru.pelmegov.javashop.api.service.GoodService;
 @Controller
 public class GoodController {
 
+    private String detailView = "/good/detail";
+
     @Autowired
     private GoodService goodService;
 
     @RequestMapping(value = {"/good/detail/{id}"}, method = RequestMethod.GET)
     public ModelAndView detailPage(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("good/detail");
+        ModelAndView modelAndView = new ModelAndView(detailView);
         modelAndView.addObject("good", goodService.getGoodById(id));
 
         return modelAndView;
