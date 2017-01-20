@@ -27,13 +27,13 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public Role getRoleById(Long id) {
+    public Role getRoleById(Integer id) {
         return roleDao.getRoleById(id);
     }
 
     @Override
     @Transactional
-    public Set<Role> allRoles() {
-        return roleDao.allRoles();
+    public Set<Role> getAllRoles() {
+        return roleDao.getAllRoles();
     }
 }

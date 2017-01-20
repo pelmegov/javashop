@@ -7,10 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.GoodService;
-import ru.pelmegov.javashop.model.Good;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 public class GoodController {
@@ -22,7 +18,7 @@ public class GoodController {
     private GoodService goodService;
 
     @RequestMapping(value = {"/good/detail/{id}"}, method = RequestMethod.GET)
-    public ModelAndView detailPage(@PathVariable Long id) {
+    public ModelAndView detailPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView(detailView);
         modelAndView.addObject("good", goodService.getGoodById(id));
 
@@ -30,17 +26,13 @@ public class GoodController {
     }
 
     @RequestMapping(value = {"/category/{id}"}, method = RequestMethod.GET)
-    public ModelAndView category(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView(categoryView);
-        modelAndView.addObject("category", id);
+    public ModelAndView category(@PathVariable(value = "id") Integer category_id) {
+        // Сколько товаров выводить в каталоге
+        Integer goodsCount = 12;
 
-        Set<Good> goods = new HashSet<Good>();
-        for (Good good: goodService.allGoods()) {
-            if(good.getCategory().getId().equals(id)) {
-                goods.add(good);
-            }
-        }
-        modelAndView.addObject("goods", goods);
+        ModelAndView modelAndView = new ModelAndView(categoryView);
+        modelAndView.addObject("category", category_id);
+        modelAndView.addObject("catalogGoods", goodService.getGoodsByCategory(goodsCount, category_id));
 
         return modelAndView;
     }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
@@ -40,12 +39,12 @@ public class UserController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView(indexView);
-        List<User> allUsers = new ArrayList<User>(userService.allUsers());
+        List<User> allUsers = new ArrayList<User>(userService.getAllUsers());
         // ToDo придумать как и где сортировать по другому по возрастанию ID юзеров
         Collections.sort(allUsers, new Comparator<User>() {
             public int compare(User o1, User o2) {
-                Long i1 = o1.getId();
-                Long i2 = o2.getId();
+                Integer i1 = o1.getId();
+                Integer i2 = o2.getId();
                 return (i1 < i2 ? -1 : (i1.equals(i2) ? 0 : 1));
             }
         });
@@ -102,7 +101,7 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/deleteUser/{id}"}, method = RequestMethod.GET)
-    public String deleteUser(@PathVariable("id") Long id, RedirectAttributes redirectAttrs) {
+    public String deleteUser(@PathVariable("id") Integer id, RedirectAttributes redirectAttrs) {
         User user = userService.getUserById(id);
         userService.deleteUserById(id);
         redirectAttrs.addFlashAttribute("success", "Delete user: " + user);
@@ -111,7 +110,7 @@ public class UserController {
 
     private ModelAndView getUserModelAndView(ModelAndView modelAndView, User user) {
         modelAndView.addObject("currentRoles", user.getRoles());
-        modelAndView.addObject("allRoles", roleService.allRoles());
+        modelAndView.addObject("allRoles", roleService.getAllRoles());
         modelAndView.addObject("user", user);
         return modelAndView;
     }

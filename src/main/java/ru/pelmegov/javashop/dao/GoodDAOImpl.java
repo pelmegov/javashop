@@ -24,24 +24,56 @@ public class GoodDAOImpl extends AbstractDAO implements GoodDAO {
     }
 
     @Override
-    public Good getGoodById(Long id) {
+    public Good getGoodById(Integer id) {
         return (Good) getSession().createCriteria(Good.class).add(Restrictions.eq("id", id)).uniqueResult();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Set<Good> allGoods() {
+    public Set<Good> getAllGoods() {
         List<Good> goods = getSession().createCriteria(Good.class).list();
         return new HashSet<Good>(goods);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Set<Good> getLastAddedGoods(Integer col) {
+    public Set<Good> getGoodsByCategory(Integer categoryId) {
+        return getGoodsByCategory(null, categoryId);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Set<Good> getGoodsByCategory(Integer count, Integer categoryId) {
+        List<Good> goods;
+        if (count != null) {
+            goods = getSession()
+                    .createCriteria(Good.class)
+                    .add(Restrictions.eq("category.id", categoryId))
+                    .setMaxResults(count)
+                    .list();
+        } else {
+            goods = getSession()
+                    .createCriteria(Good.class)
+                    .add(Restrictions.eq("category.id", categoryId))
+                    .list();
+        }
+        return new HashSet<Good>(goods);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Set<Good> getGoods(Integer count) {
+        List<Good> goods = getSession().createCriteria(Good.class).setMaxResults(count).list();
+        return new HashSet<Good>(goods);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Set<Good> getLastAddedGoods(Integer count) {
         List<Good> goods = getSession()
                 .createCriteria(Good.class)
                 .addOrder(Order.desc("id"))
-                .setMaxResults(col)
+                .setMaxResults(count)
                 .list();
         return new HashSet<Good>(goods);
     }

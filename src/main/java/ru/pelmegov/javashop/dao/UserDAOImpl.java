@@ -35,7 +35,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteUserById(Integer id) {
         User user = (User) getSession().load(User.class, id);
 
         if (user != null) {
@@ -45,7 +45,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(Integer id) {
         User user = (User) getSession().createCriteria(User.class).add(Restrictions.eq("id", id)).uniqueResult();
         LOGGER.info("User successfully loaded: {}.", user);
         return user;
@@ -60,7 +60,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Set<User> allUsers() {
+    public Set<User> getAllUsers() {
         List<User> users = getSession().createCriteria(User.class).addOrder(Order.asc("id")).list();
         LOGGER.info("User list: {}.", users);
 

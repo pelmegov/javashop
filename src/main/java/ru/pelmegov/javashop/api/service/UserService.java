@@ -10,12 +10,12 @@ public interface UserService {
 
     public void updateUser(User user);
 
-    public void deleteUserById(Long id);
+    public void deleteUserById(Integer id);
 
-    public User getUserById(Long id);
+    public User getUserById(Integer id);
 
     public User getUserByLogin(String login);
 
-    public Set<User> allUsers();
+    public Set<User> getAllUsers();
 
 }
