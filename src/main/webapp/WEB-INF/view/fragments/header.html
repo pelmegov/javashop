@@ -11,16 +11,20 @@
 <div th:fragment="header">
 
     <nav class="header navbar navbar-toggleable-md bg-inverse navbar-dark bg-faded">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="/">JavaShop</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" >
                     <a class="nav-link" href="/admin/user/">USERS CRUD</a>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="/category/1">Notebooks</a></li>
+                <li class="nav-item"><a class="nav-link" href="/category/2">Tablets</a></li>
             </ul>
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav">
