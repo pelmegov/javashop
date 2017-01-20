@@ -80,39 +80,39 @@
                 </div>
             </div>
         </div>
-
-        <hr>
-        <h2 style="margin-top: 40px">CATALOG</h2>
-        <div class="row" style="margin-top: 20px"
-             th:each="goods : ${T(com.google.common.collect.Lists).partition(catalogGoods, 4)}">
-            <div class="col-sm-3 row-eq-height" th:each="good : ${goods}">
-                <div class="card">
+    </div>
+    <hr>
+    <h2 style="margin-top: 30px">CATALOG</h2>
+    <div class="row" style="margin-top: 20px"
+         th:each="goods : ${T(com.google.common.collect.Lists).partition(catalogGoods, 4)}">
+        <div class="col-sm-3 row-eq-height" th:each="good : ${goods}">
+            <div class="card">
+                <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                    <div class="card-img-top card-image-fixheight">
+                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap"/>
+                    </div>
+                </a>
+                <div class="card-block">
                     <a th:href="@{/good/detail/{id}(id=${good.id})}">
-                        <div class="card-img-top card-image-fixheight">
-                            <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap"/>
-                        </div>
+                        <h4 class="card-title" th:text="${good.title}"></h4>
                     </a>
-                    <div class="card-block">
-                        <a th:href="@{/good/detail/{id}(id=${good.id})}">
-                            <h4 class="card-title" th:text="${good.title}"></h4>
-                        </a>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
-                            </li>
-                        </ul>
-                        <p class="card-text" th:text="${good.description}"></p>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-primary">Buy now!</a>
-                        </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
+                        </li>
+                    </ul>
+                    <p class="card-text" th:text="${good.description}"></p>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Buy now!</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!--Template footer-->
-    <div th:include="/fragments/footer :: footer"></div>
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
 
 </div>
 </body>
