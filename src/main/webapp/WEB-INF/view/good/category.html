@@ -20,7 +20,8 @@
 <div class="container">
 
     <h2>CATALOG</h2>
-    <div class="row" style="margin-top: 20px" th:each="goods : ${T(com.google.common.collect.Lists).partition(catalogGoods, 4)}">
+    <div class="row" style="margin-top: 20px"
+         th:each="goods : ${T(com.google.common.collect.Lists).partition(catalogGoods, 4)}">
         <div class="col-sm-3 row-eq-height" th:each="good : ${goods}">
             <div class="card">
                 <a th:href="@{/good/detail/{id}(id=${good.id})}">
@@ -36,7 +37,7 @@
                             <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
                         </li>
                     </ul>
-                    <p class="card-text" th:text="${good.description}"></p>
+                    <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
 
                     <div class="card-footer">
                         <a href="#" class="btn btn-primary">Buy now!</a>
@@ -44,7 +45,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <!--Template footer-->

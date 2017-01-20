@@ -73,7 +73,7 @@
                             <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
                         </li>
                     </ul>
-                    <p class="card-text" th:text="${good.description}"></p>
+                    <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
                     <div class="card-footer">
                         <a href="#" class="btn btn-success">Buy now!</a>
                     </div>
@@ -101,7 +101,7 @@
                             <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
                         </li>
                     </ul>
-                    <p class="card-text" th:text="${good.description}"></p>
+                    <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
                     <div class="card-footer">
                         <a href="#" class="btn btn-primary">Buy now!</a>
                     </div>
