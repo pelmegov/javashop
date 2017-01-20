@@ -23,13 +23,13 @@ public class RoleDAOImpl extends AbstractDAO implements RoleDAO {
     }
 
     @Override
-    public Role getRoleById(Long id) {
+    public Role getRoleById(Integer id) {
         return (Role) getSession().createCriteria(Role.class).add(Restrictions.eq("id", id)).uniqueResult();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Set<Role> allRoles() {
+    public Set<Role> getAllRoles() {
         List<Role> roles = getSession().createCriteria(Role.class).list();
         return new HashSet<Role>(roles);
     }

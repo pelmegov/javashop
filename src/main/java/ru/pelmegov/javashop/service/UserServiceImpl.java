@@ -33,13 +33,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteUserById(Long id) {
+    public void deleteUserById(Integer id) {
         this.userDao.deleteUserById(id);
     }
 
     @Override
     @Transactional
-    public User getUserById(Long id) {
+    public User getUserById(Integer id) {
         return this.userDao.getUserById(id);
     }
 
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Set<User> allUsers() {
-        return this.userDao.allUsers();
+    public Set<User> getAllUsers() {
+        return this.userDao.getAllUsers();
     }
 }

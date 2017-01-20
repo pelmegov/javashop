@@ -22,7 +22,7 @@
 <body>
 
 <!--Template Header-->
-<div th:include="fragments/header ::header"></div>
+<div th:include="/fragments/header :: header"></div>
 
 <div class="container">
 
@@ -34,13 +34,13 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-                <img class="d-block img-fluid" src="http://placehold.it/1100x350/bbb" alt="First slide">
+                <img class="d-block img-fluid" src="/resources/img/web_hosting-1100x350.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/1100x350/ccc" alt="Second slide">
+                <img class="d-block img-fluid" src="/resources/img/Mturk-Consulting-1100x350.png" alt="Second slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/1100x350/eee" alt="Third slide">
+                <img class="d-block img-fluid" src="/resources/img/dis1-1100x350.png" alt="Third slide">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -53,85 +53,67 @@
         </a>
     </div>
 
-
     <hr>
-    <h2>NEW PRODUCTS</h2>
+    <h2 style="margin-top: 30px">NEW PRODUCTS</h2>
     <div class="row" style="margin-top: 20px">
-        <div class="col-sm-3" th:each="good : ${newGoods}">
+        <div class="col-sm-3 row-eq-height" th:each="good : ${newGoods}">
             <div class="card">
 
                 <a th:href="@{/good/detail/{id}(id=${good.id})}">
                     <div class="card-img-top card-image-fixheight">
-                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap" />
+                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap"/>
                     </div>
                 </a>
                 <div class="card-block">
-                    <a th:href="@{/good/detail/{id}(id=${good.id})}"><h4 class="card-title" th:text="${good.title}"></h4></a>
+                    <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                        <h4 class="card-title" th:text="${good.title}"></h4>
+                    </a>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <span style="color: darkslateblue; font-weight: bold" th:text="${good.price}">PRICE</span>&nbsp;
-                            RUB
+                            <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
                         </li>
                     </ul>
-                    <p class="card-text" th:text="${good.description}"></p>
-                    <a href="#" class="btn btn-success">Buy now!</a>
+                    <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-success">Buy now!</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
     <hr>
-    <h2>CATALOG</h2>
-    <div class="row" style="margin-top: 20px">
-        <div class="col-sm-3" th:each="good : ${firstRowCatalogGoods}">
+    <h2 style="margin-top: 30px">CATALOG</h2>
+    <div class="row" style="margin-top: 20px"
+         th:each="goods : ${T(com.google.common.collect.Lists).partition(catalogGoods, 4)}">
+        <div class="col-sm-3 row-eq-height" th:each="good : ${goods}">
             <div class="card">
                 <a th:href="@{/good/detail/{id}(id=${good.id})}">
                     <div class="card-img-top card-image-fixheight">
-                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap" />
+                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap"/>
                     </div>
                 </a>
                 <div class="card-block">
-                    <a th:href="@{/good/detail/{id}(id=${good.id})}"><h4 class="card-title" th:text="${good.title}"></h4></a>
+                    <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                        <h4 class="card-title" th:text="${good.title}"></h4>
+                    </a>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <span style="color: darkslateblue; font-weight: bold" th:text="${good.price}">PRICE</span>&nbsp;
-                            RUB
+                            <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
                         </li>
                     </ul>
-                    <p class="card-text" th:text="${good.description}"></p>
-                    <a href="#" class="btn btn-primary">Buy now!</a>
+                    <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Buy now!</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 10px">
-        <div class="col-sm-3" th:each="good : ${secondRowCatalogGoods}">
-            <div class="card">
-                <a th:href="@{/good/detail/{id}(id=${good.id})}">
-                    <div class="card-img-top card-image-fixheight">
-                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap" />
-                    </div>
-                </a>
-                <div class="card-block">
-                    <a th:href="@{/good/detail/{id}(id=${good.id})}"><h4 class="card-title" th:text="${good.title}"></h4></a>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <span style="color: darkslateblue; font-weight: bold" th:text="${good.price}">PRICE</span>&nbsp;
-                            RUB
-                        </li>
-                    </ul>
-                    <p class="card-text" th:text="${good.description}"></p>
-                    <a href="#" class="btn btn-primary">Buy now!</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 <!--Template footer-->
-<div th:include="fragments/footer ::footer"></div>
+<div th:include="/fragments/footer :: footer"></div>
 
+</div>
 </body>
 </html>

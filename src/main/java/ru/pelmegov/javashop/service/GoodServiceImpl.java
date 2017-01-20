@@ -27,19 +27,37 @@ public class GoodServiceImpl implements GoodService {
 
     @Override
     @Transactional
-    public Good getGoodById(Long id) {
+    public Good getGoodById(Integer id) {
         return goodDao.getGoodById(id);
     }
 
     @Override
     @Transactional
-    public Set<Good> allGoods() {
-        return goodDao.allGoods();
+    public Set<Good> getAllGoods() {
+        return goodDao.getAllGoods();
+    }
+
+    @Override
+    @Transactional
+    public Set<Good> getGoods(Integer count) {
+        return goodDao.getGoods(count);
     }
 
     @Override
     @Transactional
     public Set<Good> getLastAddedGoods(Integer col) {
         return goodDao.getLastAddedGoods(col);
+    }
+
+    @Override
+    @Transactional
+    public Set<Good> getGoodsByCategory(Integer categoryId) {
+        return goodDao.getGoodsByCategory(categoryId);
+    }
+
+    @Override
+    @Transactional
+    public Set<Good> getGoodsByCategory(Integer count, Integer categoryId) {
+        return goodDao.getGoodsByCategory(count, categoryId);
     }
 }

@@ -8,8 +8,8 @@ public interface RoleService {
 
     public Role getRoleByName(String name);
 
-    public Role getRoleById(Long id);
+    public Role getRoleById(Integer id);
 
-    public Set<Role> allRoles();
+    public Set<Role> getAllRoles();
 
 }

@@ -11,13 +11,28 @@ import ru.pelmegov.javashop.api.service.GoodService;
 @Controller
 public class GoodController {
 
+    private String detailView = "/good/detail";
+    private String categoryView = "/good/category";
+
     @Autowired
     private GoodService goodService;
 
     @RequestMapping(value = {"/good/detail/{id}"}, method = RequestMethod.GET)
-    public ModelAndView detailPage(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("good/detail");
+    public ModelAndView detailPage(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView(detailView);
         modelAndView.addObject("good", goodService.getGoodById(id));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/category/{id}"}, method = RequestMethod.GET)
+    public ModelAndView category(@PathVariable(value = "id") Integer category_id) {
+        // Сколько товаров выводить в каталоге
+        Integer goodsCount = 12;
+
+        ModelAndView modelAndView = new ModelAndView(categoryView);
+        modelAndView.addObject("category", category_id);
+        modelAndView.addObject("catalogGoods", goodService.getGoodsByCategory(goodsCount, category_id));
 
         return modelAndView;
     }

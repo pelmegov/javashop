@@ -20,8 +20,12 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/admin/user")
 public class UserController {
+
+    private String indexView = "/admin/user/index";
+    private String updateUserView = "/admin/user/updateUser";
+    private String addUserView = "/admin/user/addUser";
 
     private final UserService userService;
     private final RoleService roleService;
@@ -34,25 +38,23 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("user/index");
-
-        List<User> allUsers = new ArrayList<User>(userService.allUsers());
+        ModelAndView modelAndView = new ModelAndView(indexView);
+        List<User> allUsers = new ArrayList<User>(userService.getAllUsers());
         // ToDo придумать как и где сортировать по другому по возрастанию ID юзеров
         Collections.sort(allUsers, new Comparator<User>() {
             public int compare(User o1, User o2) {
-                Long i1 = o1.getId();
-                Long i2 = o2.getId();
+                Integer i1 = o1.getId();
+                Integer i2 = o2.getId();
                 return (i1 < i2 ? -1 : (i1.equals(i2) ? 0 : 1));
             }
         });
-
         modelAndView.addObject("users", allUsers);
         return modelAndView;
     }
 
     @RequestMapping(value = {"/addUser"}, method = RequestMethod.GET)
     public ModelAndView addUser(User user) {
-        ModelAndView modelAndView = new ModelAndView("user/addUser");
+        ModelAndView modelAndView = new ModelAndView(addUserView);
         return getUserModelAndView(modelAndView, user);
     }
 
@@ -64,29 +66,23 @@ public class UserController {
         if (result.hasErrors()) {
             return getUserModelAndView(modelAndView, user);
         }
-
         // ToDO Реализовать. Попытка добавить пользователя с существующим логином
         if (userService.getUserByLogin(user.getLogin()) != null) {
             return getUserModelAndView(modelAndView, user);
         }
-
         userService.addUser(user);
         redirectAttrs.addFlashAttribute("success", "User added: " + user);
-
-        return new ModelAndView("redirect:/user/index");
+        return new ModelAndView("redirect:" + indexView);
     }
 
     @RequestMapping(value = {"/updateUser/{id}", "/updateUser"}, method = RequestMethod.GET)
     public ModelAndView updateUser(User user, RedirectAttributes redirectAttrs) {
-        ModelAndView modelAndView = new ModelAndView("user/updateUser");
-
+        ModelAndView modelAndView = new ModelAndView(updateUserView);
         if (user.getId() == null) {
             redirectAttrs.addFlashAttribute("error", "Not the selected user");
-            return new ModelAndView("redirect:/user/index");
+            return new ModelAndView("redirect:" + indexView);
         }
-
         user = userService.getUserById(user.getId());
-
         modelAndView.addObject("user", user);
         return getUserModelAndView(modelAndView, user);
     }
@@ -99,25 +95,22 @@ public class UserController {
         if (result.hasErrors()) {
             return getUserModelAndView(modelAndView, user);
         }
-
         userService.updateUser(user);
         redirectAttrs.addFlashAttribute("success", "User updated: " + user);
-
-        return new ModelAndView("redirect:/user/index");
+        return new ModelAndView("redirect:" + indexView);
     }
 
     @RequestMapping(value = {"/deleteUser/{id}"}, method = RequestMethod.GET)
-    public String deleteUser(@PathVariable("id") Long id, RedirectAttributes redirectAttrs) {
+    public String deleteUser(@PathVariable("id") Integer id, RedirectAttributes redirectAttrs) {
         User user = userService.getUserById(id);
         userService.deleteUserById(id);
         redirectAttrs.addFlashAttribute("success", "Delete user: " + user);
-
-        return "redirect:/user/";
+        return "redirect:" + indexView;
     }
 
     private ModelAndView getUserModelAndView(ModelAndView modelAndView, User user) {
         modelAndView.addObject("currentRoles", user.getRoles());
-        modelAndView.addObject("allRoles", roleService.allRoles());
+        modelAndView.addObject("allRoles", roleService.getAllRoles());
         modelAndView.addObject("user", user);
         return modelAndView;
     }

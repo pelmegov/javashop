@@ -8,10 +8,16 @@ public interface GoodDAO {
 
     public Good getGoodByName(String name);
 
-    public Good getGoodById(Long id);
+    public Good getGoodById(Integer id);
 
-    public Set<Good> allGoods();
+    public Set<Good> getAllGoods();
 
-    public Set<Good> getLastAddedGoods(Integer col);
+    public Set<Good> getGoods(Integer count);
+
+    public Set<Good> getLastAddedGoods(Integer count);
+
+    public Set<Good> getGoodsByCategory(Integer categoryId);
+
+    public Set<Good> getGoodsByCategory(Integer count, Integer categoryId);
 
 }
