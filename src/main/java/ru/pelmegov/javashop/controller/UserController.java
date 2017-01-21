@@ -15,7 +15,6 @@ import ru.pelmegov.javashop.model.User;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -39,16 +38,10 @@ public class UserController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView(indexView);
-        List<User> allUsers = new ArrayList<User>(userService.getAllUsers());
-        // ToDo придумать как и где сортировать по другому по возрастанию ID юзеров
-        Collections.sort(allUsers, new Comparator<User>() {
-            public int compare(User o1, User o2) {
-                Integer i1 = o1.getId();
-                Integer i2 = o2.getId();
-                return (i1 < i2 ? -1 : (i1.equals(i2) ? 0 : 1));
-            }
-        });
-        modelAndView.addObject("users", allUsers);
+        List<User> users = new ArrayList<>(userService.getAllUsers());
+        // Отсортируем по ID
+        users.sort(Comparator.comparing(User::getId));
+        modelAndView.addObject("users", users);
         return modelAndView;
     }
 

@@ -1,6 +1,8 @@
 -- insert user data
 INSERT INTO "user" (login, password, active) VALUES ('admin', '123456', true);
 INSERT INTO "user" (login, password, active) VALUES ('user', '123456', true);
+INSERT INTO "user" (login, password, active) VALUES ('manager', '123456', true);
+INSERT INTO "user" (login, password, active) VALUES ('user2', '123456', false);
 
 -- insert role data
 INSERT INTO "role" (name) VALUES ('ROLE_ADMIN');
@@ -11,6 +13,9 @@ INSERT INTO "role" (name) VALUES ('ROLE_MANAGER');
 INSERT INTO "user_role" (user_id, role_id) VALUES (1, 2);
 INSERT INTO "user_role" (user_id, role_id) VALUES (1, 1);
 INSERT INTO "user_role" (user_id, role_id) VALUES (2, 2);
+INSERT INTO "user_role" (user_id, role_id) VALUES (3, 2);
+INSERT INTO "user_role" (user_id, role_id) VALUES (3, 3);
+INSERT INTO "user_role" (user_id, role_id) VALUES (4, 2);
 
 --insert category data
 INSERT INTO "category" (title, description) VALUES ('notebooks', 'Cards assume no specific width to start');
