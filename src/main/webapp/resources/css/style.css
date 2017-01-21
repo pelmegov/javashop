@@ -63,3 +63,7 @@ footer {
     padding-bottom: 75px;
     border: 10px solid #F7F7F9;
 }
+
+.btn-default:hover {
+    background: #cccccc;
+}

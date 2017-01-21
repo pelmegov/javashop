@@ -20,22 +20,24 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" >
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="/admin/user/">USERS CRUD</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/category/1">Notebooks</a></li>
                 <li class="nav-item"><a class="nav-link" href="/category/2">Tablets</a></li>
             </ul>
             <div class="my-2 my-lg-0">
-                <ul class="navbar-nav">
-                    <li th:switch="${#authentication} ? ${#authorization.expression('isAuthenticated()')} : ${false}"
-                        class="nav-item pull-sm-0">
-                <span th:case="${false}">
-                <a class="nav-link" href="/login">Login</a>
-                </span>
+                <ul class="navbar-nav"
+                    th:switch="${#authentication} ? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                    <li class="nav-item pull-sm-0">
+                        <span th:case="${false}">
+                            <a class="nav-link" href="/login">Login</a>
+                        </span>
                         <span th:case="${true}">
-                <a class="nav-link" href="/login?logout">Logout</a>
-                </span>
+                            <form th:action="@{/logout}" method="post">
+                                <input class="btn btn-default" type="submit" value="Log out" />
+                            </form>
+                        </span>
                     </li>
                 </ul>
             </div>
