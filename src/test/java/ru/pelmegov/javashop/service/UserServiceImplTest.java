@@ -1,66 +1,111 @@
 package ru.pelmegov.javashop.service;
 
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
+import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
-import ru.pelmegov.javashop.config.*;
-import ru.pelmegov.javashop.config.security.SecurityConfig;
-import ru.pelmegov.javashop.config.security.SecurityInit;
+import ru.pelmegov.javashop.config.AppConfig;
 import ru.pelmegov.javashop.model.Role;
 import ru.pelmegov.javashop.model.User;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = AppConfig.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {AppConfig.class, AppInit.class, SecurityConfig.class, SecurityInit.class, ThymeleafConfig.class, UserServiceImpl.class, UserService.class})
-public class UserServiceImplTest extends AbstractTransactionalJUnit4SpringContextTests{
+@ExtendWith(SpringExtension.class)
+@DisplayName("UserService")
+public class UserServiceImplTest {
 
     @Autowired
-    public UserServiceImpl userServiceImpl;
+    private UserService userService;
 
-    public UserServiceImplTest() {
+    @Autowired
+    private RoleService roleService;
+
+    // user id
+    private static int id = 0;
+
+    @Test
+    @DisplayName("Add user")
+    void addUser() {
+        User user = generateTestUser();
+        userService.addUser(user);
+        User newUser = userService.getUserByLogin(user.getLogin());
+        assertEquals(user.getLogin(), newUser.getLogin());
+        assertEquals(user.getPassword(), newUser.getPassword());
+        assertEquals(user.getRoles(), newUser.getRoles());
     }
 
-    @org.junit.Test
-    public void addUserTest() {
-        User testForAddUser = generateTestUser();
-        userServiceImpl.addUser(testForAddUser);
-        User user = userServiceImpl.getUserByLogin(testForAddUser.getLogin());
-        assertEquals(testForAddUser.getLogin(), user.getLogin());
-        assertEquals(testForAddUser.getPassword(), user.getPassword());
-        assertEquals(testForAddUser.getRoles(),user.getRoles());
+    @Test
+    @DisplayName("Update user")
+    void updateUser() {
+        User user = generateTestUser();
+
+        String newLogin = "new_login";
+        String newPassword = "new_password";
+
+        user.setLogin(newLogin);
+        user.setPassword(newPassword);
+        userService.updateUser(user);
+
+        User newUser = userService.getUserByLogin(user.getLogin());
+        assertEquals(newLogin, newUser.getLogin());
+        assertEquals(newPassword, newUser.getPassword());
     }
 
-    @org.junit.Test
-    public  void updateUserTest(){
+    @Test
+    @DisplayName("Delete user by id")
+    void deleteUserById() {
+        User user = generateTestUser();
+        Integer id = user.getId();
+        userService.deleteUserById(id);
 
-        User testUser = new User();
-        testUser.setLogin("New_login");
-        testUser.setPassword("New_pass");
-//        testUser.setRoles();
-        userServiceImpl.updateUser(testUser);
-        userServiceImpl.getUserByLogin(testUser.getLogin());
-        assertEquals("New_login", testUser.getLogin());
-        assertEquals("New_pass", testUser.getPassword());
+        assertNull(userService.getUserById(id));
+    }
+
+    @Test
+    @DisplayName("Get user by id")
+    void getUserById() {
+        User user = generateTestUser();
+        Integer id = user.getId();
+        userService.addUser(user);
+
+        assertNotNull(userService.getUserById(id));
+    }
+
+    @Test
+    @DisplayName("Get user by login")
+    void getUserByLogin() {
+        User user = generateTestUser();
+        String login = user.getLogin();
+        userService.addUser(user);
+
+        assertNotNull(userService.getUserByLogin(login));
+    }
+
+    @Test
+    @DisplayName("Get all users")
+    void getAllUsers() {
+        userService.addUser(generateTestUser());
+        assertNotNull(userService.getAllUsers());
     }
 
     private User generateTestUser() {
-        User testUser = new User();
-        Set<Role> roleSet = new HashSet<Role>();
-        Role role = new Role();
-        role.setName("ROLE_ADMIN");
-        roleSet.add(role);
-        testUser.setLogin("test");
-        testUser.setPassword("test");
-        testUser.setRoles(roleSet);
-        return testUser;
+        User user = new User();
+        user.setId(++id);
+        Set<Role> roleSet = roleService.getAllRoles();
+        user.setLogin("tester" + id);
+        user.setPassword("tester" + id);
+        user.setRoles(roleSet);
+        return user;
     }
 }

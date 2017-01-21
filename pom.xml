@@ -30,9 +30,14 @@
         <hibernate.validator>5.3.4.Final</hibernate.validator>
         <jdbc.postgresql>9.3-1100-jdbc41</jdbc.postgresql>
         <thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
+        <thymeleaf-extras-springsecurity4>3.0.1.RELEASE</thymeleaf-extras-springsecurity4>
         <bootstrap>4.0.0-alpha.6</bootstrap>
         <slf4j>1.7.22</slf4j>
         <lombok>1.16.12</lombok>
+        <junit-jupiter-api>5.0.0-M3</junit-jupiter-api>
+        <jstl.version>1.2</jstl.version>
+        <validation-api>1.1.0.Final</validation-api>
+        <javax.servlet-api>4.0.0-b01</javax.servlet-api>
     </properties>
 
     <dependencies>
@@ -47,14 +52,14 @@
             <version>${thymeleaf.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>junit5-engine</artifactId>
-            <version>5.0.0-ALPHA</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter-api}</version>
         </dependency>
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -84,6 +89,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
@@ -100,12 +110,12 @@
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-            <version>3.0.1.RELEASE</version>
+            <version>${thymeleaf-extras-springsecurity4}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>RELEASE</version>
+            <version>${javax.servlet-api}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -140,7 +150,7 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <version>${validation-api}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -152,11 +162,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>r05</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.0.0-M3</version>
         </dependency>
     </dependencies>
 </project>
