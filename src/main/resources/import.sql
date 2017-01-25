@@ -20,6 +20,9 @@ INSERT INTO "user_role" (user_id, role_id) VALUES (4, 2);
 --insert category data
 INSERT INTO "category" (title, description) VALUES ('notebooks', 'Cards assume no specific width to start');
 INSERT INTO "category" (title, description) VALUES ('tablets', 'Tablets to quickly set a card’s width.');
+INSERT INTO "category" (title, description) VALUES ('mobile', 'Top mobile phones');
+INSERT INTO "category" (title, description) VALUES ('pc', 'pc block, barebones, system block');
+
 
 --insert good data
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Notebook HP', '/resources/img/i.jpeg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 20500, 1);
@@ -38,3 +41,10 @@ INSERT INTO "good" (title, small_image_link, description, quantity, price, categ
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Tablet NOTE2pg ns', '/resources/img/logo2.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 22040, 2);
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Tablet GBD XX 72', '/resources/img/pf.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 34200, 2);
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Tablet LA AS NOOO70000', '/resources/img/Samyie-nedorogie-planshetyi-1.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 23500, 2);
+
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Apple IPhone 5s 16Gb', '/resources/img/5s.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 20900, 3);
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Samsung Galaxy s6 32Gb', '/resources/img/samsung_galaxy_s6.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 19880, 3);
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Xiaomi Redmi Note 4 64Gb', '/resources/img/xiaomi_redmi_note4.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 18990, 3);
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Asus Zenfone 2 Laser 16Gb', '/resources/img/asus_zenfone2_laser.png', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 13490, 3);
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Sony Xperia X 64Gb Black', '/resources/img/sony_xperia_x.png', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 32990, 3);
+

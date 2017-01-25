@@ -35,7 +35,7 @@ footer {
 }
 
 .card-image-fixheight {
-    max-height: 150px !important;
+    max-height: 200px !important;
     border: 10px solid #F7F7F9;
 }
 
