@@ -21,7 +21,7 @@ INSERT INTO "user_role" (user_id, role_id) VALUES (4, 2);
 INSERT INTO "category" (title, description) VALUES ('notebooks', 'Cards assume no specific width to start');
 INSERT INTO "category" (title, description) VALUES ('tablets', 'Tablets to quickly set a card’s width.');
 INSERT INTO "category" (title, description) VALUES ('mobile', 'Top mobile phones');
-INSERT INTO "category" (title, description) VALUES ('pc', 'pc block, barebones, system block');
+INSERT INTO "category" (title, description) VALUES ('Foto Cameras', 'mouse, keyboard, cards, etc.');
 
 
 --insert good data
@@ -47,4 +47,10 @@ INSERT INTO "good" (title, small_image_link, description, quantity, price, categ
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Xiaomi Redmi Note 4 64Gb', '/resources/img/xiaomi_redmi_note4.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 18990, 3);
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Asus Zenfone 2 Laser 16Gb', '/resources/img/asus_zenfone2_laser.png', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 13490, 3);
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Sony Xperia X 64Gb Black', '/resources/img/sony_xperia_x.png', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 32990, 3);
+
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Canon EOS 100D 18-55DC Kit', '/resources/img/canon_eos_100d.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 29990, 4);
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Canon EOS 70D', '/resources/img/canon_eos_70d.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 68990, 4);
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Canon EOS 5D Mark 4 Body', '/resources/img/canon_eos_5d.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 229990, 4);
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Canon EOS 6D', '/resources/img/canon_eos_6d.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 126990, 4);
+INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Nikon D5300', '/resources/img/nikon_d5300.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 39990, 4);
 
