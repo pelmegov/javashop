@@ -3,14 +3,17 @@ package ru.pelmegov.javashop.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
 @Table(name = "good")
-@EqualsAndHashCode(exclude={"category"})
+@EqualsAndHashCode(exclude = {"category", "cartUsers"})
+@ToString(exclude="cartUsers")
 @NoArgsConstructor
 public class Good {
 
@@ -39,5 +42,8 @@ public class Good {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "cartGoods")
+    private List<User> cartUsers;
 
 }

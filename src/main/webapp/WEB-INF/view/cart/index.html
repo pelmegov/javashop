@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>JavaShop</title>
+    <title>Cart</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
@@ -11,9 +11,8 @@
 
 <div class="container">
 
-    <h2>CATALOG</h2>
-    <div class="row" style="margin-top: 20px"
-         th:each="goods : ${T(com.google.common.collect.Lists).partition(catalogGoods, 4)}">
+    <h2 style="margin-top: 30px">Your cart</h2>
+    <div class="row" style="margin-top: 20px">
         <div class="col-sm-3 row-eq-height" th:each="good : ${goods}">
             <div class="card">
                 <a th:href="@{/good/detail/{id}(id=${good.id})}">
@@ -23,31 +22,23 @@
                 </a>
                 <div class="card-block">
                     <a th:href="@{/good/detail/{id}(id=${good.id})}">
-                        <h4 class="card-title" th:text="${good.title}"></h4></a>
+                        <h4 class="card-title" th:text="${good.title}"></h4>
+                    </a>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
                         </li>
                     </ul>
                     <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
-
-                    <div class="card-footer">
-                        <div class="card-footer">
-                            <a data-toggle="modal"
-                               data-target="#modalBuy"
-                               th:attr="data-id=${good.id}"
-                               th:href="@{/cart/buy}"
-                               class="buy btn btn-primary"
-                            >Buy now!</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!--Template footer-->
-    <div th:include="/fragments/footer :: footer"></div>
+</div>
+
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
 
 </div>
 </body>

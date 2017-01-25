@@ -36,12 +36,4 @@ public class GoodController {
 
         return modelAndView;
     }
-
-    // ToDo это скорее всего должно быть в UserController
-    @ResponseBody
-    @RequestMapping(value = {"/good/buy"})
-    public String buy(@RequestBody String id) {
-        Good good = goodService.getGoodById(Integer.valueOf(id));
-        return good.getTitle() + " been successfully added in your basket!";
-    }
 }
