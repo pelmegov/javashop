@@ -10,6 +10,10 @@
 <!--HEADER-->
 <div th:fragment="header">
 
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"/>
+
     <nav class="header navbar navbar-toggleable-md bg-inverse navbar-dark bg-faded">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -37,7 +41,7 @@
                         </span>
                         <span th:case="${true}">
                             <form th:action="@{/logout}" method="post">
-                                <input class="btn btn-default" type="submit" value="Log out" />
+                                <input class="btn btn-default" type="submit" value="Log out"/>
                             </form>
                         </span>
                     </li>
@@ -46,8 +50,16 @@
         </div>
     </nav>
 
-</div>
-<!--/HEADER-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}"></p>
+                <p class="alert alert-success" th:if="${success != null}" th:text="${success}"></p>
+            </div>
+        </div>
+    </div>
+
+</div><!--/HEADER-->
 
 </body>
 </html>

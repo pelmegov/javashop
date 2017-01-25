@@ -2,11 +2,11 @@ package ru.pelmegov.javashop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.pelmegov.javashop.api.service.GoodService;
+import ru.pelmegov.javashop.model.Good;
 
 @Controller
 public class GoodController {
@@ -26,14 +26,22 @@ public class GoodController {
     }
 
     @RequestMapping(value = {"/category/{id}"}, method = RequestMethod.GET)
-    public ModelAndView category(@PathVariable(value = "id") Integer category_id) {
+    public ModelAndView category(@PathVariable(value = "id") Integer categoryId) {
         // Сколько товаров выводить в каталоге
         Integer goodsCount = 12;
 
         ModelAndView modelAndView = new ModelAndView(categoryView);
-        modelAndView.addObject("category", category_id);
-        modelAndView.addObject("catalogGoods", goodService.getGoodsByCategory(goodsCount, category_id));
+        modelAndView.addObject("category", categoryId);
+        modelAndView.addObject("catalogGoods", goodService.getGoodsByCategory(goodsCount, categoryId));
 
         return modelAndView;
+    }
+
+    // ToDo это скорее всего должно быть в UserController
+    @ResponseBody
+    @RequestMapping(value = {"/good/buy"})
+    public String buy(@RequestBody String id) {
+        Good good = goodService.getGoodById(Integer.valueOf(id));
+        return good.getTitle() + " been successfully added in your basket!";
     }
 }
