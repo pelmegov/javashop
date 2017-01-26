@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "user")
-@EqualsAndHashCode(exclude = {"roles", "cartGoods"})
+@EqualsAndHashCode(exclude = {"id", "roles", "cartGoods"})
 @ToString(exclude="cartGoods")
 @NoArgsConstructor
 public class User {

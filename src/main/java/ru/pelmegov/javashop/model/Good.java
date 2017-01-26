@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "good")
-@EqualsAndHashCode(exclude = {"category", "cartUsers"})
+@EqualsAndHashCode(exclude = {"id", "category", "cartUsers"})
 @ToString(exclude="cartUsers")
 @NoArgsConstructor
 public class Good {

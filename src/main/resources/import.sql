@@ -55,9 +55,9 @@ INSERT INTO "good" (title, small_image_link, description, quantity, price, categ
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Nikon D5300', '/resources/img/nikon_d5300.jpg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 39990, 4);
 
 -- insert user_good data
-INSERT INTO "user_good" (user_id, good_id) VALUES (1, 2);
-INSERT INTO "user_good" (user_id, good_id) VALUES (1, 1);
-INSERT INTO "user_good" (user_id, good_id) VALUES (1, 5);
-INSERT INTO "user_good" (user_id, good_id) VALUES (1, 7);
-INSERT INTO "user_good" (user_id, good_id) VALUES (2, 4);
-INSERT INTO "user_good" (user_id, good_id) VALUES (3, 3);
+-- INSERT INTO "user_good" (user_id, good_id) VALUES (1, 2);
+-- INSERT INTO "user_good" (user_id, good_id) VALUES (1, 1);
+-- INSERT INTO "user_good" (user_id, good_id) VALUES (1, 5);
+-- INSERT INTO "user_good" (user_id, good_id) VALUES (1, 7);
+-- INSERT INTO "user_good" (user_id, good_id) VALUES (2, 4);
+-- INSERT INTO "user_good" (user_id, good_id) VALUES (3, 3);

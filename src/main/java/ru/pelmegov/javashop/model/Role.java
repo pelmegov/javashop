@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @Table(name = "role")
 @ToString(exclude="users")
-@EqualsAndHashCode(exclude={"users"})
+@EqualsAndHashCode(exclude={"id", "users"})
 @NoArgsConstructor
 public class Role {
 
