@@ -7,13 +7,14 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "good")
-@EqualsAndHashCode(exclude = {"category", "cartUsers"})
-@ToString(exclude="cartUsers")
+@EqualsAndHashCode(exclude = {"id", "category", "users"})
+@ToString(exclude = {"users"})
 @NoArgsConstructor
 public class Good {
 
@@ -43,7 +44,10 @@ public class Good {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "cartGoods")
-    private List<User> cartUsers;
+    @ManyToMany
+    @JoinTable(name = "user_good",
+            joinColumns = @JoinColumn(name = "good_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> users = new HashSet<>();
 
 }

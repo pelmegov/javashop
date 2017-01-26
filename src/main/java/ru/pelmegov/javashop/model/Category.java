@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @Table(name = "category")
 @ToString(exclude="goods")
-@EqualsAndHashCode(exclude={"goods"})
+@EqualsAndHashCode(exclude={"id", "goods"})
 @NoArgsConstructor
 public class Category {
 
@@ -31,6 +31,6 @@ public class Category {
     private String description;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<Good> goods = new HashSet<Good>();
+    private Set<Good> goods;
 
 }

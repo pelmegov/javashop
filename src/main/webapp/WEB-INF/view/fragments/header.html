@@ -27,6 +27,9 @@
                 <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="/admin/user/">USERS CRUD</a>
                 </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" href="/cart">MY CART</a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="/category/1">Notebooks</a></li>
                 <li class="nav-item"><a class="nav-link" href="/category/2">Tablets</a></li>
                 <li class="nav-item"><a class="nav-link" href="/category/3">Smartphones</a></li>

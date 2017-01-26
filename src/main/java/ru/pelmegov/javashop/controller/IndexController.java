@@ -26,7 +26,7 @@ public class IndexController {
     public ModelAndView indexPage() {
         ModelAndView modelAndView = new ModelAndView(indexView);
         modelAndView.addObject("newGoods", goodService.getLastAddedGoods(4));
-        modelAndView.addObject("catalogGoods", new ArrayList<Good>(goodService.getGoods(8)));
+        modelAndView.addObject("catalogGoods", goodService.getGoods(8));
         return modelAndView;
     }
 }
