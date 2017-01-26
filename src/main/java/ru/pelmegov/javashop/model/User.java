@@ -38,8 +38,7 @@ public class User {
     private Set<Role> roles;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_good",
-        joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "user_good", joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "good_id"))
     private Set<Good> cartGoods = new HashSet<>();
 

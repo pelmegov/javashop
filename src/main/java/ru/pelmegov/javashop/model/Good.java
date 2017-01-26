@@ -45,8 +45,7 @@ public class Good {
     private Category category;
 
     @ManyToMany
-    @JoinTable(name = "user_good",
-            joinColumns = @JoinColumn(name = "good_id"),
+    @JoinTable(name = "user_good", joinColumns = @JoinColumn(name = "good_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
 
