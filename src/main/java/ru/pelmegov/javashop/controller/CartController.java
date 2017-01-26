@@ -4,15 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.GoodService;
 import ru.pelmegov.javashop.api.service.UserService;
 import ru.pelmegov.javashop.model.Good;
 import ru.pelmegov.javashop.model.User;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 public class CartController {
@@ -41,17 +41,17 @@ public class CartController {
     @ResponseBody
     @RequestMapping(value = {"/cart/buy"})
     public String buy(@RequestBody String id) {
-        Good good = goodService.getGoodById(Integer.valueOf(id));
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
 
         User user = userService.getUserByLogin(userName);
-        Set<Good> goodSet = user.getCartGoods();
-        goodSet.add(good);
-        user.setCartGoods(goodSet);
+        Good good = goodService.getGoodById(Integer.valueOf(id));
+
+        user.addCartGood(good);
         userService.updateUser(user);
-        return good.getTitle() + " been successfully added in your cart!";
+
+        return  "<b>" + good.getTitle() + "</b> been successfully added in your cart!";
     }
 
 }

@@ -3,18 +3,16 @@ package ru.pelmegov.javashop.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "user")
 @EqualsAndHashCode(exclude = {"id", "roles", "cartGoods"})
-@ToString(exclude="cartGoods")
 @NoArgsConstructor
 public class User {
 
@@ -39,9 +37,14 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Good.class)
-    @JoinTable(name = "user_good", joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "good_id")})
-    private Set<Good> cartGoods;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_good",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "good_id"))
+    private Set<Good> cartGoods = new HashSet<>();
+
+    public void addCartGood(Good good) {
+        this.cartGoods.add(good);
+    }
 
 }
