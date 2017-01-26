@@ -3,6 +3,7 @@ package ru.pelmegov.javashop.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Data
 @Table(name = "good")
 @EqualsAndHashCode(exclude = {"id", "category", "users"})
+@ToString(exclude = {"users"})
 @NoArgsConstructor
 public class Good {
 
@@ -43,7 +45,7 @@ public class Good {
     private Category category;
 
     @ManyToMany
-    @JoinTable(name = "users",
+    @JoinTable(name = "user_good",
             joinColumns = @JoinColumn(name = "good_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
