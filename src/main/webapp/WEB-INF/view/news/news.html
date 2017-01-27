@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+</head>
+    <body>
+    <!--Template Header-->
+    <div th:include="/fragments/header :: header"></div>
+
+        <div class="conteiner">
+            <h2 style="margin-top: 30px">NEWS</h2>
+            <div class="row" style="margin-top: 20px">
+                <div class="col-sm-12 row-eq-height" th:each="news : ${news}">
+
+                    <div class="card" style="margin-bottom: 10px">
+                        <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
+                            <h3 th:text="${news.title}" class="card-title"></h3>
+                            <p class="card-text" th:text="${news.description}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!--Template footer-->
+    <div th:include="/fragments/footer :: footer"></div>
+</body>
+</html>

@@ -61,3 +61,7 @@ INSERT INTO "good" (title, small_image_link, description, quantity, price, categ
 -- INSERT INTO "user_good" (user_id, good_id) VALUES (1, 7);
 -- INSERT INTO "user_good" (user_id, good_id) VALUES (2, 4);
 -- INSERT INTO "user_good" (user_id, good_id) VALUES (3, 3);
+
+--insert news data
+INSERT INTO "news" (title, description, date) VALUES ('First news', 'We are opened', '27/01/2017' );
+INSERT INTO "news" (title, description, date) VALUES ('Second news', 'We glad to see you in our site', '27/01/2017' );
