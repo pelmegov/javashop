@@ -19,11 +19,15 @@ public class CartController {
 
     private String cartView = "/cart/index";
 
-    @Autowired
-    private GoodService goodService;
+    private final GoodService goodService;
+
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public CartController(GoodService goodService, UserService userService) {
+        this.goodService = goodService;
+        this.userService = userService;
+    }
 
     @RequestMapping(value = {"/cart"}, method = RequestMethod.GET)
     public ModelAndView cart() {

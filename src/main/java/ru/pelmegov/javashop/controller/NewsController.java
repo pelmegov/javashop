@@ -12,21 +12,18 @@ import ru.pelmegov.javashop.api.service.NewsService;
 @Controller
 public class NewsController {
 
-    private String newsPage = "/news/news";
+    private String newsListView = "/news/news";
 
-//    private final NewsService newsService;
-//
-//    @Autowired
-//    public NewsController(NewsService newsService){
-//        this.newsService = newsService;
-//    }
-//
+    private final NewsService newsService;
+
     @Autowired
-    private NewsService newsService;
+    public NewsController(NewsService newsService) {
+        this.newsService = newsService;
+    }
 
     @RequestMapping(value = {"/news"}, method = RequestMethod.GET)
-    public ModelAndView newsPage(){
-        ModelAndView modelAndView = new ModelAndView(newsPage);
+    public ModelAndView newsList(){
+        ModelAndView modelAndView = new ModelAndView(newsListView);
         modelAndView.addObject("news", newsService.getNews(12));
         return  modelAndView;
     }
@@ -39,3 +36,4 @@ public class NewsController {
         return modelAndView;
     }
 }
+

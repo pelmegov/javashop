@@ -46,7 +46,7 @@ footer {
     display: flex;
 }
 
-.price {
+.price span {
     color: darkslateblue;
     font-weight: bold;
 }
@@ -62,6 +62,7 @@ footer {
 .card > .card-block {
     padding-bottom: 75px;
     border: 10px solid #F7F7F9;
+    max-width: 1090px;
 }
 
 .btn-default:hover {

@@ -12,6 +12,8 @@
 <div class="container">
 
     <h2 style="margin-top: 30px">Your cart</h2>
+
+    <div th:if="!${#lists.isEmpty(goods)}">
     <div class="row" style="margin-top: 20px">
 
         <div class="col-sm-12 row-eq-height" th:each="good : ${goods}">
@@ -34,8 +36,8 @@
                         <div class="col-md-2">
                             <div class="card-text">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
+                                    <li class="list-group-item price">
+                                        PRICE&nbsp;<span th:text="${good.price}"></span>&nbsp;RUB
                                     </li>
                                 </ul>
                             </div>
@@ -45,8 +47,13 @@
             </div>
         </div>
     </div>
-
     <a style="margin-top: 20px" class="btn btn-success" href="#">Buy all...</a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(goods)}">
+        <p class="alert alert-info">Your cart empty!</p>
+    </div>
+
 </div>
 
 <!--Template footer-->

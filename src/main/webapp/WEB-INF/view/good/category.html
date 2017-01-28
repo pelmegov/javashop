@@ -25,8 +25,8 @@
                     <a th:href="@{/good/detail/{id}(id=${good.id})}">
                         <h4 class="card-title" th:text="${good.title}"></h4></a>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <span class="price" th:text="${good.price}">PRICE</span>&nbsp;RUB
+                        <li class="list-group-item price">
+                            PRICE&nbsp;<span th:text="${good.price}"></span>&nbsp;RUB
                         </li>
                     </ul>
                     <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
