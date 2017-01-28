@@ -29,6 +29,9 @@ public class News {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "news_image_link")
+    private String newsImageLink;
+
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "date")
