@@ -1,5 +1,7 @@
 package ru.pelmegov.javashop.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -55,7 +57,14 @@ public class CartController {
         user.addCartGood(good);
         userService.updateUser(user);
 
-        return  "<b>" + good.getTitle() + "</b> been successfully added in your cart!";
+        ObjectMapper mapper = new ObjectMapper();
+        String result = null;
+        try {
+            result = mapper.writeValueAsString("<b>" + good.getTitle() + "</b> been successfully added in your cart!");
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

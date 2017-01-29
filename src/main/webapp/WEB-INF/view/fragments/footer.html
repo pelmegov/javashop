@@ -23,9 +23,15 @@
                     <div class="modal-info">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a href="#" type="button" class="btn btn-default" data-dismiss="modal">Back to shopping</a>
-                    <a href="/cart" type="button" class="btn btn-primary">Go to the Cart</a>
+                <div class="modal-footer"
+                     th:switch="${#authentication} ? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                    <span th:case="${false}">
+                        <a type="button" class="btn btn-primary" href="/login">Login</a>
+                    </span>
+                    <span th:case="${true}">
+                        <a href="#" type="button" class="btn btn-default" data-dismiss="modal">Back to shopping</a>
+                        <a href="/cart" type="button" class="btn btn-primary">Go to the Cart</a>
+                    </span>
                 </div>
             </div>
         </div>
@@ -69,10 +75,13 @@
                     },
                     data: JSON.stringify(goodId),
                     dataType: 'json',
-                    type: 'post'
-                }).complete(function (result) {
-                    // добавляем информацию в модальное окно
-                    $(".modal-info").append(result.responseText);
+                    type: 'post',
+                    success: function (data) {
+                        $(".modal-info").append(data);
+                    },
+                    error: function () {
+                        $(".modal-info").append('Before adding a good to the cart, please log in!');
+                    }
                 });
             });
         });

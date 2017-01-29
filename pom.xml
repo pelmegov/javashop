@@ -38,6 +38,7 @@
         <jstl.version>1.2</jstl.version>
         <validation-api>1.1.0.Final</validation-api>
         <javax.servlet-api>4.0.0-b01</javax.servlet-api>
+        <jackson-databind>2.8.6</jackson-databind>
     </properties>
 
     <dependencies>
@@ -161,6 +162,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>r05</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind}</version>
         </dependency>
     </dependencies>
 </project>
