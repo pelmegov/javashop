@@ -30,7 +30,7 @@ public class NewsController {
 
     @RequestMapping(value = "/news/{id}", method = RequestMethod.GET)
     public ModelAndView getNewsById(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView(newsPage);
+        ModelAndView modelAndView = new ModelAndView(newsListView);
         modelAndView.addObject("news", newsService.getNewsById(id));
 
         return modelAndView;
