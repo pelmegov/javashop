@@ -13,6 +13,7 @@ import ru.pelmegov.javashop.api.service.NewsService;
 public class NewsController {
 
     private String newsListView = "/news/news";
+    private String newsPageView = "/news/detail";
 
     private final NewsService newsService;
 
@@ -30,7 +31,7 @@ public class NewsController {
 
     @RequestMapping(value = "/news/{id}", method = RequestMethod.GET)
     public ModelAndView getNewsById(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView(newsListView);
+        ModelAndView modelAndView = new ModelAndView(newsPageView);
         modelAndView.addObject("news", newsService.getNewsById(id));
 
         return modelAndView;
