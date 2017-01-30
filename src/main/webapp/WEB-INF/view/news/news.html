@@ -11,12 +11,15 @@
 <div class="container">
     <h2 style="margin-top: 30px">NEWS</h2>
     <div class="row" style="margin-top: 20px">
+
         <div class="col-sm-12 row-eq-height" th:each="news : ${news}">
 
             <div class="card" style="margin-bottom: 10px">
                 <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
-                    <h3 th:text="${news.title}" class="card-title"></h3>
-                    <p class="card-text" th:text="${news.description}"></p>
+                    <a th:href="@{/news/detail/{id}(id=${news.id})}">
+                        <h3 th:text="${news.title}" class="card-title"></h3>
+                        <p class="card-text" th:text="${news.description}"></p>
+                    </a>
                 </div>
             </div>
         </div>

@@ -46,4 +46,6 @@ public class User {
         this.cartGoods.add(good);
     }
 
+
+
 }

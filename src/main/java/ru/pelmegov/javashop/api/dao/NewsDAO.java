@@ -11,7 +11,7 @@ public interface NewsDAO {
 
     Set<News> getNews(Integer count);
 
-    News getNewsById(Long id);
+    News getNewsById(Integer id);
 
     News getNewsByDate(Date date);
 }

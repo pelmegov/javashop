@@ -63,5 +63,6 @@ INSERT INTO "good" (title, small_image_link, description, quantity, price, categ
 -- INSERT INTO "user_good" (user_id, good_id) VALUES (3, 3);
 
 --insert news data
-INSERT INTO "news" (title, description, news_image_link, date) VALUES ('First news', 'We are opened', '/resource/img/dis1-1100x350.png', '27/01/2017' );
-INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Second news', 'We glad to see you in our site', '/resource/img/Mturk-Consulting-1100x350.png', '27/01/2017' );
+INSERT INTO "news" (title, description, news_image_link, date) VALUES ('First news', 'We are opened', '/resources/img/dis1-1100x350.png', '27/01/2017' );
+INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Second news', 'We glad to see you in our site', '/resources/img/Mturk-Consulting-1100x350.png', '27/01/2017' );
+INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Third news', 'We glad to see you in our site', '/resources/img/web_hosting-1100x350.jpg', '27/01/2017' );

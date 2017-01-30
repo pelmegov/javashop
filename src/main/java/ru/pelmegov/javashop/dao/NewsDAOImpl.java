@@ -29,7 +29,7 @@ public class NewsDAOImpl extends AbstractDAO implements NewsDAO {
     }
 
     @Override
-    public News getNewsById(Long id) {
+    public News getNewsById(Integer id) {
         return null;
     }
 

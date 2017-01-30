@@ -3,35 +3,44 @@
 <head>
     <title>JavaShop</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--<script th:href="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>-->
+    <!--<script src="webjars/jquery/1.11.1/jquery.min.js"></script>-->
 </head>
 <body>
 
 <!--Template Header-->
 <div th:include="/fragments/header :: header"></div>
 
+<!--<script type="text/javascript">-->
+    <!--$(document).ready(function(){-->
+        <!--$(".start-slide").click(function(){-->
+            <!--$("#carouselExampleIndicators").carousel('cycle');-->
+        <!--});-->
+            <!--$(".slide-one").click(function () {-->
+                <!--$("#carouselExampleIndicators").carousel(1);-->
+            <!--});-->
+            <!--$(".slide-one").click(function () {-->
+                <!--$("#carouselExampleIndicators").carousel(2);-->
+            <!--});-->
+            <!--$(".slide-one").click(function () {-->
+                <!--$("#carouselExampleIndicators").carousel(3);-->
+            <!--});-->
+<!--//            $(".next-slide").click(function () {-->
+<!--//                $("#carouselExampleIndicators").carousel('next')-->
+<!--//            });-->
+    <!--});-->
+<!--</script>-->
+
 <div class="container">
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-interval="1000" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" th:attr="data-slide-to=${news.id}" th:class="${news.id}==1 ? 'active':''"  th:each="news : ${listNews}"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-            <!--<div class="carousel-item active">-->
-                <!--<img class="d-block img-fluid" src="/resources/img/web_hosting-1100x350.jpg" alt="First slide">-->
-            <!--</div>-->
-            <!--<div class="carousel-item">-->
-                <!--<img class="d-block img-fluid" src="/resources/img/Mturk-Consulting-1100x350.png" alt="Second slide">-->
-            <!--</div>-->
-            <!--<div class="carousel-item">-->
-                <!--<img class="d-block img-fluid" src="/resources/img/dis1-1100x350.png" alt="Third slide">-->
-            <!--</div>-->
-            <div class="carousel-item active" th:each="news : ${listNews}">
-                    <a th:href="@{/news/news/{id}(id=${news.id})}">
+            <div  th:class="${news.id}==1 ? 'carousel-item active':'carousel-item'" th:each="news : ${listNews}">
+                    <a th:href="@{/news/detail/{id}(id=${news.id})}">
                             <img class="d-block img-fluid" th:src="${news.newsImageLink}" alt="Card newsImageLink cap"/>
-                            <h3 th:text="${news.title}" class="card-title"></h3>
-                            <p class="card-text" th:text="${news.description}"></p>
                     </a>
             </div>
         </div>

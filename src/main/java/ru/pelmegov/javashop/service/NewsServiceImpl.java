@@ -29,7 +29,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News getNewsById(Long id) {
+    public News getNewsById(Integer id) {
         return null;
     }
 
