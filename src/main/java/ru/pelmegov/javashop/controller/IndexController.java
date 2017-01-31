@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.GoodService;
 import ru.pelmegov.javashop.api.service.NewsService;
-import ru.pelmegov.javashop.model.Good;
-
-import java.util.ArrayList;
 
 @Controller
 public class IndexController {
@@ -34,6 +31,5 @@ public class IndexController {
         modelAndView.addObject("listNews", newsService.getLastAddedNews(3));
         return modelAndView;
     }
-
 
 }

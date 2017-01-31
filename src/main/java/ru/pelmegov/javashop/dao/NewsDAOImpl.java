@@ -5,7 +5,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.NewsDAO;
-import ru.pelmegov.javashop.model.Good;
 import ru.pelmegov.javashop.model.News;
 
 import java.util.*;
@@ -26,7 +25,7 @@ public class NewsDAOImpl extends AbstractDAO implements NewsDAO {
     @SuppressWarnings("unchecked")
     public Set<News> getNews(Integer count) {
         List<News> newsList = getSession().createCriteria(News.class).setMaxResults(count).list();
-        return new HashSet<News>(newsList);
+        return new HashSet<>(newsList);
     }
 
     @Override
@@ -47,6 +46,6 @@ public class NewsDAOImpl extends AbstractDAO implements NewsDAO {
                 .addOrder(Order.desc("id"))
                 .setMaxResults(count)
                 .list();
-        return new LinkedList<News>(news);
+        return new ArrayList<>(news);
     }
 }

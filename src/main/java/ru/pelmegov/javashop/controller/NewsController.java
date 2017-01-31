@@ -1,6 +1,5 @@
 package ru.pelmegov.javashop.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,15 +22,14 @@ public class NewsController {
     }
 
     @RequestMapping(value = {"/news"}, method = RequestMethod.GET)
-    public ModelAndView newsList(){
+    public ModelAndView newsList() {
         ModelAndView modelAndView = new ModelAndView(newsListView);
         modelAndView.addObject("news", newsService.getNews(12));
-        return  modelAndView;
+        return modelAndView;
     }
 
-
     @RequestMapping(value = "/news/detail/{id}", method = RequestMethod.GET)
-    public ModelAndView getDetailNewsById(@PathVariable Integer id){
+    public ModelAndView getDetailNewsById(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView(newsPageView);
         modelAndView.addObject("news", newsService.getNewsById(id));
 

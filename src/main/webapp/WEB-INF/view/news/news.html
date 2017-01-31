@@ -2,18 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Title</title>
+    <title>All news</title>
 </head>
 <body>
 <!--Template Header-->
 <div th:include="/fragments/header :: header"></div>
 
 <div class="container">
-    <h2 style="margin-top: 30px">NEWS</h2>
+    <h2 style="margin-top: 30px">ALL NEWS</h2>
     <div class="row" style="margin-top: 20px">
-
         <div class="col-sm-12 row-eq-height" th:each="news : ${news}">
-
             <div class="card" style="margin-bottom: 10px">
                 <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
                     <a th:href="@{/news/detail/{id}(id=${news.id})}">

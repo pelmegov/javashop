@@ -13,13 +13,17 @@
 
     <div id="carouselExampleIndicators" class="carousel slide" data-interval="1000" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" th:attr="data-slide-to=${news.id}" th:class="${listNews.indexOf(news)} ? 'active':''"  th:each="news : ${listNews}"></li>
+            <li data-target="#carouselExampleIndicators"
+                th:each="news,row:${listNews}"
+                th:attr="data-slide-to=${news.id}" th:class="${row.index}==0?'active':''"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-            <div  th:class="${news.id}==1 ? 'carousel-item active':'carousel-item'" th:each="news : ${listNews}">
-                    <a th:href="@{/news/detail/{id}(id=${news.id})}">
-                            <img class="d-block img-fluid" th:src="${news.newsImageLink}" alt="Card newsImageLink cap"/>
-                    </a>
+            <div class="carousel-item"
+                 th:each="news,row:${listNews}"
+                 th:classappend="${row.index}==0?'active':''">
+                <a th:href="@{/news/detail/{id}(id=${news.id})}">
+                    <img class="d-block img-fluid" th:src="${news.newsImageLink}" alt="Card newsImageLink cap"/>
+                </a>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
