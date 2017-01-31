@@ -7,17 +7,19 @@ import ru.pelmegov.javashop.model.News;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Service
 public class NewsServiceImpl implements NewsService {
-    private  final NewsDAO newsDAO;
+    private final NewsDAO newsDAO;
 
     public NewsServiceImpl(NewsDAO newsDAO) {
         this.newsDAO = newsDAO;
     }
 
     @Override
+    @Transactional
     public Set<News> getAllNews() {
         return null;
     }
@@ -29,12 +31,20 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Transactional
     public News getNewsById(Integer id) {
+        return newsDAO.getNewsById(id);
+    }
+
+    @Override
+    @Transactional
+    public News getNewsByDate(Date date) {
         return null;
     }
 
     @Override
-    public News getNewsByDate(Date date) {
-        return null;
+    @Transactional
+    public List<News> getLastAddedNews(Integer count) {
+        return newsDAO.getLastAddedNews(count);
     }
 }

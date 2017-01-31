@@ -4,6 +4,7 @@ package ru.pelmegov.javashop.api.dao;
 import ru.pelmegov.javashop.model.News;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public interface NewsDAO {
@@ -14,4 +15,6 @@ public interface NewsDAO {
     News getNewsById(Integer id);
 
     News getNewsByDate(Date date);
+
+    List<News> getLastAddedNews(Integer count);
 }

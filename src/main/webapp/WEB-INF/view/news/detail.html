@@ -10,11 +10,8 @@
 
 <div class="container">
     <div class="card">
-        <div class="card-header">
-            News Detail
-        </div>
-
-        <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
+        <div class="card-header">News Detail</div>
+        <div class="card-block">
             <img class="card-img-top" th:src="${news.newsImageLink}" alt="Card newsImageLink cap">
             <h4 class="card-title" th:text="${news.title}"></h4>
             <p class="card-text" style="font-size: 1.2em" th:text="${news.description}"></p>

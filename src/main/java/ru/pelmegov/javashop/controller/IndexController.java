@@ -31,7 +31,7 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView(indexView);
         modelAndView.addObject("newGoods", goodService.getLastAddedGoods(4));
         modelAndView.addObject("catalogGoods", goodService.getGoods(8));
-        modelAndView.addObject("listNews", newsService.getNews(3));
+        modelAndView.addObject("listNews", newsService.getLastAddedNews(3));
         return modelAndView;
     }
 

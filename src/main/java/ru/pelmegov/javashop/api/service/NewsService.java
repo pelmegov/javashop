@@ -3,6 +3,7 @@ package ru.pelmegov.javashop.api.service;
 import ru.pelmegov.javashop.model.News;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public interface NewsService {
@@ -13,4 +14,6 @@ public interface NewsService {
     News getNewsById(Integer id);
 
     News getNewsByDate(Date date);
+
+    List<News> getLastAddedNews(Integer count);
 }

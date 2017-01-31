@@ -3,39 +3,17 @@
 <head>
     <title>JavaShop</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--<script th:href="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>-->
-    <!--<script src="webjars/jquery/1.11.1/jquery.min.js"></script>-->
 </head>
 <body>
 
 <!--Template Header-->
 <div th:include="/fragments/header :: header"></div>
 
-<!--<script type="text/javascript">-->
-    <!--$(document).ready(function(){-->
-        <!--$(".start-slide").click(function(){-->
-            <!--$("#carouselExampleIndicators").carousel('cycle');-->
-        <!--});-->
-            <!--$(".slide-one").click(function () {-->
-                <!--$("#carouselExampleIndicators").carousel(1);-->
-            <!--});-->
-            <!--$(".slide-one").click(function () {-->
-                <!--$("#carouselExampleIndicators").carousel(2);-->
-            <!--});-->
-            <!--$(".slide-one").click(function () {-->
-                <!--$("#carouselExampleIndicators").carousel(3);-->
-            <!--});-->
-<!--//            $(".next-slide").click(function () {-->
-<!--//                $("#carouselExampleIndicators").carousel('next')-->
-<!--//            });-->
-    <!--});-->
-<!--</script>-->
-
 <div class="container">
 
     <div id="carouselExampleIndicators" class="carousel slide" data-interval="1000" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" th:attr="data-slide-to=${news.id}" th:class="${news.id}==1 ? 'active':''"  th:each="news : ${listNews}"></li>
+            <li data-target="#carouselExampleIndicators" th:attr="data-slide-to=${news.id}" th:class="${listNews.indexOf(news)} ? 'active':''"  th:each="news : ${listNews}"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
             <div  th:class="${news.id}==1 ? 'carousel-item active':'carousel-item'" th:each="news : ${listNews}">
