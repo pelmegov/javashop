@@ -37,12 +37,13 @@
                             <div class="card-text">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item price">
-                                        COUNT&nbsp;<span th:text="${item.count}"></span>
+                                        PRICE&nbsp;<span th:text="${item.good.price}"></span>&nbsp;RUB
                                     </li>
 
                                     <li class="list-group-item price">
-                                        PRICE&nbsp;<span th:text="${item.good.price}"></span>&nbsp;RUB
+                                        COUNT&nbsp;<span th:text="${item.count}"></span>
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -50,6 +51,9 @@
                 </div>
             </div>
         </div>
+        <h3 style="text-align: right">
+            SUM&nbsp;<span th:text="${cart.sum}"></span>
+        </h3>
     </div>
     <a style="margin-top: 20px" class="btn btn-success" href="#">Buy all...</a>
     </div>

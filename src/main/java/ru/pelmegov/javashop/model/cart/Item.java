@@ -3,6 +3,7 @@ package ru.pelmegov.javashop.model.cart;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.pelmegov.javashop.model.good.Good;
 
 import javax.persistence.*;
@@ -10,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "cart_item")
-@EqualsAndHashCode(exclude = {"id", "cart", "good"})
+@EqualsAndHashCode(exclude = {"id", "cart"})
+@ToString(exclude = {"cart"})
 @NoArgsConstructor
 public class Item {
 

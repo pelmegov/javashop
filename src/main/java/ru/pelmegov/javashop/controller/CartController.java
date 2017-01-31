@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import ru.pelmegov.javashop.api.service.CartService;
 import ru.pelmegov.javashop.api.service.GoodService;
 import ru.pelmegov.javashop.api.service.UserService;
 import ru.pelmegov.javashop.model.cart.Cart;
+import ru.pelmegov.javashop.model.cart.Item;
 import ru.pelmegov.javashop.model.good.Good;
 import ru.pelmegov.javashop.model.user.User;
+
+import java.util.Set;
 
 @Controller
 public class CartController {
@@ -26,10 +30,13 @@ public class CartController {
 
     private final UserService userService;
 
+    private final CartService cartService;
+
     @Autowired
-    public CartController(GoodService goodService, UserService userService) {
+    public CartController(GoodService goodService, UserService userService, CartService cartService) {
         this.goodService = goodService;
         this.userService = userService;
+        this.cartService = cartService;
     }
 
     @RequestMapping(value = {"/cart"}, method = RequestMethod.GET)
@@ -41,6 +48,7 @@ public class CartController {
 
         User user = userService.getUserByLogin(userName);
         modelAndView.addObject("items", user.getCart().getItems());
+        modelAndView.addObject("cart", user.getCart());
 
         return modelAndView;
     }
@@ -56,8 +64,8 @@ public class CartController {
         Good good = goodService.getGoodById(Integer.valueOf(id));
 
         Cart cart = user.getCart();
-        cart.addGood(good);
-        userService.updateUser(user);
+        addGoodInCart(good, cart);
+        cartService.updateCart(cart);
 
         ObjectMapper mapper = new ObjectMapper();
         String result = null;
@@ -67,6 +75,26 @@ public class CartController {
             e.printStackTrace();
         }
         return result;
+    }
+
+    private void addGoodInCart(Good good, Cart cart) {
+        Set<Item> items = cart.getItems();
+        boolean flag = true;
+        for (Item item : items) {
+            if (item.getGood().equals(good)) {
+                item.setCount(item.getCount() + 1);
+                cart.setSum(cart.getSum() + good.getPrice());
+                flag = false;
+            }
+        }
+        if (flag) {
+            Item newItem = new Item();
+            newItem.setGood(good);
+            newItem.setCart(cart);
+            newItem.setCount(1);
+            cart.setSum(cart.getSum() + good.getPrice());
+            cart.addItem(newItem);
+        }
     }
 
 }

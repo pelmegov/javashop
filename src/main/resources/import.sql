@@ -1,8 +1,8 @@
 -- insert cart data
-INSERT INTO "cart" (sum) VALUES (10000);
-INSERT INTO "cart" (sum) VALUES (20000);
-INSERT INTO "cart" (sum) VALUES (30000);
-INSERT INTO "cart" (sum) VALUES (40000);
+INSERT INTO "cart" (sum) VALUES (0);
+INSERT INTO "cart" (sum) VALUES (0);
+INSERT INTO "cart" (sum) VALUES (0);
+INSERT INTO "cart" (sum) VALUES (0);
 
 -- insert user data
 INSERT INTO "user" (login, password, active, cart_id) VALUES ('admin', '123456', true, 1);
