@@ -3,7 +3,7 @@ package ru.pelmegov.javashop.service;
 import org.springframework.stereotype.Service;
 import ru.pelmegov.javashop.api.dao.NewsDAO;
 import ru.pelmegov.javashop.api.service.NewsService;
-import ru.pelmegov.javashop.model.News;
+import ru.pelmegov.javashop.model.news.News;
 
 import javax.transaction.Transactional;
 import java.util.Date;

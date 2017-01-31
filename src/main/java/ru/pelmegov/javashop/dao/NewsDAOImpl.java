@@ -5,7 +5,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.NewsDAO;
-import ru.pelmegov.javashop.model.News;
+import ru.pelmegov.javashop.model.news.News;
 
 import java.util.*;
 

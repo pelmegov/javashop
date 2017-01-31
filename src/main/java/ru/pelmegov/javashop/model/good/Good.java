@@ -1,9 +1,10 @@
-package ru.pelmegov.javashop.model;
+package ru.pelmegov.javashop.model.good;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import ru.pelmegov.javashop.model.cart.Item;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -13,8 +14,8 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "good")
-@EqualsAndHashCode(exclude = {"id", "category", "users"})
-@ToString(exclude = {"users"})
+@EqualsAndHashCode(exclude = {"id", "category", "cartItems"})
+@ToString(exclude="cartItems")
 @NoArgsConstructor
 public class Good {
 
@@ -44,9 +45,7 @@ public class Good {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    @ManyToMany
-    @JoinTable(name = "user_good", joinColumns = @JoinColumn(name = "good_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "good", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Item> cartItems = new HashSet<>();
 
 }

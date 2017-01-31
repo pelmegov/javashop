@@ -5,7 +5,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.GoodDAO;
-import ru.pelmegov.javashop.model.Good;
+import ru.pelmegov.javashop.model.good.Good;
 
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +32,7 @@ public class GoodDAOImpl extends AbstractDAO implements GoodDAO {
     @SuppressWarnings("unchecked")
     public Set<Good> getAllGoods() {
         List<Good> goods = getSession().createCriteria(Good.class).list();
-        return new HashSet<Good>(goods);
+        return new HashSet<>(goods);
     }
 
     @Override
@@ -57,14 +57,14 @@ public class GoodDAOImpl extends AbstractDAO implements GoodDAO {
                     .add(Restrictions.eq("category.id", categoryId))
                     .list();
         }
-        return new HashSet<Good>(goods);
+        return new HashSet<>(goods);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Set<Good> getGoods(Integer count) {
         List<Good> goods = getSession().createCriteria(Good.class).setMaxResults(count).list();
-        return new HashSet<Good>(goods);
+        return new HashSet<>(goods);
     }
 
     @Override
@@ -75,6 +75,6 @@ public class GoodDAOImpl extends AbstractDAO implements GoodDAO {
                 .addOrder(Order.desc("id"))
                 .setMaxResults(count)
                 .list();
-        return new HashSet<Good>(goods);
+        return new HashSet<>(goods);
     }
 }

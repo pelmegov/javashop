@@ -11,7 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
-import ru.pelmegov.javashop.model.User;
+import ru.pelmegov.javashop.model.cart.Cart;
+import ru.pelmegov.javashop.model.user.User;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class UserController {
         if (userService.getUserByLogin(user.getLogin()) != null) {
             return getUserModelAndView(modelAndView, user);
         }
+        user.setCart(new Cart());
         userService.addUser(user);
         redirectAttrs.addFlashAttribute("success", "User added: " + user);
         return new ModelAndView("redirect:" + indexView);

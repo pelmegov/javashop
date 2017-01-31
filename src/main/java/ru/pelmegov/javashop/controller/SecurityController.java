@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
-import ru.pelmegov.javashop.model.Role;
-import ru.pelmegov.javashop.model.User;
+import ru.pelmegov.javashop.model.user.Role;
+import ru.pelmegov.javashop.model.user.User;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -69,7 +69,7 @@ public class SecurityController {
             modelAndView.addObject("error", "User with this login exists!");
             return modelAndView;
         }
-        Set<Role> role = new HashSet<Role>();
+        Set<Role> role = new HashSet<>();
         role.add(roleService.getRoleByName("ROLE_USER"));
         user.setRoles(role);
         user.setActive(true);

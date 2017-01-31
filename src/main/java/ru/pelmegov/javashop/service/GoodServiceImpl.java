@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pelmegov.javashop.api.dao.GoodDAO;
 import ru.pelmegov.javashop.api.service.GoodService;
-import ru.pelmegov.javashop.model.Good;
+import ru.pelmegov.javashop.model.good.Good;
 
 import java.util.Set;
 

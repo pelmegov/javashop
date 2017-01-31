@@ -1,4 +1,4 @@
-package ru.pelmegov.javashop.model;
+package ru.pelmegov.javashop.model.good;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity

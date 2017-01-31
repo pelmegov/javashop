@@ -1,6 +1,6 @@
 package ru.pelmegov.javashop.controller;
 
-import com.fasterxml.jackson.core .JsonProcessingException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.GoodService;
 import ru.pelmegov.javashop.api.service.UserService;
-import ru.pelmegov.javashop.model.Good;
-import ru.pelmegov.javashop.model.User;
+import ru.pelmegov.javashop.model.cart.Cart;
+import ru.pelmegov.javashop.model.good.Good;
+import ru.pelmegov.javashop.model.user.User;
 
 @Controller
 public class CartController {
@@ -39,7 +40,7 @@ public class CartController {
         String userName = authentication.getName();
 
         User user = userService.getUserByLogin(userName);
-        modelAndView.addObject("goods", user.getCartGoods());
+        modelAndView.addObject("items", user.getCart().getItems());
 
         return modelAndView;
     }
@@ -54,7 +55,8 @@ public class CartController {
         User user = userService.getUserByLogin(userName);
         Good good = goodService.getGoodById(Integer.valueOf(id));
 
-        user.addCartGood(good);
+        Cart cart = user.getCart();
+        cart.addGood(good);
         userService.updateUser(user);
 
         ObjectMapper mapper = new ObjectMapper();
