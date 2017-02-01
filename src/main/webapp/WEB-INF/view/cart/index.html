@@ -14,48 +14,54 @@
     <h2 style="margin-top: 30px">Your cart</h2>
 
     <div th:if="!${#lists.isEmpty(items)}">
-    <div class="row" style="margin-top: 20px">
+        <div class="row" style="margin-top: 20px">
 
-        <div class="col-sm-12 row-eq-height" th:each="item : ${items}">
+            <div class="col-sm-12 row-eq-height" th:each="item : ${items}">
 
-            <div class="card" style="margin-bottom: 10px">
-                <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
-                    <a th:href="@{/good/detail/{id}(id=${item.good.id})}">
-                        <h3 th:text="${item.good.title}" class="card-title"></h3>
-                    </a>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a th:href="@{/good/detail/{id}(id=${item.good.id})}">
-                                <img style="max-height: 100px !important;" th:src="${item.good.smallImageLink}" alt="#"/>
-                            </a>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card-text" th:text="${#strings.substring(item.good.description, 0, 100).concat('...')}">
+                <div class="card" style="margin-bottom: 10px">
+                    <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
+                        <a th:href="@{/good/detail/{id}(id=${item.good.id})}">
+                            <h3 th:text="${item.good.title}" class="card-title"></h3>
+                        </a>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a th:href="@{/good/detail/{id}(id=${item.good.id})}">
+                                    <img style="max-height: 100px !important;" th:src="${item.good.smallImageLink}"
+                                         alt="#"/>
+                                </a>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="card-text">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item price">
-                                        PRICE&nbsp;<span th:text="${item.good.price}"></span>&nbsp;RUB
-                                    </li>
+                            <div class="col-md-7">
+                                <div class="card-text"
+                                     th:text="${#strings.substring(item.good.description, 0, 100).concat('...')}">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="card-text">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item price">
+                                            PRICE&nbsp;<span th:text="${item.good.price}"></span>&nbsp;RUB
+                                        </li>
 
-                                    <li class="list-group-item price">
-                                        COUNT&nbsp;<span th:text="${item.count}"></span>
-                                    </li>
+                                        <li class="list-group-item price">
+                                            COUNT&nbsp;<span th:text="${item.count}"></span>
+                                        </li>
 
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <h3 style="text-align: right">
-            SUM&nbsp;<span th:text="${cart.sum}"></span>
-        </h3>
-    </div>
-    <a style="margin-top: 20px" class="btn btn-success" href="#">Buy all...</a>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>
+                    SUM&nbsp;<span th:text="${cart.sum}"></span>
+                </h3>
+            </div>
+        </div>
+        <a style="margin-top: 20px" class="btn btn-success" href="#">Buy all...</a>
     </div>
 
     <div th:if="${#lists.isEmpty(items)}">
