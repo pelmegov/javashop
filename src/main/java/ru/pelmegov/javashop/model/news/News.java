@@ -1,4 +1,4 @@
-package ru.pelmegov.javashop.model;
+package ru.pelmegov.javashop.model.news;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
