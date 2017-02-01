@@ -68,3 +68,11 @@ footer {
 .btn-default:hover {
     background: #cccccc;
 }
+
+.dropdown-menu a.dropdown-item {
+    color: #333 !important;
+}
+
+.dropdown-menu a.dropdown-item:hover {
+    color: #000 !important;
+}

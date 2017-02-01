@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.CartService;
 import ru.pelmegov.javashop.api.service.GoodService;
@@ -53,6 +50,19 @@ public class CartController {
         return modelAndView;
     }
 
+    @RequestMapping(value = {"/cart/delete/{id}"}, method = RequestMethod.GET)
+    public ModelAndView deleteItem(@PathVariable(value = "id") Integer id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User user = userService.getUserByLogin(userName);
+
+        Set<Item> items = removeItemInCart(id, user.getCart());
+
+        user.getCart().setItems(items);
+        cartService.updateCart(user.getCart());
+        return cart();
+    }
+
     @ResponseBody
     @RequestMapping(value = {"/cart/buy"})
     public String buy(@RequestBody String id) {
@@ -75,6 +85,22 @@ public class CartController {
             e.printStackTrace();
         }
         return result;
+    }
+
+    private Set<Item> removeItemInCart(Integer itemId, Cart cart) {
+        Set<Item> items = cart.getItems();
+        Item removeItem = null;
+        for (Item item : items) {
+            if (item.getGood().getId().equals(itemId)) {
+                removeItem = item;
+                for (int i = 0; item.getCount() > i; i++)
+                    cart.setSum(cart.getSum() - removeItem.getGood().getPrice());
+            }
+        }
+        if (removeItem != null)
+            items.remove(removeItem);
+
+        return items;
     }
 
     private void addGoodInCart(Good good, Cart cart) {

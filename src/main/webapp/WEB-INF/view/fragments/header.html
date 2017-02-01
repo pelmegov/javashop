@@ -24,20 +24,43 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="nav-link" href="/admin/user/">USERS CRUD</a>
+                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="ndml1"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin Panel
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="ndml1">
+                        <a class="dropdown-item" href="/admin/user/">Users CRUD</a>
+                        <a class="dropdown-item" href="/">Goods CRUD</a>
+                        <a class="dropdown-item" href="/">News CRUD</a>
+                    </div>
                 </li>
-                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a class="nav-link" href="/cart">MY CART</a>
+
+                <li class="nav-item dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="ndml2"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="ndml2">
+                        <a class="dropdown-item" href="/cart">My cart</a>
+                        <a class="dropdown-item" href="/order">My orders</a>
+                    </div>
                 </li>
-                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a class="nav-link" href="/order/">My Orders</a>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="ndml3"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Goods catalog
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="ndml3">
+                        <a class="dropdown-item" href="/category/1">Notebooks</a>
+                        <a class="dropdown-item" href="/category/2">Tablets</a>
+                        <a class="dropdown-item" href="/category/4">Foto Cameras</a>
+                        <a class="dropdown-item" href="/category/3">Smartphones</a>
+                    </div>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/news">NEWS</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category/1">Notebooks</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category/2">Tablets</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category/3">Smartphones</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category/4">Foto Cameras</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="/news">News</a></li>
 
             </ul>
             <div class="my-2 my-lg-0">

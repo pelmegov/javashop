@@ -11,7 +11,7 @@
 
 <div class="container">
 
-    <h2 style="margin-top: 30px">Your cart</h2>
+    <h2 style="margin-top: 30px">My cart</h2>
 
     <div th:if="!${#lists.isEmpty(items)}">
         <div class="row" style="margin-top: 20px">
@@ -39,13 +39,14 @@
                                 <div class="card-text">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item price">
+                                            <a th:href="@{/cart/delete/{id}(id=${item.good.id})}">Delete</a>
+                                        </li>
+                                        <li class="list-group-item price">
                                             PRICE&nbsp;<span th:text="${item.good.price}"></span>&nbsp;RUB
                                         </li>
-
                                         <li class="list-group-item price">
                                             COUNT&nbsp;<span th:text="${item.count}"></span>
                                         </li>
-
                                     </ul>
                                 </div>
                             </div>
