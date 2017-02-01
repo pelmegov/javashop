@@ -1,6 +1,6 @@
 package ru.pelmegov.javashop.api.service;
 
-import ru.pelmegov.javashop.model.News;
+import ru.pelmegov.javashop.model.news.News;
 
 import java.util.Date;
 import java.util.List;

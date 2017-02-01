@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.RoleDAO;
-import ru.pelmegov.javashop.model.Role;
+import ru.pelmegov.javashop.model.user.Role;
 
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +31,6 @@ public class RoleDAOImpl extends AbstractDAO implements RoleDAO {
     @SuppressWarnings("unchecked")
     public Set<Role> getAllRoles() {
         List<Role> roles = getSession().createCriteria(Role.class).list();
-        return new HashSet<Role>(roles);
+        return new HashSet<>(roles);
     }
 }

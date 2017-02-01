@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pelmegov.javashop.api.dao.RoleDAO;
 import ru.pelmegov.javashop.api.service.RoleService;
-import ru.pelmegov.javashop.model.Role;
+import ru.pelmegov.javashop.model.user.Role;
 
 import java.util.Set;
 

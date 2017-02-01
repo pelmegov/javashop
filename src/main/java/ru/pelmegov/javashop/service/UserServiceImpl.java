@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pelmegov.javashop.api.dao.UserDAO;
 import ru.pelmegov.javashop.api.service.UserService;
-import ru.pelmegov.javashop.model.User;
+import ru.pelmegov.javashop.model.user.User;
 
 import java.util.Set;
 

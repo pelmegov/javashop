@@ -1,6 +1,6 @@
 package ru.pelmegov.javashop.api.service;
 
-import ru.pelmegov.javashop.model.Good;
+import ru.pelmegov.javashop.model.good.Good;
 
 import java.util.Set;
 

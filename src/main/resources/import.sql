@@ -1,8 +1,14 @@
+-- insert cart data
+INSERT INTO "cart" (sum) VALUES (0);
+INSERT INTO "cart" (sum) VALUES (0);
+INSERT INTO "cart" (sum) VALUES (0);
+INSERT INTO "cart" (sum) VALUES (0);
+
 -- insert user data
-INSERT INTO "user" (login, password, active) VALUES ('admin', '123456', true);
-INSERT INTO "user" (login, password, active) VALUES ('user', '123456', true);
-INSERT INTO "user" (login, password, active) VALUES ('manager', '123456', true);
-INSERT INTO "user" (login, password, active) VALUES ('user2', '123456', false);
+INSERT INTO "user" (login, password, active, cart_id) VALUES ('admin', '123456', true, 1);
+INSERT INTO "user" (login, password, active, cart_id) VALUES ('user', '123456', true, 2);
+INSERT INTO "user" (login, password, active, cart_id) VALUES ('manager', '123456', true, 3);
+INSERT INTO "user" (login, password, active, cart_id) VALUES ('user2', '123456', false, 4);
 
 -- insert role data
 INSERT INTO "role" (name) VALUES ('ROLE_ADMIN');
@@ -22,7 +28,6 @@ INSERT INTO "category" (title, description) VALUES ('notebooks', 'Cards assume n
 INSERT INTO "category" (title, description) VALUES ('tablets', 'Tablets to quickly set a card’s width.');
 INSERT INTO "category" (title, description) VALUES ('mobile', 'Top mobile phones');
 INSERT INTO "category" (title, description) VALUES ('Foto Cameras', 'mouse, keyboard, cards, etc.');
-
 
 --insert good data
 INSERT INTO "good" (title, small_image_link, description, quantity, price, category_id) VALUES ('Notebook HP', '/resources/img/hp.jpeg', '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 20500, 1);
@@ -72,4 +77,4 @@ INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Good Ide
 INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Intellij idea', 'We glad to see you in our site', '/resources/img/web_hosting-1100x350.jpg', '27/01/2017' );
 INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Next week in', 'We glad to see you in our site', '/resources/img/web_hosting-1100x350.jpg', '27/01/2017' );
 INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Hilton Garden Inn', 'We glad to see you in our site', '/resources/img/dis1-1100x350.png', '27/01/2017' );
-INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Face 2', 'We glad to see you in our site', '/resources/img/Mturk-Consulting-1100x350.png', '27/01/2017' );
+INSERT INTO "news" (title, description, news_image_link, date) VALUES ('Face 2', 'We glad to see you in our site', '/resources/img/web_hosting-1100x350.jpg', '27/01/2017' );

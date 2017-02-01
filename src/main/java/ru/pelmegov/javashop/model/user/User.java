@@ -1,19 +1,21 @@
-package ru.pelmegov.javashop.model;
+package ru.pelmegov.javashop.model.user;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.ToString;
+import ru.pelmegov.javashop.model.cart.Cart;
+import ru.pelmegov.javashop.model.cart.Item;
+import ru.pelmegov.javashop.model.order.Order;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "user")
-@EqualsAndHashCode(exclude = {"id", "roles", "cartGoods"})
-@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"id", "roles", "cart", "orders"})
+@ToString(exclude="orders")
 public class User {
 
     @Id
@@ -37,15 +39,15 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_good", joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "good_id"))
-    private Set<Good> cartGoods = new HashSet<>();
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="cart_id", referencedColumnName = "id")
+    private Cart cart;
 
-    public void addCartGood(Good good) {
-        this.cartGoods.add(good);
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Order> orders;
+
+    public void addOrder(Order order) {
+        orders.add(order);
     }
-
-
 
 }

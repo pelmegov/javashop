@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.UserDAO;
-import ru.pelmegov.javashop.model.User;
+import ru.pelmegov.javashop.model.user.User;
 
 import java.util.HashSet;
 import java.util.List;
@@ -64,6 +64,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         List<User> users = getSession().createCriteria(User.class).addOrder(Order.asc("id")).list();
         LOGGER.info("User list: {}.", users);
 
-        return new HashSet<User>(users);
+        return new HashSet<>(users);
     }
 }

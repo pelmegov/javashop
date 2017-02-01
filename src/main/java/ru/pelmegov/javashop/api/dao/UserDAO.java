@@ -1,6 +1,6 @@
 package ru.pelmegov.javashop.api.dao;
 
-import ru.pelmegov.javashop.model.User;
+import ru.pelmegov.javashop.model.user.User;
 
 import java.util.Set;
 
