@@ -21,7 +21,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     @Transactional
     public Set<News> getAllNews() {
-        return null;
+        return newsDAO.getAllNews();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     @Transactional
     public News getNewsByDate(Date date) {
-        return null;
+        return newsDAO.getNewsByDate(date);
     }
 
     @Override

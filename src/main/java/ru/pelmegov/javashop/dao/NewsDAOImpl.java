@@ -17,8 +17,10 @@ public class NewsDAOImpl extends AbstractDAO implements NewsDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Set<News> getAllNews() {
-        return null;
+        List<News> newsList = getSession().createCriteria(News.class).list();
+        return new HashSet<>(newsList);
     }
 
     @Override
@@ -35,7 +37,7 @@ public class NewsDAOImpl extends AbstractDAO implements NewsDAO {
 
     @Override
     public News getNewsByDate(Date date) {
-        return null;
+        return (News) getSession().createCriteria(News.class).add(Restrictions.eq("date", date)).uniqueResult();
     }
 
     @Override
