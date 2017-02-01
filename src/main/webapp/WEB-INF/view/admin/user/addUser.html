@@ -36,10 +36,11 @@
 
                 <div class="form-group row">
                     <label class="form-control-label" for="ROLES">ROLES:</label>
-                    <select class="form-control" id="ROLES" name="roles" multiple="multiple" >
+                    <select class="form-control" id="ROLES" name="roles" multiple="multiple">
                         <option th:each="role : ${allRoles}"
                                 th:value="${{role}}"
-                                th:text="${role.name}">Role name</option>
+                                th:text="${role.name}">Role name
+                        </option>
                     </select>
                 </div>
 

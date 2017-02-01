@@ -15,14 +15,14 @@ public class UserFormValidation implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        User user = (User)target;
+        User user = (User) target;
 
 
-        if (user.getLogin().length()<3 || user.getLogin().length()>32){
-            errors.rejectValue("login","incorrectSize");
+        if (user.getLogin().length() < 3 || user.getLogin().length() > 32) {
+            errors.rejectValue("login", "incorrectSize");
         }
-        if (user.getPassword().length()<6 || user.getPassword().length()>32){
-            errors.rejectValue("password","incorrectSize");
+        if (user.getPassword().length() < 6 || user.getPassword().length() > 32) {
+            errors.rejectValue("password", "incorrectSize");
         }
     }
 }
