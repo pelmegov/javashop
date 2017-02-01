@@ -2,7 +2,10 @@ package ru.pelmegov.javashop.model.user;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import ru.pelmegov.javashop.model.cart.Cart;
+import ru.pelmegov.javashop.model.cart.Item;
+import ru.pelmegov.javashop.model.order.Order;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -11,7 +14,8 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "user")
-@EqualsAndHashCode(exclude = {"id", "roles", "cart"})
+@EqualsAndHashCode(exclude = {"id", "roles", "cart", "orders"})
+@ToString(exclude="orders")
 public class User {
 
     @Id
@@ -38,5 +42,12 @@ public class User {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="cart_id", referencedColumnName = "id")
     private Cart cart;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Order> orders;
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
 
 }

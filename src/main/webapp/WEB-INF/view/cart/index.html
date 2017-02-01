@@ -61,7 +61,7 @@
                 </h3>
             </div>
         </div>
-        <a style="margin-top: 20px" class="btn btn-success" href="#">Buy all...</a>
+        <a style="margin-top: 20px" class="btn btn-success" th:href="@{/order/create}">Buy all...</a>
     </div>
 
     <div th:if="${#lists.isEmpty(items)}">
