@@ -3,16 +3,15 @@ package ru.pelmegov.javashop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
 import ru.pelmegov.javashop.model.cart.Cart;
 import ru.pelmegov.javashop.model.user.User;
+import ru.pelmegov.javashop.validation.UserFormValidation;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -29,11 +28,13 @@ public class UserController {
 
     private final UserService userService;
     private final RoleService roleService;
+    private final UserFormValidation userFormValidation;
 
     @Autowired
-    public UserController(UserService userService, RoleService roleService) {
+    public UserController(UserService userService, RoleService roleService,UserFormValidation userFormValidation) {
         this.userService = userService;
         this.roleService = roleService;
+        this.userFormValidation = userFormValidation;
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
@@ -108,5 +109,10 @@ public class UserController {
         modelAndView.addObject("allRoles", roleService.getAllRoles());
         modelAndView.addObject("user", user);
         return modelAndView;
+    }
+
+    @InitBinder("user")
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(userFormValidation);
     }
 }
