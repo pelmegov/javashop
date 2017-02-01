@@ -25,7 +25,7 @@ public class News {
     @Column(name = "title")
     private String title;
 
-    @Size(min = 3, max = 32)
+    @Size(min = 3)
     @Column(name = "description")
     private String description;
 

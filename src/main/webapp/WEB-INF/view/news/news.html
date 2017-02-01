@@ -10,14 +10,28 @@
 
 <div class="container">
     <h2 style="margin-top: 30px">ALL NEWS</h2>
+
     <div class="row" style="margin-top: 20px">
-        <div class="col-sm-12 row-eq-height" th:each="news : ${news}">
+
+        <div class="col-md-12" th:each="news : ${news}">
             <div class="card" style="margin-bottom: 10px">
                 <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
                     <a th:href="@{/news/detail/{id}(id=${news.id})}">
                         <h3 th:text="${news.title}" class="card-title"></h3>
-                        <p class="card-text" th:text="${news.description}"></p>
                     </a>
+
+                    <div class="row">
+                        <div class="col-md-4" >
+                            <a th:href="@{/news/detail/{id}(id=${news.id})}">
+                                <img style="max-height: 100px !important;" th:src="${news.newsImageLink}" alt="#"/>
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-text">
+                                <p class="card-text" th:text="${news.description}"></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

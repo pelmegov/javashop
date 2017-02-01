@@ -24,7 +24,7 @@ public class NewsController {
     @RequestMapping(value = {"/news"}, method = RequestMethod.GET)
     public ModelAndView newsList() {
         ModelAndView modelAndView = new ModelAndView(newsListView);
-        modelAndView.addObject("news", newsService.getNews(12));
+        modelAndView.addObject("news", newsService.getLastAddedNews(10));
         return modelAndView;
     }
 
