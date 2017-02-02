@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.RoleService;
 import ru.pelmegov.javashop.api.service.UserService;
+import ru.pelmegov.javashop.model.cart.Cart;
 import ru.pelmegov.javashop.model.user.Role;
 import ru.pelmegov.javashop.model.user.User;
 
@@ -73,6 +74,7 @@ public class SecurityController {
         role.add(roleService.getRoleByName("ROLE_USER"));
         user.setRoles(role);
         user.setActive(true);
+        user.setCart(new Cart());
         userService.addUser(user);
         return new ModelAndView(loginView);
     }
