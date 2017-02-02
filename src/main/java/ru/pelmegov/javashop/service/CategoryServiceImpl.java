@@ -34,6 +34,4 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategoryById(Integer id) {
         this.categoryDAO.deleteCategoryById(id);
     }
-
-
 }

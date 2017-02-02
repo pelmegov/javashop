@@ -35,6 +35,7 @@ public class CategoryDAOImpl extends AbstractDAO implements CategoryDAO {
         LOGGER.info("Category loaded: {}.", category);
         return category;
     }
+
     @Override
     public void deleteCategoryById(Integer id) {
         Category category = (Category) getSession().load(Category.class, id);
@@ -44,5 +45,4 @@ public class CategoryDAOImpl extends AbstractDAO implements CategoryDAO {
             getSession().delete(category);
         }
     }
-
 }
