@@ -30,22 +30,30 @@
                                          alt="#"/>
                                 </a>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="card-text"
                                      th:text="${#strings.substring(item.good.description, 0, 100).concat('...')}">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
+
+                                <a style="position: absolute; right: 0; top:-40px;"
+                                   class="btn btn-default" th:href="@{/cart/delete/{id}(id=${item.good.id})}">X</a>
+
                                 <div class="card-text">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item price">
-                                            <a th:href="@{/cart/delete/{id}(id=${item.good.id})}">Delete</a>
+                                            Price:&nbsp;<span th:text="${item.good.price}">Price</span>&nbsp;RUB
                                         </li>
                                         <li class="list-group-item price">
-                                            PRICE&nbsp;<span th:text="${item.good.price}"></span>&nbsp;RUB
-                                        </li>
-                                        <li class="list-group-item price">
-                                            COUNT&nbsp;<span th:text="${item.count}"></span>
+                                            <div class="row">
+                                                <button th:attr="data-id=${item.good.id}"
+                                                        class="btn btn-default good-calc good-calc-up">&and;</button>
+                                                <span class="good-count" style="margin: 0 5px"
+                                                      th:text="${item.count}"></span>
+                                                <button th:attr="data-id=${item.good.id}"
+                                                        class="btn btn-default good-calc">&or;</button>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -58,7 +66,7 @@
         <div class="row">
             <div class="col-md-4">
                 <h3>
-                    SUM&nbsp;<span th:text="${cart.sum}"></span>
+                    SUM <span th:text="${cart.sum}"></span> RUB
                 </h3>
             </div>
         </div>
