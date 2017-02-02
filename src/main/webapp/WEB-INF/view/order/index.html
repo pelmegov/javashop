@@ -10,16 +10,18 @@
 <div th:include="/fragments/header :: header"></div>
 
 <div class="container">
-    <h2 style="margin-top: 30px">You Orders</h2>
+    <h2 style="margin-top: 30px">My Orders</h2>
     <div th:if="!${#lists.isEmpty(orders)}">
         <div class="col-sm-12 row-eq-height" th:each="order: ${orders}">
             <div class="row" style="margin-top: 20px">
                 <div class="card" style="margin-bottom: 10px">
                     <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
 
-                        <h2 th:text="${'Order #' + order.id}"></h2>
-                        <h4 th:text="${'Order Status: ' + order.status}"></h4>
-                        <h4 th:text="${'Created Date: ' + order.date}"></h4>
+                        <div class="card-header">
+                            <h2 th:text="${'Order #' + order.id}"></h2>
+                            <h4 th:text="${'Order Status: ' + order.status}"></h4>
+                            <h4 th:text="${'Created Date: ' + order.date}"></h4>
+                        </div>
 
                         <div class="row">
                             <div class="col-sm-12 row-eq-height" th:each="item : ${order.cart.items}">

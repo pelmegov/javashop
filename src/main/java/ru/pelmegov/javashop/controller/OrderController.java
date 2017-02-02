@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.CartService;
-import ru.pelmegov.javashop.api.service.GoodService;
 import ru.pelmegov.javashop.api.service.OrderService;
 import ru.pelmegov.javashop.api.service.UserService;
 import ru.pelmegov.javashop.model.cart.Cart;
