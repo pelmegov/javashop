@@ -84,6 +84,31 @@
                     }
                 });
             });
+
+            $('button.good-calc').click(function (event) {
+                event.preventDefault();
+                var goodId = $(this).data("id");
+                var isPlus = $(this).hasClass('good-calc-up');
+                $.ajax({
+                    url: "/cart/goodcalc",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify({ id : goodId, isPlus : isPlus}),
+                    dataType: 'json',
+                    type: 'post',
+                    success: function (data) {
+                        console.log(data);
+                        console.log($(this).siblings(".good-count"));
+                        $(this).siblings(".good-count").first().empty().text(data);
+                    },
+                    error: function () {
+                        $(this).siblings(".good-count").first().empty().text('Error!');
+                    }
+                });
+            });
+
         });
     </script>
 

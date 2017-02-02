@@ -16,6 +16,7 @@ import ru.pelmegov.javashop.model.cart.Item;
 import ru.pelmegov.javashop.model.good.Good;
 import ru.pelmegov.javashop.model.user.User;
 
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -61,6 +62,52 @@ public class CartController {
         user.getCart().setItems(items);
         cartService.updateCart(user.getCart());
         return cart();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/cart/goodcalc"})
+    public String goodcalc(@RequestBody Map<String, String> json) {
+
+        Integer id = Integer.valueOf(json.get("id"));
+        Boolean isPlus = Boolean.valueOf(json.get("isPlus"));
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+
+        User user = userService.getUserByLogin(userName);
+        Good good = goodService.getGoodById(id);
+
+        Cart cart = user.getCart();
+        updateCartByGood(good, cart, isPlus);
+        cartService.updateCart(cart);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String result = null;
+        try {
+            result = mapper.writeValueAsString(good.getTitle());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private void updateCartByGood(Good good, Cart cart, Boolean isPlus) {
+        Set<Item> items = cart.getItems();
+        for (Item item : items) {
+            if (item.getGood().equals(good)) {
+                if (isPlus) {
+                    item.setCount(item.getCount() + 1);
+                    cart.setSum(cart.getSum() + good.getPrice());
+                } else {
+                    item.setCount(item.getCount() - 1);
+                    if (item.getCount() < 1) {
+                        item.setCount(1);
+                        break;
+                    }
+                    cart.setSum(cart.getSum() - good.getPrice());
+                }
+            }
+        }
     }
 
     @ResponseBody

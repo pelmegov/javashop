@@ -42,10 +42,14 @@
                                             <a th:href="@{/cart/delete/{id}(id=${item.good.id})}">Delete</a>
                                         </li>
                                         <li class="list-group-item price">
-                                            PRICE&nbsp;<span th:text="${item.good.price}"></span>&nbsp;RUB
+                                            PRICE <span th:text="${item.good.price}">Price</span> RUB
                                         </li>
                                         <li class="list-group-item price">
-                                            COUNT&nbsp;<span th:text="${item.count}"></span>
+                                            <button th:attr="data-id=${item.good.id}"
+                                                    class="btn btn-default good-calc good-calc-up">&and;</button>
+                                            <span class="good-count" style="margin: 0 5px" th:text="${item.count}"></span>
+                                            <button th:attr="data-id=${item.good.id}"
+                                               class="btn btn-default good-calc">&or;</button>
                                         </li>
                                     </ul>
                                 </div>
