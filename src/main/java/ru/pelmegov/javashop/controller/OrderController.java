@@ -14,6 +14,10 @@ import ru.pelmegov.javashop.model.cart.Cart;
 import ru.pelmegov.javashop.model.order.Order;
 import ru.pelmegov.javashop.model.user.User;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 @Controller
 public class OrderController {
 
@@ -38,7 +42,9 @@ public class OrderController {
         String userName = authentication.getName();
         User user = userService.getUserByLogin(userName);
 
-        modelAndView.addObject("orders", user.getOrders());
+        List<Order> orders = new ArrayList<>(user.getOrders());
+        orders.sort(Comparator.comparing(Order::getId).reversed());
+        modelAndView.addObject("orders", orders);
         return modelAndView;
     }
 
@@ -68,7 +74,9 @@ public class OrderController {
         orderService.addOrder(order);
         userService.updateUser(user);
 
-        modelAndView.addObject("orders", user.getOrders());
+        List<Order> orders = new ArrayList<>(user.getOrders());
+        orders.sort(Comparator.comparing(Order::getId).reversed());
+        modelAndView.addObject("orders", orders);
         return modelAndView;
     }
 
