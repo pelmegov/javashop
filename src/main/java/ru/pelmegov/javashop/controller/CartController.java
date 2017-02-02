@@ -16,6 +16,7 @@ import ru.pelmegov.javashop.model.cart.Item;
 import ru.pelmegov.javashop.model.good.Good;
 import ru.pelmegov.javashop.model.user.User;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -78,21 +79,26 @@ public class CartController {
         Good good = goodService.getGoodById(id);
 
         Cart cart = user.getCart();
-        updateCartByGood(good, cart, isPlus);
+        Item item = updateCartByGood(good, cart, isPlus);
         cartService.updateCart(cart);
+
+        Map<String, Object> objects = new HashMap<>();
+        objects.put("count", item.getCount());
+        objects.put("sum", cart.getSum());
 
         ObjectMapper mapper = new ObjectMapper();
         String result = null;
         try {
-            result = mapper.writeValueAsString(good.getTitle());
+            result = mapper.writeValueAsString(objects);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    private void updateCartByGood(Good good, Cart cart, Boolean isPlus) {
+    private Item updateCartByGood(Good good, Cart cart, Boolean isPlus) {
         Set<Item> items = cart.getItems();
+        Item returnItem = null;
         for (Item item : items) {
             if (item.getGood().equals(good)) {
                 if (isPlus) {
@@ -106,8 +112,12 @@ public class CartController {
                     }
                     cart.setSum(cart.getSum() - good.getPrice());
                 }
+                returnItem = item;
+                break;
             }
         }
+
+        return returnItem;
     }
 
     @ResponseBody
