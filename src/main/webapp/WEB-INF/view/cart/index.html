@@ -38,7 +38,7 @@
                             <div class="col-md-3">
 
                                 <a style="position: absolute; right: 0; top:-40px;"
-                                   class="btn btn-default" th:href="@{/cart/delete/{id}(id=${item.good.id})}">X</a>
+                                   class="btn btn-default" th:href="@{/cart/delete/{id}(id=${item.id})}">X</a>
 
                                 <div class="card-text">
                                     <ul class="list-group list-group-flush">
@@ -47,11 +47,11 @@
                                         </li>
                                         <li class="list-group-item price">
                                             <div class="row">
-                                                <button th:attr="data-id=${item.good.id}"
+                                                <button th:attr="data-id=${item.id}"
                                                         class="btn btn-default good-calc good-calc-up">&and;</button>
                                                 <span class="good-count" style="margin: 0 5px"
                                                       th:text="${item.count}"></span>
-                                                <button th:attr="data-id=${item.good.id}"
+                                                <button th:attr="data-id=${item.id}"
                                                         class="btn btn-default good-calc">&or;</button>
                                             </div>
                                         </li>

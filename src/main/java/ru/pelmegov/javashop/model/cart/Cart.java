@@ -35,4 +35,8 @@ public class Cart {
         items.add(item);
     }
 
+    public Item getItem(Integer id) {
+        return items.stream().filter(item -> item.getId().equals(id)).findFirst().orElse(null);
+    }
+
 }

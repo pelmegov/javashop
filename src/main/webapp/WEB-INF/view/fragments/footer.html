@@ -87,16 +87,18 @@
 
             $('button.good-calc').click(function (event) {
                 event.preventDefault();
-                var goodId = $(this).data("id");
+                // Идентификатор item'a - сущность, которая представляет товар
+                var itemId = $(this).data("id");
+                // Если у кнопки есть класс 'good-calc-up', значит мы прибавляем
                 var isPlus = $(this).hasClass('good-calc-up');
                 var count = 0;
                 $.ajax({
-                    url: "/cart/goodcalc",
+                    url: "/cart/calculate",
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    data: JSON.stringify({ id : goodId, isPlus : isPlus}),
+                    data: JSON.stringify({ id : itemId, isPlus : isPlus}),
                     dataType: 'json',
                     type: 'post',
                     context: this,

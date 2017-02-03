@@ -56,18 +56,23 @@ public class CartController {
     public ModelAndView deleteItem(@PathVariable(value = "id") Integer id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
+
         User user = userService.getUserByLogin(userName);
+        Cart cart = user.getCart();
+        Item item = cart.getItem(id);
 
-        Set<Item> items = removeItemInCart(id, user.getCart());
+        for (int i = 0; item.getCount() > i; i++)
+            cart.setSum(cart.getSum() - item.getGood().getPrice());
 
-        user.getCart().setItems(items);
-        cartService.updateCart(user.getCart());
+        if (cart.getItems().remove(item))
+            cartService.updateCart(cart);
+
         return cart();
     }
 
     @ResponseBody
-    @RequestMapping(value = {"/cart/goodcalc"})
-    public String goodcalc(@RequestBody Map<String, String> json) {
+    @RequestMapping(value = {"/cart/calculate"})
+    public String cartCalculate(@RequestBody Map<String, String> json) {
 
         Integer id = Integer.valueOf(json.get("id"));
         Boolean isPlus = Boolean.valueOf(json.get("isPlus"));
@@ -76,53 +81,30 @@ public class CartController {
         String userName = authentication.getName();
 
         User user = userService.getUserByLogin(userName);
-        Good good = goodService.getGoodById(id);
-
         Cart cart = user.getCart();
-        Item item = updateCartByGood(good, cart, isPlus);
+        Item item = cart.getItem(id);
+
+        if (isPlus) {
+            item.setCount(item.getCount() + 1);
+            cart.setSum(cart.getSum() + item.getGood().getPrice());
+        } else {
+            if (item.getCount() > 1) {
+                item.setCount(item.getCount() - 1);
+                cart.setSum(cart.getSum() - item.getGood().getPrice());
+            }
+        }
         cartService.updateCart(cart);
 
         Map<String, Object> objects = new HashMap<>();
         objects.put("count", item.getCount());
         objects.put("sum", cart.getSum());
 
-        ObjectMapper mapper = new ObjectMapper();
-        String result = null;
-        try {
-            result = mapper.writeValueAsString(objects);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    private Item updateCartByGood(Good good, Cart cart, Boolean isPlus) {
-        Set<Item> items = cart.getItems();
-        Item returnItem = null;
-        for (Item item : items) {
-            if (item.getGood().equals(good)) {
-                if (isPlus) {
-                    item.setCount(item.getCount() + 1);
-                    cart.setSum(cart.getSum() + good.getPrice());
-                } else {
-                    item.setCount(item.getCount() - 1);
-                    if (item.getCount() < 1) {
-                        item.setCount(1);
-                        break;
-                    }
-                    cart.setSum(cart.getSum() - good.getPrice());
-                }
-                returnItem = item;
-                break;
-            }
-        }
-
-        return returnItem;
+        return getJson(objects);
     }
 
     @ResponseBody
     @RequestMapping(value = {"/cart/buy"})
-    public String buy(@RequestBody String id) {
+    public String buyGood(@RequestBody String id) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
@@ -131,36 +113,36 @@ public class CartController {
         Good good = goodService.getGoodById(Integer.valueOf(id));
 
         Cart cart = user.getCart();
-        addGoodInCart(good, cart);
+        addItemInCart(good, cart);
         cartService.updateCart(cart);
 
+        return getJson("<b>" + good.getTitle() + "</b> been successfully added in your cart!");
+    }
+
+    /**
+     * Метод для преобразования Java объекта в JavaScript объект или строку
+     *
+     * @param object Java объект для преобразования
+     * @return результат в виде JavaScript объекта или строки
+     */
+    private String getJson(Object object) {
         ObjectMapper mapper = new ObjectMapper();
         String result = null;
         try {
-            result = mapper.writeValueAsString("<b>" + good.getTitle() + "</b> been successfully added in your cart!");
+            result = mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    private Set<Item> removeItemInCart(Integer itemId, Cart cart) {
-        Set<Item> items = cart.getItems();
-        Item removeItem = null;
-        for (Item item : items) {
-            if (item.getGood().getId().equals(itemId)) {
-                removeItem = item;
-                for (int i = 0; item.getCount() > i; i++)
-                    cart.setSum(cart.getSum() - removeItem.getGood().getPrice());
-            }
-        }
-        if (removeItem != null)
-            items.remove(removeItem);
-
-        return items;
-    }
-
-    private void addGoodInCart(Good good, Cart cart) {
+    /**
+     * Метод добавляет Item в корзину
+     *
+     * @param good товар, для которого нужно создать Item корзины
+     * @param cart корзина, в которой будет содержаться Item
+     */
+    private void addItemInCart(Good good, Cart cart) {
         Set<Item> items = cart.getItems();
         boolean flag = true;
         for (Item item : items) {
