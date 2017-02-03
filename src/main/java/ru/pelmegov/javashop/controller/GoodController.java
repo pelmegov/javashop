@@ -24,7 +24,7 @@ public class GoodController {
     @RequestMapping(value = {"/good/detail/{id}"}, method = RequestMethod.GET)
     public ModelAndView detailPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView(detailView);
-        modelAndView.addObject("good", goodService.getGoodById(id));
+        modelAndView.addObject("good", goodService.getGoodById(id, true));
 
         return modelAndView;
     }
@@ -36,7 +36,7 @@ public class GoodController {
 
         ModelAndView modelAndView = new ModelAndView(categoryView);
         modelAndView.addObject("category", categoryId);
-        modelAndView.addObject("catalogGoods", goodService.getGoodsByCategory(goodsCount, categoryId));
+        modelAndView.addObject("catalogGoods", goodService.getGoodsByCategory(goodsCount, categoryId, true));
 
         return modelAndView;
     }

@@ -27,8 +27,20 @@ public class GoodServiceImpl implements GoodService {
 
     @Override
     @Transactional
+    public Good getGoodByName(String name, Boolean active) {
+        return goodDao.getGoodByName(name, active);
+    }
+
+    @Override
+    @Transactional
     public Good getGoodById(Integer id) {
         return goodDao.getGoodById(id);
+    }
+
+    @Override
+    @Transactional
+    public Good getGoodById(Integer id, Boolean active) {
+        return goodDao.getGoodById(id, active);
     }
 
     @Override
@@ -39,14 +51,32 @@ public class GoodServiceImpl implements GoodService {
 
     @Override
     @Transactional
+    public Set<Good> getAllGoods(Boolean active) {
+        return goodDao.getAllGoods(active);
+    }
+
+    @Override
+    @Transactional
     public Set<Good> getGoods(Integer count) {
         return goodDao.getGoods(count);
     }
 
     @Override
     @Transactional
-    public Set<Good> getLastAddedGoods(Integer col) {
-        return goodDao.getLastAddedGoods(col);
+    public Set<Good> getGoods(Integer count, Boolean active) {
+        return goodDao.getGoods(count, active);
+    }
+
+    @Override
+    @Transactional
+    public Set<Good> getLastAddedGoods(Integer count) {
+        return goodDao.getLastAddedGoods(count);
+    }
+
+    @Override
+    @Transactional
+    public Set<Good> getLastAddedGoods(Integer count, Boolean active) {
+        return goodDao.getLastAddedGoods(count, active);
     }
 
     @Override
@@ -57,7 +87,19 @@ public class GoodServiceImpl implements GoodService {
 
     @Override
     @Transactional
+    public Set<Good> getGoodsByCategory(Integer categoryId, Boolean active) {
+        return goodDao.getGoodsByCategory(categoryId, active);
+    }
+
+    @Override
+    @Transactional
     public Set<Good> getGoodsByCategory(Integer count, Integer categoryId) {
         return goodDao.getGoodsByCategory(count, categoryId);
+    }
+
+    @Override
+    @Transactional
+    public Set<Good> getGoodsByCategory(Integer count, Integer categoryId, Boolean active) {
+        return goodDao.getGoodsByCategory(count, categoryId, active);
     }
 }

@@ -7,6 +7,7 @@ import lombok.ToString;
 import ru.pelmegov.javashop.model.cart.Item;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +16,7 @@ import java.util.Set;
 @Data
 @Table(name = "good")
 @EqualsAndHashCode(exclude = {"id", "category", "cartItems"})
-@ToString(exclude="cartItems")
+@ToString(exclude = "cartItems")
 @NoArgsConstructor
 public class Good {
 
@@ -28,6 +29,9 @@ public class Good {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "active", columnDefinition = "boolean default true")
+    private Boolean active = true;
+
     @Size(min = 6)
     @Column(name = "description")
     private String description;
@@ -39,6 +43,7 @@ public class Good {
     private Integer quantity;
 
     @Column(name = "price")
+    @Digits(integer = 9, fraction = 2)
     private Double price;
 
     @ManyToOne

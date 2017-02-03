@@ -61,8 +61,8 @@ public class CartController {
         Cart cart = user.getCart();
         Item item = cart.getItem(id);
 
-        for (int i = 0; item.getCount() > i; i++)
-            cart.setSum(cart.getSum() - item.getGood().getPrice());
+        Double itemsSum = item.getGood().getPrice() * item.getCount();
+        cart.setSum(cart.getSum() - itemsSum);
 
         if (cart.getItems().remove(item))
             cartService.updateCart(cart);
@@ -110,7 +110,7 @@ public class CartController {
         String userName = authentication.getName();
 
         User user = userService.getUserByLogin(userName);
-        Good good = goodService.getGoodById(Integer.valueOf(id));
+        Good good = goodService.getGoodById(Integer.valueOf(id), true);
 
         Cart cart = user.getCart();
         addItemInCart(good, cart);

@@ -26,8 +26,8 @@ public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView indexPage() {
         ModelAndView modelAndView = new ModelAndView(indexView);
-        modelAndView.addObject("newGoods", goodService.getLastAddedGoods(4));
-        modelAndView.addObject("catalogGoods", goodService.getGoods(8));
+        modelAndView.addObject("newGoods", goodService.getLastAddedGoods(4, true));
+        modelAndView.addObject("catalogGoods", goodService.getGoods(8, true));
         modelAndView.addObject("listNews", newsService.getLastAddedNews(3));
         return modelAndView;
     }
