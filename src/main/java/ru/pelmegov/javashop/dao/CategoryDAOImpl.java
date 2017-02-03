@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.CategoryDAO;
 import ru.pelmegov.javashop.model.good.Category;
-import ru.pelmegov.javashop.model.user.User;
 
 @Repository
 public class CategoryDAOImpl extends AbstractDAO implements CategoryDAO {
@@ -18,13 +17,13 @@ public class CategoryDAOImpl extends AbstractDAO implements CategoryDAO {
     }
 
     @Override
-    public void updateCategory(Category category){
+    public void updateCategory(Category category) {
         getSession().update(category);
         LOGGER.info("Category updated: ", category);
     }
 
     @Override
-    public void addCategory(Category category){
+    public void addCategory(Category category) {
         getSession().save(category);
         LOGGER.info("Category added: ", category);
     }

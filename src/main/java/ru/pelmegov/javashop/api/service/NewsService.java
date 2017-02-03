@@ -16,4 +16,10 @@ public interface NewsService {
     News getNewsByDate(Date date);
 
     List<News> getLastAddedNews(Integer count);
+
+    void addNews(News news);
+
+    void updateNews(News news);
+
+    void deleteNews(Integer id);
 }

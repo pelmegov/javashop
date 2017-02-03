@@ -3,6 +3,7 @@ package ru.pelmegov.javashop.dao;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.api.dao.NewsDAO;
 import ru.pelmegov.javashop.model.news.News;
@@ -11,6 +12,7 @@ import java.util.*;
 
 @Repository
 public class NewsDAOImpl extends AbstractDAO implements NewsDAO {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(NewsDAOImpl.class);
 
     public NewsDAOImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -49,5 +51,26 @@ public class NewsDAOImpl extends AbstractDAO implements NewsDAO {
                 .setMaxResults(count)
                 .list();
         return new ArrayList<>(news);
+    }
+
+    @Override
+    public void addNews(News news) {
+        getSession().save(news);
+        LOGGER.info("News has added successfully ", news);
+    }
+
+    @Override
+    public  void updateNews(News news){
+        getSession().update(news);
+        LOGGER.info("News has updated succcessfully ", news);
+    }
+
+    @Override
+    public void deleteNews(Integer id){
+        News news = (News) getSession().load(News.class, id);
+        if(news != null){
+            LOGGER.info("News successfully remove ", news);
+            getSession().delete(news);
+        }
     }
 }

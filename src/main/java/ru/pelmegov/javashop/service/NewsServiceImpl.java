@@ -47,4 +47,19 @@ public class NewsServiceImpl implements NewsService {
     public List<News> getLastAddedNews(Integer count) {
         return newsDAO.getLastAddedNews(count);
     }
+
+    @Override
+    public void addNews(News news) {
+        this.newsDAO.addNews(news);
+    }
+
+    @Override
+    public void updateNews(News news) {
+        this.newsDAO.updateNews(news);
+    }
+
+    @Override
+    public void deleteNews(Integer id) {
+        this.newsDAO.deleteNews(id);
+    }
 }
