@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import ru.pelmegov.javashop.model.cart.Cart;
-import ru.pelmegov.javashop.model.cart.Item;
 import ru.pelmegov.javashop.model.order.Order;
 
 import javax.persistence.*;
@@ -31,7 +30,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "active")
+    @Size(min = 6, max = 32)
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "active", columnDefinition = "boolean default true")
     private Boolean active = true;
 
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)

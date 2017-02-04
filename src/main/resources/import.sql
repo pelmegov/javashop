@@ -5,10 +5,10 @@ INSERT INTO "cart" (sum) VALUES (0);
 INSERT INTO "cart" (sum) VALUES (0);
 
 -- insert user data
-INSERT INTO "user" (login, password, active, cart_id) VALUES ('admin', '123456', true, 1);
-INSERT INTO "user" (login, password, active, cart_id) VALUES ('user', '123456', true, 2);
-INSERT INTO "user" (login, password, active, cart_id) VALUES ('manager', '123456', true, 3);
-INSERT INTO "user" (login, password, active, cart_id) VALUES ('user2', '123456', false, 4);
+INSERT INTO "user" (login, password, active, cart_id, email) VALUES ('admin', '123456', true, 1, 'admin@gmail.com');
+INSERT INTO "user" (login, password, active, cart_id, email) VALUES ('user', '123456', true, 2, 'user@gmail.com');
+INSERT INTO "user" (login, password, active, cart_id, email) VALUES ('manager', '123456', true, 3, 'manager@gmail.com');
+INSERT INTO "user" (login, password, active, cart_id, email) VALUES ('user2', '123456', false, 4, 'user2@gmail.com');
 
 -- insert role data
 INSERT INTO "role" (name) VALUES ('ROLE_ADMIN');

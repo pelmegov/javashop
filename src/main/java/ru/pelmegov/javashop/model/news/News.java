@@ -3,7 +3,7 @@ package ru.pelmegov.javashop.model.news;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -32,6 +32,7 @@ public class News {
     @Column(name = "news_image_link")
     private String newsImageLink;
 
+    @CreationTimestamp
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "date")

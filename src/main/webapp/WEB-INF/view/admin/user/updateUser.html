@@ -37,6 +37,14 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="form-control-label" for="EMAIL">EMAIL:</label>
+                    <input th:field="*{email}" class="form-control" id="EMAIL" type="text" name="email"/>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                         class="alert alert-danger">Email Error. Try another?
+                    </div>
+                </div>
+
                 <fieldset class="row">
                     <legend class="col-form-legend">ACTIVE</legend>
                     <div class="form-check">
