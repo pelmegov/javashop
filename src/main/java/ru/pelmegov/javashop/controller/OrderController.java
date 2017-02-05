@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.CartService;
+import ru.pelmegov.javashop.api.service.MailService;
 import ru.pelmegov.javashop.api.service.OrderService;
 import ru.pelmegov.javashop.api.service.UserService;
 import ru.pelmegov.javashop.model.cart.Cart;
@@ -26,12 +27,15 @@ public class OrderController {
     private final UserService userService;
     private final OrderService orderService;
     private final CartService cartService;
+    private final MailService mailService;
 
     @Autowired
-    public OrderController(UserService userService, OrderService orderService, CartService cartService) {
+    public OrderController(UserService userService, OrderService orderService,
+                           CartService cartService, MailService mailService) {
         this.userService = userService;
         this.orderService = orderService;
         this.cartService = cartService;
+        this.mailService = mailService;
     }
 
     @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
@@ -73,6 +77,9 @@ public class OrderController {
         cartService.updateCart(oldCart);
         orderService.addOrder(order);
         userService.updateUser(user);
+
+        // send email
+        mailService.sendEmail(order);
 
         List<Order> orders = new ArrayList<>(user.getOrders());
         orders.sort(Comparator.comparing(Order::getId).reversed());

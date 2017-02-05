@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -65,6 +67,29 @@ public class AppConfig {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(s);
         return txManager;
+    }
+
+    @Bean
+    public JavaMailSender getMailSender(){
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+
+        // Указать свои Юзернейм и Пароль от гугл почты
+        // через ваш почтовый ящик будет происходить отправка почты
+        // Заметка: надо разрешить в почте у себя отправку сообщений внешним приложениям.
+        mailSender.setUsername("username");
+        mailSender.setPassword("password");
+
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.starttls.enable", "true");
+        javaMailProperties.put("mail.smtp.auth", "true");
+        javaMailProperties.put("mail.transport.protocol", "smtp");
+        javaMailProperties.put("mail.debug", "true");
+
+        mailSender.setJavaMailProperties(javaMailProperties);
+        return mailSender;
     }
 
 }
