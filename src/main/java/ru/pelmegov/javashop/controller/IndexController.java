@@ -31,5 +31,4 @@ public class IndexController {
         modelAndView.addObject("listNews", newsService.getLastAddedNews(3));
         return modelAndView;
     }
-
 }

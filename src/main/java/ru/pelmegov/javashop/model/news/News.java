@@ -37,4 +37,5 @@ public class News {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "date")
     private Date date;
+
 }

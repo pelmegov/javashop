@@ -10,6 +10,7 @@ import ru.pelmegov.javashop.model.good.Category;
 
 @Repository
 public class CategoryDAOImpl extends AbstractDAO implements CategoryDAO {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryDAOImpl.class);
 
     public CategoryDAOImpl(SessionFactory sessionFactory) {

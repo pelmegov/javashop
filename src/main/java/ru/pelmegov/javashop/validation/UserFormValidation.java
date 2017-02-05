@@ -17,7 +17,6 @@ public class UserFormValidation implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
 
-
         if (user.getLogin().length() < 3 || user.getLogin().length() > 32) {
             errors.rejectValue("login", "incorrectSize");
         }

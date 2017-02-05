@@ -12,6 +12,7 @@ import java.util.Set;
 
 @Service
 public class NewsServiceImpl implements NewsService {
+
     private final NewsDAO newsDAO;
 
     public NewsServiceImpl(NewsDAO newsDAO) {

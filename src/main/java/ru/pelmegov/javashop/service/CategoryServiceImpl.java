@@ -9,6 +9,7 @@ import ru.pelmegov.javashop.model.good.Category;
 @Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
+
     private  final CategoryDAO categoryDAO;
 
     public CategoryServiceImpl(CategoryDAO categoryDAO) {

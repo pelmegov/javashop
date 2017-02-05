@@ -44,5 +44,4 @@ public class ThymeleafConfig {
         resolver.setCharacterEncoding("UTF-8");
         return resolver;
     }
-
 }

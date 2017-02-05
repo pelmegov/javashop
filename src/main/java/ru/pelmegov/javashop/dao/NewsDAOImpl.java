@@ -12,6 +12,7 @@ import java.util.*;
 
 @Repository
 public class NewsDAOImpl extends AbstractDAO implements NewsDAO {
+
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(NewsDAOImpl.class);
 
     public NewsDAOImpl(SessionFactory sessionFactory) {

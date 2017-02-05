@@ -17,5 +17,4 @@ public interface UserDAO {
     public User getUserByLogin(String login);
 
     public Set<User> getAllUsers();
-
 }

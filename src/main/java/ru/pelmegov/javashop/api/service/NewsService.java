@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface NewsService {
+
     Set<News> getAllNews();
 
     Set<News> getNews(Integer count);

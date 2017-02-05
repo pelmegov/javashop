@@ -23,7 +23,6 @@ public class MailServiceImpl implements MailService {
     public void sendEmail(Object object) {
 
         Order order = (Order) object;
-
         MimeMessagePreparator preparator = getMessagePreparator(order);
 
         try {
@@ -36,16 +35,18 @@ public class MailServiceImpl implements MailService {
 
     private MimeMessagePreparator getMessagePreparator(final Order order) {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
-
             public void prepare(MimeMessage mimeMessage) throws Exception {
 
                 StringBuilder items = new StringBuilder();
-                for(Item item : order.getCart().getItems())
+                for (Item item : order.getCart().getItems())
                     items.append("Good: " + item.getGood().getDescription()
-                    + ". Count: " + item.getCount() + ". \n");
+                            + ". Count: " + item.getCount() + ". \n");
+
                 String text = "Dear " + order.getUser().getLogin()
-                        + ", thank you for placing order. Your order ID is " + order.getId() + ".\n"
-                        + "Order status: " + order.getStatus() + "." + "\nSUM: " + order.getCart().getSum() + " RUB.\n"
+                        + ", thank you for placing order. "
+                        + "Your order ID is " + order.getId() + ".\n"
+                        + "Order status: " + order.getStatus() + "." + "\n"
+                        + "SUM: " + order.getCart().getSum() + " RUB.\n"
                         + "Your cart: " + items;
 
                 mimeMessage.setFrom(new InternetAddress("info@javashop.com", "JavaShop Corporation"));

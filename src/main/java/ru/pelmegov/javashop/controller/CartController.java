@@ -26,9 +26,7 @@ public class CartController {
     private String cartView = "/cart/index";
 
     private final GoodService goodService;
-
     private final UserService userService;
-
     private final CartService cartService;
 
     @Autowired
@@ -161,5 +159,4 @@ public class CartController {
             cart.addItem(newItem);
         }
     }
-
 }

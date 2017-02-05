@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface NewsDAO {
+
     Set<News> getAllNews();
 
     Set<News> getNews(Integer count);

@@ -17,5 +17,4 @@ public interface UserService {
     public User getUserByLogin(String login);
 
     public Set<User> getAllUsers();
-
 }

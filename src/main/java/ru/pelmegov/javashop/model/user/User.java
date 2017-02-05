@@ -52,5 +52,4 @@ public class User {
     public void addOrder(Order order) {
         orders.add(order);
     }
-
 }

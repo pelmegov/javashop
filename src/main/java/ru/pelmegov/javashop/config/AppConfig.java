@@ -70,7 +70,7 @@ public class AppConfig {
     }
 
     @Bean
-    public JavaMailSender getMailSender(){
+    public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
         mailSender.setHost("smtp.gmail.com");
@@ -91,5 +91,4 @@ public class AppConfig {
         mailSender.setJavaMailProperties(javaMailProperties);
         return mailSender;
     }
-
 }
