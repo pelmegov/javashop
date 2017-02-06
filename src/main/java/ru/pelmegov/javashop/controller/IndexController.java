@@ -14,14 +14,13 @@ public class IndexController {
     private String indexView = "/index";
 
     private final GoodService goodService;
+    private final NewsService newsService;
 
     @Autowired
-    public IndexController(GoodService goodService) {
+    public IndexController(GoodService goodService, NewsService newsService) {
         this.goodService = goodService;
+        this.newsService = newsService;
     }
-
-    @Autowired
-    private NewsService newsService;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView indexPage() {

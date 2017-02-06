@@ -12,9 +12,10 @@ import ru.pelmegov.javashop.service.NewsService;
 @RequestMapping(value = "/news")
 public class NewsController {
 
-    private final NewsService newsService;
     private String newsListView = "/news/news";
     private String newsPageView = "/news/detail";
+
+    private final NewsService newsService;
 
     @Autowired
     public NewsController(NewsService newsService) {

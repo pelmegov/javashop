@@ -8,13 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.pelmegov.javashop.service.CartService;
-import ru.pelmegov.javashop.service.GoodService;
-import ru.pelmegov.javashop.service.UserService;
 import ru.pelmegov.javashop.model.cart.Cart;
 import ru.pelmegov.javashop.model.cart.Item;
 import ru.pelmegov.javashop.model.good.Good;
 import ru.pelmegov.javashop.model.user.User;
+import ru.pelmegov.javashop.service.CartService;
+import ru.pelmegov.javashop.service.GoodService;
+import ru.pelmegov.javashop.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -117,12 +117,7 @@ public class CartController {
         return getJson("<b>" + good.getTitle() + "</b> been successfully added in your cart!");
     }
 
-    /**
-     * Метод для преобразования Java объекта в JavaScript объект или строку
-     *
-     * @param object Java объект для преобразования
-     * @return результат в виде JavaScript объекта или строки
-     */
+    // Метод для преобразования Java объекта в JavaScript объект или строку
     private String getJson(Object object) {
         ObjectMapper mapper = new ObjectMapper();
         String result = null;
@@ -134,12 +129,7 @@ public class CartController {
         return result;
     }
 
-    /**
-     * Метод добавляет Item в корзину
-     *
-     * @param good товар, для которого нужно создать Item корзины
-     * @param cart корзина, в которой будет содержаться Item
-     */
+    // Метод добавляет Item в указанную корзину
     private void addItemInCart(Good good, Cart cart) {
         Set<Item> items = cart.getItems();
         boolean flag = true;

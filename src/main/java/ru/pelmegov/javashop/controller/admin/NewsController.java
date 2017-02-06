@@ -1,4 +1,4 @@
-package ru.pelmegov.javashop.controller;
+package ru.pelmegov.javashop.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.pelmegov.javashop.api.service.NewsService;
 import ru.pelmegov.javashop.model.news.News;
+import ru.pelmegov.javashop.service.NewsService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -19,14 +19,16 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/admin/news")
-public class AdminNewsController {
-    private final NewsService newsService;
+public class NewsController {
+
     private String addNewsView = "/admin/news/addNews";
     private String indexNewsView = "/admin/news/index";
     private String updateNewsView = "/admin/news/updateNews";
 
+    private final NewsService newsService;
+
     @Autowired
-    public AdminNewsController(NewsService newsService) {
+    public NewsController(NewsService newsService) {
         this.newsService = newsService;
     }
 

@@ -1,4 +1,4 @@
-package ru.pelmegov.javashop.controller;
+package ru.pelmegov.javashop.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
