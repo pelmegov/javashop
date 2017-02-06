@@ -2,7 +2,7 @@ package ru.pelmegov.javashop.formatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.pelmegov.javashop.api.service.RoleService;
+import ru.pelmegov.javashop.service.RoleService;
 import ru.pelmegov.javashop.model.user.Role;
 import org.springframework.format.Formatter;
 import java.text.ParseException;
