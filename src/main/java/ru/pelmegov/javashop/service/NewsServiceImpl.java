@@ -50,16 +50,19 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Transactional
     public void addNews(News news) {
         this.newsDAO.addNews(news);
     }
 
     @Override
+    @Transactional
     public void updateNews(News news) {
         this.newsDAO.updateNews(news);
     }
 
     @Override
+    @Transactional
     public void deleteNews(Integer id) {
         this.newsDAO.deleteNews(id);
     }

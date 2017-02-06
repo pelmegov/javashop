@@ -9,26 +9,26 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.api.service.NewsService;
 
 @Controller
+@RequestMapping(value = "/news")
 public class NewsController {
 
+    private final NewsService newsService;
     private String newsListView = "/news/news";
     private String newsPageView = "/news/detail";
-
-    private final NewsService newsService;
 
     @Autowired
     public NewsController(NewsService newsService) {
         this.newsService = newsService;
     }
 
-    @RequestMapping(value = {"/news"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/news"}, method = RequestMethod.GET)
     public ModelAndView newsList() {
         ModelAndView modelAndView = new ModelAndView(newsListView);
         modelAndView.addObject("news", newsService.getLastAddedNews(10));
         return modelAndView;
     }
 
-    @RequestMapping(value = "/news/detail/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public ModelAndView getDetailNewsById(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView(newsPageView);
         modelAndView.addObject("news", newsService.getNewsById(id));

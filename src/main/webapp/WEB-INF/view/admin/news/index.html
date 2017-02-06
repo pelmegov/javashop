@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <a class="btn btn-success" href="addNews">Add News</a>
+
+    <table class="table" th:unless="${#lists.isEmpty(news)}">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Icon</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date</th>
+
+            <th>Update News</th>
+            <th>Delete News</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="news : ${news}">
+            <td th:text="${news.id}">Id</td>
+            <td th:text="${news.newsImageLink}">Icon</td>
+            <td th:text="${news.title}">Title</td>
+            <td th:text="${news.description}">Description</td>
+            <td th:text="${news.date}">Date</td>
+
+            <td><a th:href="@{updateNews/{id}(id=${news.id})}">Update News</a></td>
+            <td><a th:href="@{deleteNews/{id}(id=${news.id})}">Delete News</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
+
+</body>
+</html>
