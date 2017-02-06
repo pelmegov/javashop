@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.pelmegov.javashop.api.service.GoodService;
-import ru.pelmegov.javashop.api.service.NewsService;
+import ru.pelmegov.javashop.service.GoodService;
+import ru.pelmegov.javashop.service.NewsService;
 
 @Controller
 public class IndexController {

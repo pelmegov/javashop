@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
-import ru.pelmegov.javashop.api.service.RoleService;
-import ru.pelmegov.javashop.api.service.UserService;
 import ru.pelmegov.javashop.config.AppConfig;
 import ru.pelmegov.javashop.model.user.Role;
 import ru.pelmegov.javashop.model.user.User;
