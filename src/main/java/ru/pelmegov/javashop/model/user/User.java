@@ -49,7 +49,7 @@ public class User {
     @JoinColumn(name="cart_id", referencedColumnName = "id")
     private Cart cart;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders;
 
     public void addOrder(Order order) {
