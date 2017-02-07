@@ -16,6 +16,8 @@
 
             <form action="#" th:action="@{/admin/user/updateUser}" th:object="${user}" method="post">
 
+                <input th:field="*{cart.id}" class="form-control" type="text" name="cart" hidden/>
+
                 <div class="form-group row">
                     <label class="form-control-label" for="ID">ID::</label>
                     <input th:value="${user.id}" class="form-control" id="ID" type="text" name="id"/>

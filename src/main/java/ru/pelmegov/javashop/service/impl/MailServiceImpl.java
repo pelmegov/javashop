@@ -21,7 +21,6 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void sendEmail(Object object) {
-
         Order order = (Order) object;
         MimeMessagePreparator preparator = getMessagePreparator(order);
 
@@ -36,7 +35,6 @@ public class MailServiceImpl implements MailService {
     private MimeMessagePreparator getMessagePreparator(final Order order) {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             public void prepare(MimeMessage mimeMessage) throws Exception {
-
                 StringBuilder items = new StringBuilder();
                 for (Item item : order.getCart().getItems())
                     items.append("Good: " + item.getGood().getDescription()
@@ -58,5 +56,4 @@ public class MailServiceImpl implements MailService {
         };
         return preparator;
     }
-
 }
