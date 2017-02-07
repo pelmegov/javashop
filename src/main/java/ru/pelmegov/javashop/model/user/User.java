@@ -3,6 +3,8 @@ package ru.pelmegov.javashop.model.user;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import ru.pelmegov.javashop.model.cart.Cart;
 import ru.pelmegov.javashop.model.order.Order;
 
@@ -37,16 +39,17 @@ public class User {
     @Column(name = "active", columnDefinition = "boolean default true")
     private Boolean active = true;
 
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+    @ManyToMany(targetEntity = Role.class)
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    @Fetch(FetchMode.JOIN)
     private Set<Role> roles;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="cart_id", referencedColumnName = "id")
     private Cart cart;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders;
 
     public void addOrder(Order order) {

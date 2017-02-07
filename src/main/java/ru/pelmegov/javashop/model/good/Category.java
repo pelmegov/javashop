@@ -29,7 +29,7 @@ public class Category {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "category", orphanRemoval = true)
     private Set<Good> goods;
 
 }

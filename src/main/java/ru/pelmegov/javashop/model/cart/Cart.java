@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import ru.pelmegov.javashop.model.user.User;
 
 import javax.persistence.*;
@@ -25,7 +27,8 @@ public class Cart {
     @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.JOIN)
     private Set<Item> items;
 
     @Column(name = "sum")

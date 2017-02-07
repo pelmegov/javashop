@@ -26,7 +26,7 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
 }
