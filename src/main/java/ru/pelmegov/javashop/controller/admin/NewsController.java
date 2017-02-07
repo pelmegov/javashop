@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@Controller
+@Controller(value = "adminNewsController")
 @RequestMapping(value = "/admin/news")
 public class NewsController {
 

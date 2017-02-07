@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.service.NewsService;
 
-@Controller
+@Controller("newsController")
 @RequestMapping(value = "/news")
 public class NewsController {
 
