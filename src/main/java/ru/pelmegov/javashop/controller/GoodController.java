@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.pelmegov.javashop.service.GoodService;
 
-@Controller
+@Controller(value = "goodController")
 public class GoodController {
 
     private String detailView = "/good/detail";

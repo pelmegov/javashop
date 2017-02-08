@@ -16,13 +16,8 @@
 
             <form action="#" th:action="@{/admin/user/updateUser}" th:object="${user}" method="post">
 
-                <input th:field="*{cart.id}" class="form-control" type="text" name="cart" hidden/>
-
-                <div class="form-group row">
-                    <label class="form-control-label" for="ID">ID::</label>
-                    <input th:value="${user.id}" type="hidden" id="ID" name="id"/>
-                    <h1 th:text="${user.id}" class="form-control">ID</h1>
-                </div>
+                <input th:field="*{cart.id}" type="hidden" name="cart"/>
+                <input th:value="${user.id}" type="hidden" name="id"/>
 
                 <div class="form-group row">
                     <label class="form-control-label" for="LOGIN">LOGIN:</label>

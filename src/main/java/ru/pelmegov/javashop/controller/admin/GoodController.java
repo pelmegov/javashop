@@ -51,7 +51,8 @@ public class GoodController {
     }
 
     @RequestMapping(value = "/addGood", method = RequestMethod.POST)
-    public ModelAndView addGood(@ModelAttribute Good good, BindingResult result, ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
+    public ModelAndView addGood(@ModelAttribute Good good, BindingResult result,
+                                ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
         goodService.addGood(good);
         redirectAttributes.addFlashAttribute("success", "Good has added: " + good);
         return new ModelAndView("redirect: " + indexGoodView);
@@ -60,7 +61,12 @@ public class GoodController {
     @RequestMapping(value = {"/updateGood/{id}", "/updateGood"}, method = RequestMethod.GET)
     public ModelAndView updateGood(Good good, RedirectAttributes redirectAttrs) {
         ModelAndView modelAndView = new ModelAndView(updateGoodView);
+        if (good.getId() == null) {
+            redirectAttrs.addFlashAttribute("error", "Not the selected good");
+            return new ModelAndView("redirect:" + indexGoodView);
+        }
         good = goodService.getGoodById(good.getId());
+        modelAndView.addObject("good", good);
         return getGoodModelAndView(modelAndView, good);
     }
 

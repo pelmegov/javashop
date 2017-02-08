@@ -8,6 +8,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import ru.pelmegov.javashop.formatter.CategoryFormatter;
 import ru.pelmegov.javashop.formatter.RoleFormatter;
 
 @Configuration
@@ -16,6 +17,8 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     RoleFormatter roleFormatter;
+    @Autowired
+    CategoryFormatter categoryFormatter;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -39,6 +42,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(roleFormatter);
+        registry.addFormatter(categoryFormatter);
     }
 
     @Bean
