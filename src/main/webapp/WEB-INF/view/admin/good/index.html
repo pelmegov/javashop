@@ -22,7 +22,8 @@
             <th>Description</th>
             <th>Quantity</th>
             <th>Active</th>
-            <th>price</th>
+            <th>Price</th>
+            <th>Category</th>
 
             <th>Update Good</th>
             <th>Delete Good</th>
@@ -37,6 +38,7 @@
             <td th:text="${good.quantity}">Quantity</td>
             <td th:text="${good.active}">Active</td>
             <td th:text="${good.price}">price</td>
+            <td th:text="${good.category}">category</td>
 
             <td><a th:href="@{updateGood/{id}(id=${good.id})}">Update Good</a></td>
             <td><a th:href="@{deleteGood/{id}(id=${good.id})}">Delete Good</a></td>
