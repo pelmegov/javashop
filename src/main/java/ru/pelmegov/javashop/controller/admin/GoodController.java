@@ -3,15 +3,15 @@ package ru.pelmegov.javashop.controller.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.pelmegov.javashop.model.good.Good;
-import ru.pelmegov.javashop.model.news.News;
-import ru.pelmegov.javashop.model.user.User;
 import ru.pelmegov.javashop.service.CategoryService;
 import ru.pelmegov.javashop.service.GoodService;
-import ru.pelmegov.javashop.service.NewsService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import java.util.List;
 @Controller(value = "adminGoodController")
 @RequestMapping("/admin/good")
 public class GoodController {
+
     private String addGoodView = "/admin/good/addGood";
     private String indexGoodView = "/admin/good/index";
     private String updateGoodView = "/admin/good/updateGood";

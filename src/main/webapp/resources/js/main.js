@@ -38,7 +38,8 @@ $(document).ready(function () {
         var itemId = $(this).data("id");
         // Если у кнопки есть класс 'good-calc-up', значит мы прибавляем
         var isPlus = $(this).hasClass('good-calc-up');
-        var count = 0;
+
+        // делаем POST запрос
         $.ajax({
             url: "/cart/calculate",
             headers: {
