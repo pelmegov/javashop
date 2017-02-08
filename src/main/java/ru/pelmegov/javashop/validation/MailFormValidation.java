@@ -24,5 +24,4 @@ public class MailFormValidation {
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
 }
