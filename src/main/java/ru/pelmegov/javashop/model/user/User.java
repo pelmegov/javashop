@@ -9,14 +9,13 @@ import ru.pelmegov.javashop.model.cart.Cart;
 import ru.pelmegov.javashop.model.order.Order;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "user")
 @EqualsAndHashCode(exclude = {"id", "roles", "cart", "orders"})
-@ToString(exclude="orders")
+@ToString(exclude = "orders")
 public class User {
 
     @Id
@@ -24,15 +23,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(min = 3, max = 32)
     @Column(name = "login", unique = true)
     private String login;
 
-    @Size(min = 6, max = 32)
     @Column(name = "password")
     private String password;
 
-    @Size(min = 6, max = 32)
     @Column(name = "email")
     private String email;
 
@@ -46,7 +42,7 @@ public class User {
     private Set<Role> roles;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="cart_id", referencedColumnName = "id")
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private Cart cart;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

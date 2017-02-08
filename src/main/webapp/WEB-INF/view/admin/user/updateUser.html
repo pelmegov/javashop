@@ -20,14 +20,15 @@
 
                 <div class="form-group row">
                     <label class="form-control-label" for="ID">ID::</label>
-                    <input th:value="${user.id}" class="form-control" id="ID" type="text" name="id"/>
+                    <input th:value="${user.id}" type="hidden" id="ID" name="id"/>
+                    <h1 th:text="${user.id}" class="form-control">ID</h1>
                 </div>
 
                 <div class="form-group row">
                     <label class="form-control-label" for="LOGIN">LOGIN:</label>
                     <input th:field="*{login}" class="form-control" id="LOGIN" type="text" name="login"/>
                     <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
-                         class="alert alert-danger">Login Error. Try another?
+                         class="alert alert-danger bg-error">Login Error. Try another?
                     </div>
                 </div>
 
@@ -35,7 +36,7 @@
                     <label class="form-control-label" for="PASSWORD">PASSWORD:</label>
                     <input th:field="*{password}" class="form-control" id="PASSWORD" type="text" name="password"/>
                     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                         class="alert alert-danger">Password Error. Try another?
+                         class="alert alert-danger bg-error">Password Error. Try another?
                     </div>
                 </div>
 
@@ -43,7 +44,7 @@
                     <label class="form-control-label" for="EMAIL">EMAIL:</label>
                     <input th:field="*{email}" class="form-control" id="EMAIL" type="text" name="email"/>
                     <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                         class="alert alert-danger">Email Error. Try another?
+                         class="alert alert-danger bg-error">Email Error. Try another?
                     </div>
                 </div>
 
@@ -62,7 +63,7 @@
                         </label>
                     </div>
                     <div th:if="${#fields.hasErrors('active')}" th:errors="*{active}"
-                         class="alert alert-danger">Active Error. Try another?
+                         class="alert alert-danger bg-error">Active Error. Try another?
                     </div>
                 </fieldset>
 

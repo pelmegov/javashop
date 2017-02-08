@@ -9,8 +9,8 @@ p.info-message {
     color: #fff !important;
 }
 
-p.bg-error {
-    background: #ff0000;
+.bg-error {
+    width: 100%;
 }
 
 .header {

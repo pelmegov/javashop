@@ -7,16 +7,15 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.pelmegov.javashop.model.cart.Cart;
+import ru.pelmegov.javashop.model.user.Role;
+import ru.pelmegov.javashop.model.user.User;
 import ru.pelmegov.javashop.service.RoleService;
 import ru.pelmegov.javashop.service.UserService;
-import ru.pelmegov.javashop.model.cart.Cart;
-import ru.pelmegov.javashop.model.user.User;
 import ru.pelmegov.javashop.validation.UserFormValidation;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/admin/user")
@@ -58,14 +57,20 @@ public class UserController {
                                 final BindingResult result,
                                 ModelAndView modelAndView,
                                 RedirectAttributes redirectAttrs) {
+        if (userService.getUserByLogin(user.getLogin()) != null) {
+            result.rejectValue("login", "exist.user.login");
+        }
         if (result.hasErrors()) {
             return getUserModelAndView(modelAndView, user);
         }
-        // ToDO Реализовать. Попытка добавить пользователя с существующим логином
-        if (userService.getUserByLogin(user.getLogin()) != null) {
-            return getUserModelAndView(modelAndView, user);
-        }
         user.setCart(new Cart());
+        //if admin don't select role
+        if (user.getRoles() == null) {
+            Set<Role> role = new HashSet<>();
+            role.add(roleService.getRoleByName("ROLE_USER"));
+            user.setRoles(role);
+        }
+        //
         userService.addUser(user);
         redirectAttrs.addFlashAttribute("success", "User added: " + user);
         return new ModelAndView("redirect:" + indexView);

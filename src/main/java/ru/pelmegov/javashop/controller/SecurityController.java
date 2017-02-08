@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.pelmegov.javashop.service.RoleService;
-import ru.pelmegov.javashop.service.UserService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.pelmegov.javashop.model.cart.Cart;
 import ru.pelmegov.javashop.model.user.Role;
 import ru.pelmegov.javashop.model.user.User;
+import ru.pelmegov.javashop.service.RoleService;
+import ru.pelmegov.javashop.service.UserService;
+import ru.pelmegov.javashop.validation.UserFormValidation;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -31,11 +33,15 @@ public class SecurityController {
 
     private final UserService userService;
     private final RoleService roleService;
+    private final UserFormValidation userFormValidation;
 
     @Autowired
-    public SecurityController(UserService userService, RoleService roleService) {
+    public SecurityController(UserService userService,
+                              RoleService roleService,
+                              UserFormValidation userFormValidation) {
         this.userService = userService;
         this.roleService = roleService;
+        this.userFormValidation = userFormValidation;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -51,23 +57,19 @@ public class SecurityController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration(User user, @RequestParam(value = "error", required = false) String error) {
         ModelAndView model = new ModelAndView(registrationView);
-        if (error != null) {
-            model.addObject("error", "Invalid Login Or Password!");
-        }
         return model;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView registration(@Valid @ModelAttribute User user,
                                      final BindingResult result,
-                                     final ModelAndView modelAndView) {
-        if (result.hasErrors()) {
-            modelAndView.addObject("error", "Invalid Login Or Password!");
-            return modelAndView;
-        }
-        // ToDO Реализовать. Попытка добавить пользователя с существующим логином
+                                     final ModelAndView modelAndView,
+                                     RedirectAttributes redirectAttrs) {
+        userFormValidation.validate(user, result);
         if (userService.getUserByLogin(user.getLogin()) != null) {
-            modelAndView.addObject("error", "User with this login exists!");
+            result.rejectValue("login", "exist.user.login");
+        }
+        if (result.hasErrors()) {
             return modelAndView;
         }
         Set<Role> role = new HashSet<>();
@@ -76,7 +78,8 @@ public class SecurityController {
         user.setActive(true);
         user.setCart(new Cart());
         userService.addUser(user);
-        return new ModelAndView(loginView);
+        redirectAttrs.addFlashAttribute("success", "You are registered! Please log in! Your login: " + user.getLogin());
+        return new ModelAndView("redirect:" + loginView);
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
