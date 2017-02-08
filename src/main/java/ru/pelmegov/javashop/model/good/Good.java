@@ -25,14 +25,14 @@ public class Good {
     @Column(name = "id", unique = true)
     private Integer id;
 
-    @Size(min = 3, max = 64)
+    @Size(min = 1, max = 64)
     @Column(name = "title")
     private String title;
 
     @Column(name = "active", columnDefinition = "boolean default true")
     private Boolean active = true;
 
-    @Size(min = 6)
+    @Size(min = 3)
     @Column(name = "description")
     private String description;
 

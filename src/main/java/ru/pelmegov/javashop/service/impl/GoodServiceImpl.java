@@ -102,4 +102,22 @@ public class GoodServiceImpl implements GoodService {
     public Set<Good> getGoodsByCategory(Integer count, Integer categoryId, Boolean active) {
         return goodDao.getGoodsByCategory(count, categoryId, active);
     }
+
+    @Override
+    @Transactional
+    public void addGood(Good good) {
+        this.goodDao.addGood(good);
+    }
+
+    @Override
+    @Transactional
+    public void updateGood(Good good) {
+        this.goodDao.updateGood(good);
+    }
+
+    @Override
+    @Transactional
+    public void deleteGood(Integer id) {
+        this.goodDao.deleteGood(id);
+    }
 }

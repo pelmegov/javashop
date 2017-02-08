@@ -6,6 +6,8 @@ import ru.pelmegov.javashop.dao.CategoryDAO;
 import ru.pelmegov.javashop.service.CategoryService;
 import ru.pelmegov.javashop.model.good.Category;
 
+import java.util.Set;
+
 @Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
@@ -34,5 +36,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategoryById(Integer id) {
         this.categoryDAO.deleteCategoryById(id);
+    }
+
+    @Override
+    public Set<Category> getAllCategory() {
+        return categoryDAO.getAllCategory();
     }
 }

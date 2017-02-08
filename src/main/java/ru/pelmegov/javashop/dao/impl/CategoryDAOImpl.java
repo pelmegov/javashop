@@ -8,6 +8,11 @@ import org.springframework.stereotype.Repository;
 import ru.pelmegov.javashop.dao.CategoryDAO;
 import ru.pelmegov.javashop.model.good.Category;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Repository
 public class CategoryDAOImpl extends AbstractDAO implements CategoryDAO {
 
@@ -44,5 +49,12 @@ public class CategoryDAOImpl extends AbstractDAO implements CategoryDAO {
             LOGGER.info("Category removed: {}.", category);
             getSession().delete(category);
         }
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Set<Category> getAllCategory() {
+        List<Category> category= getSession().createCriteria(Category.class).list();
+        return new HashSet<>(category);
     }
 }

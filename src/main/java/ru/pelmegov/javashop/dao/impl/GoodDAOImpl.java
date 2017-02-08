@@ -126,6 +126,24 @@ public class GoodDAOImpl extends AbstractDAO implements GoodDAO {
     }
 
     @Override
+    public void addGood(Good good) {
+        getSession().save(good);
+    }
+
+    @Override
+    public void updateGood(Good good) {
+        getSession().update(good);
+    }
+
+    @Override
+    public void deleteGood(Integer id) {
+        Good good = (Good)getSession().load(Good.class, id);
+        if(good!=null){
+            getSession().delete(good);
+        }
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public Set<Good> getGoods(Integer count) {
         List<Good> goods = getSession()

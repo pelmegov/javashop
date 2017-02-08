@@ -33,4 +33,10 @@ public interface GoodDAO {
     public Set<Good> getGoodsByCategory(Integer count, Integer categoryId);
 
     public Set<Good> getGoodsByCategory(Integer count, Integer categoryId, Boolean active);
+
+    void addGood(Good good);
+
+    void updateGood(Good good);
+
+    void deleteGood(Integer id);
 }

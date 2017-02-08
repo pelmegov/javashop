@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <a class="btn btn-success" href="addGood">Add Good</a>
+
+    <table class="table" th:unless="${#lists.isEmpty(good)}">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Icon</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Active</th>
+            <th>price</th>
+
+            <th>Update Good</th>
+            <th>Delete Good</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="good : ${good}">
+            <td th:text="${good.id}">Id</td>
+            <td th:text="${good.smallImageLink}">Icon</td>
+            <td th:text="${good.title}">Title</td>
+            <td th:text="${good.description}">Description</td>
+            <td th:text="${good.quantity}">Quantity</td>
+            <td th:text="${good.active}">Active</td>
+            <td th:text="${good.price}">price</td>
+
+            <td><a th:href="@{updateGood/{id}(id=${good.id})}">Update Good</a></td>
+            <td><a th:href="@{deleteGood/{id}(id=${good.id})}">Delete Good</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
+
+</body>
+</html>
