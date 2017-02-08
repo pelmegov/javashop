@@ -16,13 +16,19 @@
 
             <form th:action="@{/login}" method="post">
 
-                <label for="login">Login</label>:
-                <input class="form-control" type="text" id="login" name="login" autofocus="autofocus"/> <br/>
+                <div class="form-group row">
+                    <label for="login">Login</label>:
+                    <input class="form-control" type="text" id="login" name="login" autofocus="autofocus"/> <br/>
+                </div>
 
-                <label for="password">Password</label>:
-                <input class="form-control" type="password" id="password" name="password"/> <br/>
+                <div class="form-group row">
+                    <label for="password">Password</label>:
+                    <input class="form-control" type="password" id="password" name="password"/> <br/>
+                </div>
 
-                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log in"/>
+                <div class="form-group row">
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log in"/>
+                </div>
 
             </form>
         </div>

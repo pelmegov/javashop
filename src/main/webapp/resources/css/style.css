@@ -9,8 +9,8 @@ p.info-message {
     color: #fff !important;
 }
 
-p.bg-error {
-    background: #ff0000;
+.bg-error {
+    width: 100%;
 }
 
 .header {
@@ -75,4 +75,9 @@ footer {
 
 .dropdown-menu a.dropdown-item:hover {
     color: #000 !important;
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-14 {
+    font-size: 14px;
 }

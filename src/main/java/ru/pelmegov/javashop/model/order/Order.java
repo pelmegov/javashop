@@ -35,7 +35,7 @@ public class Order {
     private Date date;
 
     @Column(name = "status")
-    private String status;
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

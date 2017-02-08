@@ -20,7 +20,7 @@
                     <label class="form-control-label" for="LOGIN">LOGIN:</label>
                     <input th:field="*{login}" class="form-control" id="LOGIN" type="text" name="login"/>
                     <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
-                         class="form-control-feedback">Login Error. Try another?
+                         class="alert alert-danger bg-error">Login Error. Try another?
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@
                     <label class="form-control-label" for="PASSWORD">PASSWORD:</label>
                     <input th:field="*{password}" class="form-control" id="PASSWORD" type="text" name="password"/>
                     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                         class="form-control-feedback">Password Error. Try another?
+                         class="alert alert-danger bg-error">Password Error. Try another?
                     </div>
                 </div>
 
@@ -36,11 +36,13 @@
                     <label class="form-control-label" for="EMAIL">EMAIL:</label>
                     <input th:field="*{email}" class="form-control" id="EMAIL" type="text" name="email"/>
                     <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                         class="form-control-feedback">Email Error. Try another?
+                         class="alert alert-danger bg-error">Email Error. Try another?
                     </div>
                 </div>
 
-                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Registration"/>
+                <div class="form-group row">
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Registration"/>
+                </div>
 
             </form>
         </div>
