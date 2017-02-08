@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <table class="table table-bordered" th:unless="${#lists.isEmpty(orders)}">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>User ID</th>
+            <th>User Login</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Sum</th>
+
+            <th>Update Order</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}">Id</td>
+            <td th:text="${order.user.id}">User Id</td>
+            <td th:text="${order.user.login}">User Login</td>
+
+            <td>
+                <table class="table-sm">
+                    <thead>
+                    <tr>
+                        <th>Item Id</th>
+                        <th>Good</th>
+                        <th>Count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${order.cart.items}">
+                        <td th:text="${item.id}">Id</td>
+                        <td th:text="${item.good.title}">Good Title</td>
+                        <td th:text="${item.count}">User Login</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+
+            <td th:text="${order.status}">Status</td>
+
+            <td th:text="${order.date}">Date</td>
+
+            <td th:text="${order.cart.sum}">Sum</td>
+
+            <td><a th:href="@{updateOrder/{id}(id=${order.id})}">Update Order</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
+
+</body>
+</html>

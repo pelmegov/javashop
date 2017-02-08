@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 import ru.pelmegov.javashop.model.good.Category;
-import ru.pelmegov.javashop.model.user.Role;
 import ru.pelmegov.javashop.service.CategoryService;
 
 import java.text.ParseException;

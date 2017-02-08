@@ -48,7 +48,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
-        rb.setBasenames(new String[] { "validation/messages" });
+        rb.setBasenames(new String[]{"validation/messages"});
         return rb;
     }
 }
