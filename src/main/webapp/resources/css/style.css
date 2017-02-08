@@ -76,3 +76,8 @@ footer {
 .dropdown-menu a.dropdown-item:hover {
     color: #000 !important;
 }
+
+/* Rules for sizing the icon. */
+.material-icons.md-14 {
+    font-size: 14px;
+}
