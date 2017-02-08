@@ -69,7 +69,8 @@
                     th:switch="${#authentication} ? ${#authorization.expression('isAuthenticated()')} : ${false}">
                     <li class="nav-item pull-sm-0">
                         <span th:case="${false}">
-                            <a class="nav-link" href="/login">Login</a>
+                            <a class="nav-link" href="/login"><i
+                                    class="material-icons md-18">account_circle</i> Login</a>
                         </span>
                         <span th:case="${true}">
                             <form th:action="@{/logout}" method="post">

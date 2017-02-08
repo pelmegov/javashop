@@ -66,7 +66,8 @@ public class SecurityController {
                                      final ModelAndView modelAndView,
                                      RedirectAttributes redirectAttrs) {
         userFormValidation.validate(user, result);
-        if (userService.getUserByLogin(user.getLogin()) != null) {
+        if (user.getLogin() == null &&
+                userService.getUserByLogin(user.getLogin()) != null) {
             result.rejectValue("login", "exist.user.login");
         }
         if (result.hasErrors()) {
