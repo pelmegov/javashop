@@ -49,7 +49,8 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/addNews", method = RequestMethod.POST)
-    public ModelAndView addNews(@ModelAttribute News news, ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
+    public ModelAndView addNews(@Valid @ModelAttribute News news,
+                                RedirectAttributes redirectAttributes) {
         newsService.addNews(news);
         redirectAttributes.addFlashAttribute("success", "News has added: " + news);
         return new ModelAndView("redirect: " + indexNewsView);

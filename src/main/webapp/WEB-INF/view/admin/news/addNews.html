@@ -25,10 +25,13 @@
 
                 <div class="form-group row">
                     <label class="form-control-label" for="DESCRIPTION">DESCRIPTION:</label>
-                    <input th:field="*{description}" class="form-control" id="DESCRIPTION" type="text" name="description"/>
+                    <input th:field="*{description}" class="form-control" id="DESCRIPTION" type="text"
+                           name="description"/>
                 </div>
-                <div>
-                    <p th:datetime="*{date}"></p>
+
+                <div class="form-group row">
+                    <label class="form-control-label" for="DATE">DATE:</label>
+                    <input th:field="*{date}" class="form-control" id="DATE" type="text" name="date"/>
                 </div>
 
                 <input class="btn btn-primary" name="submit" type="submit" value="ADD" th:datetime="${news.date}"/>
