@@ -16,6 +16,7 @@ import java.util.Date;
 @EqualsAndHashCode(exclude={"id"})
 @NoArgsConstructor
 public class News {
+
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

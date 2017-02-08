@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ru.pelmegov.javashop.model.order.Status;
 import ru.pelmegov.javashop.service.CartService;
 import ru.pelmegov.javashop.service.MailService;
 import ru.pelmegov.javashop.service.OrderService;
@@ -70,15 +71,15 @@ public class OrderController {
         Order order = new Order();
         order.setCart(oldCart);
         order.setUser(user);
-        // TODO Реализовать через Enum или как то подобным образом
-        order.setStatus("WAIT");
+
+        order.setStatus(Status.WAIT);
         user.addOrder(order);
 
         cartService.updateCart(oldCart);
         orderService.addOrder(order);
         userService.updateUser(user);
 
-        // send email
+        // send email for user
         mailService.sendEmail(order);
 
         List<Order> orders = new ArrayList<>(user.getOrders());

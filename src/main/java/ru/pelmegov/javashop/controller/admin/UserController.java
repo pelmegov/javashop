@@ -70,7 +70,6 @@ public class UserController {
             role.add(roleService.getRoleByName("ROLE_USER"));
             user.setRoles(role);
         }
-        //
         userService.addUser(user);
         redirectAttrs.addFlashAttribute("success", "User added: " + user);
         return new ModelAndView("redirect:" + indexView);
