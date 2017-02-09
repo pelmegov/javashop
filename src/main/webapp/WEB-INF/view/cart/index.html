@@ -38,7 +38,8 @@
                             <div class="col-md-3">
 
                                 <a style="position: absolute; right: 0; top:-40px;"
-                                   class="btn btn-default" th:href="@{/cart/delete/{id}(id=${item.id})}">X</a>
+                                   class="btn btn-default" th:href="@{/cart/delete/{id}(id=${item.id})}"><i
+                                        class="material-icons md-18">delete_forever</i></a>
 
                                 <div class="card-text">
                                     <ul class="list-group list-group-flush">
@@ -48,11 +49,13 @@
                                         <li class="list-group-item price">
                                             <div class="row">
                                                 <button th:attr="data-id=${item.id}"
-                                                        class="btn btn-default good-calc good-calc-up">&and;</button>
+                                                        class="btn btn-default good-calc good-calc-up"><i
+                                                        class="material-icons">keyboard_arrow_up</i></button>
                                                 <span class="good-count" style="margin: 0 5px"
                                                       th:text="${item.count}"></span>
                                                 <button th:attr="data-id=${item.id}"
-                                                        class="btn btn-default good-calc">&or;</button>
+                                                        class="btn btn-default good-calc"><i
+                                                        class="material-icons md-18">keyboard_arrow_down</i></button>
                                             </div>
                                         </li>
                                     </ul>

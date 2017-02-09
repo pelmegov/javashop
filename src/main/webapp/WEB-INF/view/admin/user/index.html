@@ -11,9 +11,9 @@
 
 <div class="container">
 
-    <a class="btn btn-success" href="addUser">Add User</a>
+    <a class="btn btn-success" href="addUser"><i class="material-icons md-18">add_circle_outline</i> Add User</a>
 
-    <table class="table" th:unless="${#lists.isEmpty(users)}">
+    <table class="table table-striped" th:unless="${#lists.isEmpty(users)}">
         <thead>
         <tr>
             <th>Id</th>
@@ -38,8 +38,8 @@
                 <div th:each="role : ${user.roles}" th:text="${role.name}">Roles</div>
             </td>
 
-            <td><a th:href="@{updateUser/{id}(id=${user.id})}">Update User</a></td>
-            <td><a th:href="@{deleteUser/{id}(id=${user.id})}">Delete User</a></td>
+            <td><a th:href="@{updateUser/{id}(id=${user.id})}"><i class="material-icons md-18">autorenew</i> Update User</a></td>
+            <td><a th:href="@{deleteUser/{id}(id=${user.id})}"><i class="material-icons md-18">delete</i> Delete User</a></td>
         </tr>
         </tbody>
     </table>

@@ -32,7 +32,7 @@
         <tbody>
         <tr th:each="good : ${good}">
             <td th:text="${good.id}">Id</td>
-            <td th:text="${good.smallImageLink}">Icon</td>
+            <td><img th:src="${good.smallImageLink}"/></td>
             <td th:text="${good.title}">Title</td>
             <td th:text="${good.description}">Description</td>
             <td th:text="${good.quantity}">Quantity</td>
