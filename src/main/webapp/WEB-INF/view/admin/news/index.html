@@ -29,7 +29,7 @@
         <tbody>
         <tr th:each="news : ${news}">
             <td th:text="${news.id}">Id</td>
-            <td th:text="${news.newsImageLink}">Icon</td>
+            <td><img style="max-width: 200px !important; max-height: 200px !important;" th:src="${news.newsImageLink}"></td>
             <td th:text="${news.title}">Title</td>
             <td th:text="${news.description}">Description</td>
             <td th:text="${news.date}">Date</td>
