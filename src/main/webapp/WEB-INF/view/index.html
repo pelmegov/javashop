@@ -1,40 +1,113 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
-    <!-- Bootstrap Core CSS -->
-    <link th:href="@{/webjars/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css}" rel="stylesheet">
-
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"/>
+    <title>JavaShop</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 
 <!--Template Header-->
-<div th:include="fragments/header ::header"></div>
+<div th:include="/fragments/header :: header"></div>
 
 <div class="container">
 
-    <h1>Hello. This is index PAGE!</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, doloremque, earum iure laboriosam nulla
-        perferendis praesentium repellendus repudiandae tempore ullam ut voluptatum. Dolor fugiat neque praesentium
-        suscipit totam ut vel!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, doloremque, earum iure laboriosam nulla
-        perferendis praesentium repellendus repudiandae tempore ullam ut voluptatum. Dolor fugiat neque praesentium
-        suscipit totam ut vel!</p>
+    <div id="carouselExampleIndicators" class="carousel slide" data-interval="1000" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators"
+                th:each="news,row:${listNews}"
+                th:attr="data-slide-to=${news.id}" th:class="${row.index}==0?'active':''"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item"
+                 th:each="news,row:${listNews}"
+                 th:classappend="${row.index}==0?'active':''">
+                <a th:href="@{/news/detail/{id}(id=${news.id})}">
+                    <img class="d-block img-fluid" th:src="${news.newsImageLink}" alt="Card newsImageLink cap"/>
+                </a>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
     <hr>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, doloremque, earum iure laboriosam nulla
-        perferendis praesentium repellendus repudiandae tempore ullam ut voluptatum. Dolor fugiat neque praesentium
-        suscipit totam ut vel!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, doloremque, earum iure laboriosam nulla
-        perferendis praesentium repellendus repudiandae tempore ullam ut voluptatum. Dolor fugiat neque praesentium
-        suscipit totam ut vel!</p>
-
+    <h2 style="margin-top: 30px">NEW PRODUCTS</h2>
+    <div class="row" style="margin-top: 20px">
+        <div class="col-sm-3 row-eq-height" th:each="good : ${newGoods}">
+            <div class="card">
+                <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                    <div class="card-img-top card-image-fixheight">
+                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap"/>
+                    </div>
+                </a>
+                <div class="card-block">
+                    <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                        <h4 class="card-title" th:text="${good.title}"></h4>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item price">
+                            PRICE&nbsp;<span th:text="${good.price}"></span>&nbsp;RUB
+                        </li>
+                    </ul>
+                    <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
+                    <div class="card-footer">
+                        <a data-toggle="modal"
+                           data-target="#modalBuy"
+                           th:attr="data-id=${good.id}"
+                           th:href="@{/cart/buy}"
+                           class="buy btn btn-success"
+                        >
+                            <div class="material-icons md-14">shopping_cart</div>
+                            Add to cart!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h2 style="margin-top: 30px">CATALOG</h2>
+    <div class="row" style="margin-top: 20px"
+         th:each="goods : ${T(com.google.common.collect.Lists).partition(catalogGoods, 4)}">
+        <div class="col-sm-3 row-eq-height" th:each="good : ${goods}">
+            <div class="card">
+                <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                    <div class="card-img-top card-image-fixheight">
+                        <img th:src="${good.smallImageLink}" alt="Card smallImageLink cap"/>
+                    </div>
+                </a>
+                <div class="card-block">
+                    <a th:href="@{/good/detail/{id}(id=${good.id})}">
+                        <h4 class="card-title" th:text="${good.title}"></h4>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item price">
+                            PRICE&nbsp;<span th:text="${good.price}"></span>&nbsp;RUB
+                        </li>
+                    </ul>
+                    <p class="card-text" th:text="${#strings.substring(good.description, 0, 100).concat('...')}"></p>
+                    <div class="card-footer">
+                        <a data-toggle="modal"
+                           data-target="#modalBuy"
+                           th:attr="data-id=${good.id}"
+                           th:href="@{/cart/buy}"
+                           class="buy btn btn-primary"
+                        ><div class="material-icons md-14">shopping_cart</div> Add to cart!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--Template footer-->
-<div th:include="fragments/footer ::footer"></div>
+<div th:include="/fragments/footer :: footer"></div>
 
+</div>
 </body>
 </html>

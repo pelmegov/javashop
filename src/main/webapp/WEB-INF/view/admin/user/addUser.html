@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <form action="#" th:action="@{/admin/user/addUser}" th:object="${user}" method="post">
+
+                <input hidden th:field="*{id}" type="text" name="id"/>
+
+                <div class="form-group row">
+                    <label class="form-control-label" for="LOGIN">LOGIN:</label>
+                    <input th:field="*{login}" class="form-control" id="LOGIN" type="text" name="login"/>
+                    <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+                         class="alert alert-danger bg-error">Login Error. Try another?
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="form-control-label" for="PASSWORD">PASSWORD:</label>
+                    <input th:field="*{password}" class="form-control" id="PASSWORD" type="text" name="password"/>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                         class="alert alert-danger bg-error">Password Error. Try another?
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="form-control-label" for="EMAIL">EMAIL:</label>
+                    <input th:field="*{email}" class="form-control" id="EMAIL" type="text" name="email"/>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                         class="alert alert-danger bg-error">Email Error. Try another?
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="form-control-label" for="ROLES">ROLES:</label>
+                    <select class="form-control" id="ROLES" name="roles" multiple="multiple">
+                        <option th:each="role : ${allRoles}"
+                                th:value="${{role}}"
+                                th:text="${role.name}">Role name
+                        </option>
+                    </select>
+                </div>
+
+                <input class="btn btn-primary" name="submit" type="submit" value="ADD"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
+
+</body>
+</html>

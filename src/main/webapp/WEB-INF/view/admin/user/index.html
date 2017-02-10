@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <a class="btn btn-success" href="addUser"><i class="material-icons md-18">add_circle_outline</i> Add User</a>
+
+    <table class="table table-striped" th:unless="${#lists.isEmpty(users)}">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Login</th>
+            <th>Password</th>
+            <th>Active</th>
+            <th>Email</th>
+            <th>Roles</th>
+
+            <th>Update User</th>
+            <th>Delete User</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">Id</td>
+            <td th:text="${user.login}">Login</td>
+            <td th:text="${user.password}">Password</td>
+            <td th:text="${user.active}">Active</td>
+            <td th:text="${user.email}">Email</td>
+            <td>
+                <div th:each="role : ${user.roles}" th:text="${role.name}">Roles</div>
+            </td>
+
+            <td><a th:href="@{updateUser/{id}(id=${user.id})}"><i class="material-icons md-18">autorenew</i> Update User</a></td>
+            <td><a th:href="@{deleteUser/{id}(id=${user.id})}"><i class="material-icons md-18">delete</i> Delete User</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
+
+</body>
+</html>

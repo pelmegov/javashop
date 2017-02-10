@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<!--Template Header-->
+<div th:include="/fragments/header :: header"></div>
+
+<div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <form action="#" th:action="@{/admin/good/addGood}" th:object="${good}" method="post" >
+
+                    <input hidden th:field="*{id}" type="text" name="id"/>
+
+                    <div class="form-group row">
+                        <label class="form-control-label" for="TITLE">TITLE:</label>
+                        <input th:field="*{title}" class="form-control" id="TITLE" type="text" name="title"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="form-control-label" for="DESCRIPTION">DESCRIPTION:</label>
+                        <input th:field="*{description}" class="form-control" id="DESCRIPTION" type="text" name="description"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="form-control-label" for="Quantity">Quantity:</label>
+                        <input th:field="*{quantity}" class="form-control" id="Quantity" type="text" name="quantity"/>
+                    </div>
+
+                    <fieldset class="row">
+                        <legend class="col-form-legend">ACTIVE</legend>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="active"
+                                       value="1">Yes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="active"
+                                       value="0">No
+                            </label>
+                        </div>
+                        <div th:if="${#fields.hasErrors('active')}" th:errors="*{active}"
+                             class="alert alert-danger bg-error">Active Error. Try another?
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group row">
+                        <label class="form-control-label" for="PRICE">PRICE:</label>
+                        <input th:field="*{price}" class="form-control" id="PRICE" type="text" name="price"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="form-control-label" for="CATEGORY">CATEGORY:</label>
+                        <select class="form-control" id="CATEGORY" name="category" multiple="multiple">
+                            <option th:each="category : ${allCategory}"
+                                    th:value="${{category}}"
+                                    th:text="${category.title}">Category name
+                            </option>
+                        </select>
+                    </div>
+
+                    <input class="btn btn-primary" name="submit" type="submit" value="ADD" />
+                </form>
+            </div>
+        </div>
+
+</div>
+
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
+
+</body>
+</html>

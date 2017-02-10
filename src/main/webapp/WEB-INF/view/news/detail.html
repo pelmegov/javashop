@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Detail News Page</title>
+</head>
+<body>
+<!--Template Header-->
+<div th:include="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <div class="card" style="margin-bottom: 10px">
+        <div class="card-block" style="padding-bottom: 10px; padding-top: 10px;">
+            <div class="row">
+                <h2>News Detail</h2>
+            </div>
+            <div class="row">
+                <img class="card-img-top" th:src="${news.newsImageLink}" alt="Card newsImageLink cap" style="max-width: 900px !important;">
+            </div>
+            <div class="row">
+                <h4 class="card-title" th:text="${news.title}"></h4>
+            </div>
+            <div class="row">
+                <p class="card-text" style="font-size: 1.2em" th:text="${news.description}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Template footer-->
+<div th:include="/fragments/footer :: footer"></div>
+</body>
+</html>

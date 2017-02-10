@@ -9,11 +9,48 @@
 
 <!--FOOTER-->
 <div th:fragment="footer">
-    <footer class="bg-inverse footer navbar-fixed-bottom">
-        <div class="container">
-            <span class="text-muted">Created Stepan & Alexander.</span>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalBuy" tabindex="-1" role="dialog" aria-labelledby="modalBuyLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalBuyLabel">Information</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-info">
+                    </div>
+                </div>
+                <div class="modal-footer"
+                     th:switch="${#authentication} ? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                    <span th:case="${false}">
+                        <a type="button" class="btn btn-primary" href="/login">Login</a>
+                    </span>
+                    <span th:case="${true}">
+                        <a href="#" type="button" class="btn btn-default" data-dismiss="modal">Back to shopping</a>
+                        <a href="/cart" type="button" class="btn btn-primary">Go to the Cart</a>
+                    </span>
+                </div>
+            </div>
         </div>
-    </footer>
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-light bg-inverse">
+        <div class="container">
+            <span class="text-muted">Created JavaShop company.</span>
+        </div>
+    </nav>
+
+    <!-- Jquery -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/webjars/tether/js/tether.js}" type="text/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+
+    <!-- JS -->
+    <script th:src="@{/resources/js/main.js}" type="text/javascript"></script>
+
 </div>
 <!--/FOOTER-->
 
